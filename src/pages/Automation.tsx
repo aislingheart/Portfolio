@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { Code, CheckCircle2 } from "lucide-react";
 import PageHeader from "../components/PageHeader";
 import AnimatedCard from "../components/AnimatedCard";
@@ -29,21 +29,21 @@ export default function Automation() {
             </p>
             <div className="flex flex-wrap gap-2 mt-auto">
               {item.tech.map(t => (
-                <motion.span
+                <m.span
                   key={t}
                   className="px-2.5 py-1 rounded-full bg-white/5 text-xs font-medium text-zinc-400 group-hover:bg-white/10 transition-colors"
                   whileHover={{ scale: 1.08 }}
                 >
                   {t}
-                </motion.span>
+                </m.span>
               ))}
             </div>
           </AnimatedCard>
         ))}
       </div>
 
-      <motion.section {...fadeInUp} className="glass-card p-8 md:p-12 relative overflow-hidden">
-        <div className={`absolute right-0 bottom-0 w-64 h-64 bg-gradient-to-tl from-[${tw.accent}]/8 to-transparent rounded-full blur-3xl -mr-20 -mb-20 pointer-events-none`} />
+      <m.section {...fadeInUp} className="glass-card p-8 md:p-12 relative overflow-hidden">
+        <div className={`absolute right-0 bottom-0 w-64 h-64 bg-[radial-gradient(circle,rgba(192,57,43,0.08)_0%,transparent_70%)] rounded-full -mr-20 -mb-20 pointer-events-none`} />
         <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold tracking-tight">smart development 🧠</h2>
@@ -58,7 +58,7 @@ export default function Automation() {
                 "debugging generated code through iterative testing.",
                 "integrating scripts into existing macOS/Windows workflows.",
               ].map((text, idx) => (
-                <motion.li
+                <m.li
                   key={idx}
                   className="flex gap-3 text-sm text-zinc-400 group"
                   whileHover={{ x: 4 }}
@@ -66,16 +66,16 @@ export default function Automation() {
                 >
                   <CheckCircle2 size={18} className={`text-zinc-500 shrink-0 group-hover:text-[${tw.accent}] transition-colors`} />
                   <span className="group-hover:text-zinc-200 transition-colors">{text}</span>
-                </motion.li>
+                </m.li>
               ))}
             </ul>
           </div>
           <div className="bg-[#0a0a0c] rounded-2xl p-6 font-mono text-xs border border-white/5 relative group">
             <div className={`absolute inset-0 bg-gradient-to-br from-[${tw.accent}]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl`} />
             <div className="flex gap-2 mb-4">
-              <motion.div className="w-3 h-3 rounded-full bg-zinc-600 group-hover:bg-red-400/50 transition-colors" whileHover={{ scale: 1.3 }} />
-              <motion.div className="w-3 h-3 rounded-full bg-zinc-600 group-hover:bg-yellow-400/50 transition-colors" whileHover={{ scale: 1.3 }} />
-              <motion.div className="w-3 h-3 rounded-full bg-zinc-600 group-hover:bg-green-400/50 transition-colors" whileHover={{ scale: 1.3 }} />
+              <m.div className="w-3 h-3 rounded-full bg-zinc-600 group-hover:bg-red-400/50 transition-colors" whileHover={{ scale: 1.3 }} />
+              <m.div className="w-3 h-3 rounded-full bg-zinc-600 group-hover:bg-yellow-400/50 transition-colors" whileHover={{ scale: 1.3 }} />
+              <m.div className="w-3 h-3 rounded-full bg-zinc-600 group-hover:bg-green-400/50 transition-colors" whileHover={{ scale: 1.3 }} />
             </div>
             <div className="text-zinc-300">
               <span className={`text-zinc-500 group-hover:text-[${tw.accent}] transition-colors`}>import</span> calendar_api<br />
@@ -91,9 +91,9 @@ export default function Automation() {
             </div>
           </div>
         </div>
-      </motion.section>
+      </m.section>
 
-      <motion.section {...fadeInUp} className="grid md:grid-cols-2 gap-6">
+      <m.section {...fadeInUp} className="grid md:grid-cols-2 gap-6">
         <div className="glass-card p-8 group">
           <div className="flex items-center gap-3 mb-6">
             <IconBox icon={Code} size={24} className={`text-zinc-400 group-hover:text-[${tw.accent}] transition-colors`} hoverRotate={5} />
@@ -101,7 +101,7 @@ export default function Automation() {
           </div>
           <div className="space-y-4">
             {scriptingTools.map(item => (
-              <motion.div
+              <m.div
                 key={item.name}
                 className="flex justify-between items-center p-4 bg-white/[0.04] rounded-2xl border border-white/5 hover:bg-white/[0.08] transition-colors cursor-default"
                 whileHover={{ x: 4 }}
@@ -109,7 +109,7 @@ export default function Automation() {
               >
                 <span className="font-medium text-zinc-300">{item.name}</span>
                 <span className={`text-xs font-medium ${item.isAccent ? `text-[${tw.accent}]` : "text-zinc-500"}`}>{item.tag}</span>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
@@ -121,7 +121,7 @@ export default function Automation() {
           </p>
           <p className="text-sm text-zinc-500 text-center mt-4 relative z-10">— my philosophy 💭</p>
         </div>
-      </motion.section>
+      </m.section>
     </div>
   );
 }

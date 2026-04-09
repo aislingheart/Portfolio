@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { Link } from "react-router-dom";
 import { Cpu, Server, Zap, ArrowRight, Terminal, ShieldCheck, HeartPulse, User, Sparkles } from "lucide-react";
 import AnimatedCard from "../components/AnimatedCard";
@@ -58,9 +58,9 @@ export default function Home() {
 
         {/* Intro Card */}
         <AnimatedCard index={0} hoverLift={false} className="md:col-span-2 glass-card p-8 md:p-12 flex flex-col justify-center relative overflow-hidden">
-          <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[${tw.accent}]/10 to-transparent rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none`} />
+          <div className={`absolute top-0 right-0 w-64 h-64 bg-[radial-gradient(circle,rgba(192,57,43,0.1)_0%,transparent_70%)] rounded-full -mr-20 -mt-20 pointer-events-none`} />
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.4 }}
@@ -68,7 +68,7 @@ export default function Home() {
           >
             <Sparkles size={12} className={`text-[${tw.accent}]`} />
             <span>{greeting}</span>
-          </motion.div>
+          </m.div>
 
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-zinc-400 mb-8 w-fit relative z-10">
             <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
@@ -85,16 +85,16 @@ export default function Home() {
             i thrive on high-stakes technical challenges that need both precision and empathy.
           </p>
           <div className="flex flex-wrap gap-4 mt-auto relative z-10">
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+            <m.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Link to="/hardware" className="magnetic-btn px-6 py-3 bg-zinc-100 text-zinc-900 font-medium rounded-full hover:bg-white transition-colors flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.08)]">
                 view projects <ArrowRight size={16} />
               </Link>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+            </m.div>
+            <m.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Link to="/about" className="px-6 py-3 bg-white/5 border border-white/10 text-zinc-200 font-medium rounded-full hover:bg-white/10 transition-colors flex items-center gap-2">
                 <User size={16} /> about me
               </Link>
-            </motion.div>
+            </m.div>
           </div>
         </AnimatedCard>
 
@@ -123,20 +123,20 @@ export default function Home() {
           <h3 className="text-xl font-semibold mb-6 relative z-10">how i work 💡</h3>
           <div className="space-y-5 relative z-10">
             {methodology.map((item, idx) => (
-              <motion.div
+              <m.div
                 key={idx}
                 className="flex gap-4 group cursor-default"
                 whileHover={{ x: 4 }}
                 transition={spring.gentle}
               >
                 {item.accent ? (
-                  <motion.div
+                  <m.div
                     className={`mt-0.5 text-[${tw.accent}]`}
                     animate={{ scale: [1, 1.15, 1] }}
                     transition={{ duration: 2, repeat: Infinity, repeatDelay: 4 }}
                   >
                     <item.icon size={20} />
-                  </motion.div>
+                  </m.div>
                 ) : (
                   <div className="mt-0.5 text-zinc-500 group-hover:text-zinc-200 transition-colors">
                     <item.icon size={20} />
@@ -146,7 +146,7 @@ export default function Home() {
                   <h4 className="font-medium mb-1 text-zinc-300 group-hover:text-zinc-100 transition-colors">{item.title}</h4>
                   <p className="text-zinc-500 text-sm">{item.desc}</p>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </AnimatedCard>

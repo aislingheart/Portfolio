@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { m, AnimatePresence } from "motion/react";
 import { MapPin, Briefcase, GraduationCap, User, Wrench, Smartphone, Headphones, Gamepad2, Zap, Languages, Quote, Heart } from "lucide-react";
 import AnimatedCard from "../components/AnimatedCard";
 import { tw, spring, cardVariants } from "../lib/theme";
@@ -37,32 +37,32 @@ export default function About() {
     <div className="space-y-12">
       {/* Links Section */}
       <AnimatedCard index={0} hoverLift={false} className="glass-card p-12 md:p-24 flex flex-col items-center justify-center text-center relative overflow-hidden">
-        <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-t from-[${tw.accent}]/12 to-transparent rounded-full blur-3xl pointer-events-none`} />
+        <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-[radial-gradient(circle,rgba(192,57,43,0.12)_0%,transparent_70%)] rounded-full pointer-events-none`} />
 
-        <motion.h1
+        <m.h1
           initial={{ scale: 0.9, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: 0.15 }}
           className="text-6xl md:text-8xl font-bold tracking-tighter mb-4 relative z-10 flex flex-col md:flex-row gap-2 md:gap-6"
         >
-          <motion.span className={`text-[${tw.accent}]`} whileHover={{ scale: 1.05 }} transition={spring.gentle}>Aisling</motion.span>
-          <motion.span className="text-zinc-100" whileHover={{ scale: 1.05 }} transition={spring.gentle}>Creed</motion.span>
-        </motion.h1>
+          <m.span className={`text-[${tw.accent}]`} whileHover={{ scale: 1.05 }} transition={spring.gentle}>Aisling</m.span>
+          <m.span className="text-zinc-100" whileHover={{ scale: 1.05 }} transition={spring.gentle}>Creed</m.span>
+        </m.h1>
 
-        <motion.div
+        <m.div
           initial={{ scale: 0, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ type: "spring", stiffness: 200, delay: 0.3 }}
           className="text-3xl md:text-4xl mb-16 relative z-10"
         >
-          <motion.span animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 3 }} className={`inline-block drop-shadow-[0_0_15px_rgba(192,57,43,0.4)]`}>
+          <m.span animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 3 }} className={`inline-block drop-shadow-[0_0_15px_rgba(192,57,43,0.4)]`}>
             ❤️
-          </motion.span>
-        </motion.div>
+          </m.span>
+        </m.div>
 
-        <motion.a
+        <m.a
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -75,7 +75,7 @@ export default function About() {
           <p className="text-zinc-500 text-sm mb-3 group-hover:text-zinc-400 transition-colors">tap here to visit &gt;</p>
           <div className="h-10 mb-8 relative flex justify-center items-center w-full">
             <AnimatePresence mode="popLayout">
-              <motion.h2
+              <m.h2
                 key={activeLink.label}
                 initial={{ opacity: 0, y: 15, filter: "blur(4px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -84,12 +84,12 @@ export default function About() {
                 className="text-2xl md:text-3xl font-semibold absolute"
               >
                 {renderLabel()}
-              </motion.h2>
+              </m.h2>
             </AnimatePresence>
           </div>
-        </motion.a>
+        </m.a>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -97,7 +97,7 @@ export default function About() {
           className="flex items-center rounded-full border border-white/10 bg-black/30 backdrop-blur-md overflow-hidden relative z-10 shadow-xl"
         >
           {socialLinks.map((link, i) => (
-            <motion.button
+            <m.button
               key={i}
               onClick={() => setActiveLink(link)}
               onMouseEnter={() => setActiveLink(link)}
@@ -109,24 +109,24 @@ export default function About() {
               aria-label={`Select ${link.label}`}
             >
               <link.icon size={22} />
-            </motion.button>
+            </m.button>
           ))}
-        </motion.div>
+        </m.div>
       </AnimatedCard>
 
       <div className="grid md:grid-cols-3 gap-6">
         {/* Bio Card */}
         <AnimatedCard index={1} hoverLift={false} className="md:col-span-2 glass-card p-8 md:p-12 relative overflow-hidden">
-          <div className={`absolute top-0 left-0 w-64 h-64 bg-gradient-to-br from-[${tw.accent}]/5 to-transparent rounded-full blur-3xl -ml-20 -mt-20 pointer-events-none`} />
+          <div className={`absolute top-0 left-0 w-64 h-64 bg-[radial-gradient(circle,rgba(192,57,43,0.05)_0%,transparent_70%)] rounded-full -ml-20 -mt-20 pointer-events-none`} />
 
           <div className="flex items-center gap-4 mb-8 relative z-10">
-            <motion.div
+            <m.div
               className={`w-16 h-16 rounded-full bg-[${tw.accent}]/10 flex items-center justify-center border border-[${tw.accent}]/15`}
               whileHover={{ rotate: 10, scale: 1.1 }}
               transition={spring.gentle}
             >
               <User className={`text-[${tw.accent}]`} size={32} />
-            </motion.div>
+            </m.div>
             <div>
               <h2 className="text-2xl font-semibold">about me 💫</h2>
               <div className="flex items-center gap-2 text-zinc-500 text-sm mt-1">
@@ -153,7 +153,7 @@ export default function About() {
             {quickFacts.map((item) => {
               const Icon = factIcons[item.label] || User;
               return (
-                <motion.li
+                <m.li
                   key={item.label}
                   className="flex justify-between items-center p-2 rounded-lg hover:bg-white/5 transition-colors cursor-default gap-4"
                   whileHover={{ x: 3 }}
@@ -164,7 +164,7 @@ export default function About() {
                     {item.label}
                   </span>
                   <span className="font-medium text-zinc-300 text-right text-xs">{item.value}</span>
-                </motion.li>
+                </m.li>
               );
             })}
           </ul>
@@ -190,7 +190,7 @@ export default function About() {
           </h3>
           <div className="space-y-10">
             {jobs.map((job) => (
-              <motion.div
+              <m.div
                 key={job.title}
                 className="relative pl-6 border-l border-white/10 group cursor-default"
                 whileHover={{ x: 4 }}
@@ -202,7 +202,7 @@ export default function About() {
                   {job.company} • {job.dates}
                 </p>
                 <p className="text-sm text-zinc-400 leading-relaxed">{job.description}</p>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </AnimatedCard>
@@ -214,7 +214,7 @@ export default function About() {
           </h3>
           <div className="space-y-8">
             {education.map((edu, idx) => (
-              <motion.div
+              <m.div
                 key={edu.title}
                 className="relative pl-6 border-l border-white/10 group cursor-default"
                 whileHover={{ x: 4 }}
@@ -223,7 +223,7 @@ export default function About() {
                 <div className={`absolute w-3 h-3 rounded-full -left-[6.5px] top-1.5 ${idx === 0 ? "bg-zinc-500" : "bg-zinc-600"} group-hover:bg-zinc-400 transition-colors`} />
                 <h4 className="font-medium text-zinc-200 text-lg">{edu.title}</h4>
                 <p className="text-sm text-zinc-500 mb-2">{edu.institution} • {edu.dates}</p>
-              </motion.div>
+              </m.div>
             ))}
           </div>
 
@@ -231,9 +231,9 @@ export default function About() {
             <h3 className="text-lg font-semibold mb-6 text-zinc-300">core skills ✨</h3>
             <div className="flex flex-wrap gap-2">
               {coreSkills.map(skill => (
-                <motion.span key={skill} className="skill-tag" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <m.span key={skill} className="skill-tag" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   {skill}
-                </motion.span>
+                </m.span>
               ))}
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { Shield, Terminal, HardDrive, CheckCircle2 } from "lucide-react";
 import PageHeader from "../components/PageHeader";
 import AnimatedCard from "../components/AnimatedCard";
@@ -16,18 +16,18 @@ export default function SupportAdmin() {
       </PageHeader>
 
       {/* The Exam Save */}
-      <motion.section {...fadeInUp} className="glass-card overflow-hidden relative">
-        <div className={`absolute right-0 top-0 w-64 h-64 bg-gradient-to-bl from-[${tw.accent}]/8 to-transparent rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none`} />
+      <m.section {...fadeInUp} className="glass-card overflow-hidden relative">
+        <div className={`absolute right-0 top-0 w-64 h-64 bg-[radial-gradient(circle,rgba(192,57,43,0.08)_0%,transparent_70%)] rounded-full -mr-20 -mt-20 pointer-events-none`} />
         <div className="grid md:grid-cols-2 relative z-10">
           <div className="p-8 md:p-12 space-y-6">
-            <motion.div
+            <m.div
               className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[${tw.accent}]/10 border border-[${tw.accent}]/15 text-xs font-medium text-[${tw.accent}] w-fit`}
               animate={{ opacity: [1, 0.6, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
               <Shield size={14} />
               <span>crisis triage: active</span>
-            </motion.div>
+            </m.div>
             <h2 className="text-3xl font-semibold tracking-tight">case study: "the exam save" 🎓</h2>
             <p className="text-zinc-400 leading-relaxed">
               during a live school exam, a student's Windows installation suffered a catastrophic failure.
@@ -35,7 +35,7 @@ export default function SupportAdmin() {
             </p>
             <div className="space-y-4">
               {examSaveSteps.map((item, idx) => (
-                <motion.div
+                <m.div
                   key={idx}
                   className="flex gap-4 group"
                   whileHover={{ x: 4 }}
@@ -47,15 +47,15 @@ export default function SupportAdmin() {
                   <p className="text-sm text-zinc-400">
                     <span className="font-medium text-zinc-200 group-hover:text-white transition-colors">{item.label}</span> {item.text}
                   </p>
-                </motion.div>
+                </m.div>
               ))}
             </div>
           </div>
           <div className="bg-[#0a0a0c]/50 p-12 flex items-center justify-center border-l border-white/5">
             <div className="text-center space-y-4">
-              <motion.div animate={{ y: [0, -5, 0] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}>
+              <m.div animate={{ y: [0, -5, 0] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}>
                 <HardDrive size={80} className="mx-auto text-zinc-600" />
-              </motion.div>
+              </m.div>
               <div className="font-mono text-xs text-zinc-500">
                 <span className={`text-[${tw.accent}]`}>[disk_swap_successful]</span><br />
                 boot_loader: grub_linux<br />
@@ -64,19 +64,19 @@ export default function SupportAdmin() {
             </div>
           </div>
         </div>
-      </motion.section>
+      </m.section>
 
       {/* Home Lab Section */}
-      <motion.section {...fadeInUp} className="space-y-6">
+      <m.section {...fadeInUp} className="space-y-6">
         <div className="flex justify-between items-end">
           <h2 className="text-2xl font-semibold tracking-tight">home lab infrastructure 🏠</h2>
-          <motion.span
+          <m.span
             className={`text-xs font-medium text-[${tw.accent}] bg-[${tw.accent}]/10 px-2 py-1 rounded-md`}
             animate={{ opacity: [1, 0.5, 1] }}
             transition={{ duration: 3, repeat: Infinity }}
           >
             99.9% uptime goal
-          </motion.span>
+          </m.span>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {labServices.map((service, i) => (
@@ -87,10 +87,10 @@ export default function SupportAdmin() {
             </AnimatedCard>
           ))}
         </div>
-      </motion.section>
+      </m.section>
 
       {/* Skills & OS */}
-      <motion.section {...fadeInUp} className="grid md:grid-cols-2 gap-6">
+      <m.section {...fadeInUp} className="grid md:grid-cols-2 gap-6">
         <div className="glass-card p-8 group">
           <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 group-hover:text-white transition-colors">
             <Terminal size={20} className={`text-zinc-400 group-hover:text-[${tw.accent}] transition-colors`} />
@@ -98,7 +98,7 @@ export default function SupportAdmin() {
           </h3>
           <div className="space-y-4">
             {operatingSystems.map(os => (
-              <motion.div
+              <m.div
                 key={os.name}
                 className="space-y-2"
                 whileHover={{ x: 3 }}
@@ -109,7 +109,7 @@ export default function SupportAdmin() {
                   <span className="text-zinc-500 text-xs">{os.desc}</span>
                 </div>
                 <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
-                  <motion.div
+                  <m.div
                     initial={{ width: 0 }}
                     whileInView={{ width: `${os.level}%` }}
                     viewport={{ once: true }}
@@ -117,7 +117,7 @@ export default function SupportAdmin() {
                     className={`h-full rounded-full bg-gradient-to-r from-zinc-500 to-[${tw.accent}] group-hover:from-[${tw.accent}] group-hover:to-[${tw.accentSoft}] transition-colors duration-500`}
                   />
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
@@ -128,9 +128,9 @@ export default function SupportAdmin() {
           </h3>
           <div className="flex flex-wrap gap-2">
             {techStack.map(tech => (
-              <motion.span key={tech} className="skill-tag" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <m.span key={tech} className="skill-tag" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 {tech}
-              </motion.span>
+              </m.span>
             ))}
           </div>
           <div className="mt-8 p-4 bg-white/[0.04] rounded-2xl border border-white/5 relative overflow-hidden group">
@@ -141,7 +141,7 @@ export default function SupportAdmin() {
             </p>
           </div>
         </div>
-      </motion.section>
+      </m.section>
     </div>
   );
 }

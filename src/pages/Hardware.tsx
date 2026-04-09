@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { Cpu, CheckCircle2, Activity } from "lucide-react";
 import PageHeader from "../components/PageHeader";
 import AnimatedCard from "../components/AnimatedCard";
@@ -24,13 +24,13 @@ export default function Hardware() {
               </div>
               <div className="flex gap-2 flex-wrap justify-end">
                 {study.tags.map(tag => (
-                  <motion.span
+                  <m.span
                     key={tag}
                     className="px-2.5 py-1 rounded-full bg-white/5 text-xs font-medium text-zinc-400 group-hover:bg-white/10 transition-colors"
                     whileHover={{ scale: 1.08 }}
                   >
                     {tag}
-                  </motion.span>
+                  </m.span>
                 ))}
               </div>
             </div>
@@ -40,7 +40,7 @@ export default function Hardware() {
 
             <div className="space-y-3 border-t border-white/5 pt-6">
               {study.details.map((detail, idx) => (
-                <motion.div
+                <m.div
                   key={idx}
                   className="flex gap-3 text-sm text-zinc-400 group-hover:text-zinc-300 transition-colors"
                   initial={{ opacity: 0, x: -10 }}
@@ -50,7 +50,7 @@ export default function Hardware() {
                 >
                   <CheckCircle2 size={16} className={`text-zinc-500 shrink-0 mt-0.5 group-hover:text-[${tw.accent}] transition-colors`} />
                   <span>{detail}</span>
-                </motion.div>
+                </m.div>
               ))}
             </div>
           </AnimatedCard>
@@ -72,14 +72,14 @@ export default function Hardware() {
       </section>
 
       {/* The Bucket Analogy */}
-      <motion.section
+      <m.section
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.4 }}
         className="glass-card p-8 md:p-12 relative overflow-hidden"
       >
-        <div className={`absolute right-0 bottom-0 w-64 h-64 bg-gradient-to-tl from-[${tw.accent}]/8 to-transparent rounded-full blur-3xl -mr-20 -mb-20 pointer-events-none`} />
+        <div className={`absolute right-0 bottom-0 w-64 h-64 bg-[radial-gradient(circle,rgba(192,57,43,0.08)_0%,transparent_70%)] rounded-full -mr-20 -mb-20 pointer-events-none`} />
         <div className="max-w-3xl relative z-10">
           <h2 className="text-2xl font-semibold mb-6">the bucket analogy 🪣</h2>
           <p className="text-lg text-zinc-400 italic mb-8 leading-relaxed">
@@ -88,20 +88,20 @@ export default function Hardware() {
             this empathy-first communication builds trust where technical jargon fails."
           </p>
           <div className="flex items-center gap-4">
-            <motion.div
+            <m.div
               className={`w-12 h-12 rounded-full bg-[${tw.accent}]/10 border border-[${tw.accent}]/15 flex items-center justify-center`}
               whileHover={{ scale: 1.1, rotate: 10 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
               <Activity className={`text-[${tw.accent}]`} />
-            </motion.div>
+            </m.div>
             <div>
               <p className="font-medium text-zinc-200">aisling</p>
               <p className="text-xs text-zinc-500">customer communication strategy 💛</p>
             </div>
           </div>
         </div>
-      </motion.section>
+      </m.section>
     </div>
   );
 }
