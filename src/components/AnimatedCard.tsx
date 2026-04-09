@@ -2,14 +2,16 @@
  * Staggered animated card wrapper.
  * Pass a custom index for stagger delay ordering.
  */
+import type { ReactNode, Key } from "react";
 import { motion } from "motion/react";
 import { cardVariants } from "../lib/theme";
 
 interface Props {
+  key?: Key;
   index: number;
   className?: string;
   hoverLift?: boolean;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export default function AnimatedCard({ index, className = "", hoverLift = true, children }: Props) {

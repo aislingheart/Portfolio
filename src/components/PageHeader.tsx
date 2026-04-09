@@ -1,12 +1,13 @@
 /**
  * Reusable animated section header with decorative blob.
  */
+import type { ReactNode } from "react";
 import { motion } from "motion/react";
 import { fadeInUp } from "../lib/theme";
 
 interface Props {
   title: string;
-  children: React.ReactNode; // description paragraph
+  children: ReactNode; // description paragraph
 }
 
 export default function PageHeader({ title, children }: Props) {
