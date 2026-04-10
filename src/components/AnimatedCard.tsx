@@ -22,55 +22,40 @@ export default function AnimatedCard({ index, className = "", hoverLift = true, 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  // Smooth out the movement with heavier, highly damped physics so it feels fluid rather than snappy
   const mouseXSpring = useSpring(x, { stiffness: 100, damping: 30, mass: 0.5 });
   const mouseYSpring = useSpring(y, { stiffness: 100, damping: 30, mass: 0.5 });
 
-  // Map mouse coordinates to 3D rotation angles
-  // When mouse is top (negative Y), we pitch up (positive rotateX)
-  // When mouse is left (negative X), we yaw left (negative rotateY)
-  // Reduced angle to 4deg so the effect is subtle
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["4deg", "-4deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-4deg", "4deg"]);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], [4, -4]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], [-4, 4]);
 
-  const rectInfo = useRef({ width: 0, height: 0, absoluteLeft: 0, absoluteTop: 0 });
+  const boxState = useRef({ centerX: 0, centerY: 0, width: 0, height: 0 });
 
-  const handleMouseEnter = () => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
-    // Cache the absolute position in the document so scrolling doesn't invalidate it
-    rectInfo.current = {
-      width: rect.width,
-      height: rect.height,
-      absoluteLeft: rect.left + scrollLeft,
-      absoluteTop: rect.top + scrollTop,
+  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    // Cache the flat geometry layout strictly on enter to prevent 3D-projected bounds 
+    // from corrupting the coordinate plane mathematically frame-by-frame on tilt.
+    boxState.current = {
+      width: e.currentTarget.offsetWidth,
+      height: e.currentTarget.offsetHeight,
+      centerX: rect.left + e.currentTarget.offsetWidth / 2,
+      centerY: rect.top + e.currentTarget.offsetHeight / 2,
     };
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const { width, height, absoluteLeft, absoluteTop } = rectInfo.current;
-    if (width === 0) return; // Safeguard if movement starts before enter is caught
+    // Distance mapped directly to cached viewport center vector rather than live DOM projection
+    const deltaX = e.clientX - boxState.current.centerX;
+    const deltaY = e.clientY - boxState.current.centerY;
     
-    const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    if (boxState.current.width === 0) return;
 
-    // Calculate mouse position relative to the element without forcing a DOM layout recalculation
-    const mouseX = (e.clientX + scrollLeft) - absoluteLeft;
-    const mouseY = (e.clientY + scrollTop) - absoluteTop;
-    
-    // Convert to percentage from center (-0.5 to 0.5)
-    // Reduce tilt intensity to keep the effect lightweight and subtle
-    x.set((mouseX / width) - 0.5);
-    y.set((mouseY / height) - 0.5);
+    x.set(deltaX / boxState.current.width);
+    y.set(deltaY / boxState.current.height);
   };
 
   const handleMouseLeave = () => {
     x.set(0);
     y.set(0);
-    // Reset cache just to be perfectly clean
-    rectInfo.current = { width: 0, height: 0, absoluteLeft: 0, absoluteTop: 0 };
   };
 
   return (
@@ -84,13 +69,17 @@ export default function AnimatedCard({ index, className = "", hoverLift = true, 
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{
-        transformPerspective: 1000,
-        rotateX,
-        rotateY,
-      }}
       {...(hoverLift ? { whileHover: { y: -6 } } : {})}
       className={className}
+      style={{ 
+        transformPerspective: 1000, 
+        rotateX, 
+        rotateY,
+        // Override global CSS 'transition-all' attributes provided via injected classNames (e.g., .glass-card).
+        // By omitting 'transform' from this list, we permanently lock out the CSS layout engine from 
+        // violently interfering with Framer Motion's real-time 60fps JavaScript physics loop!
+        transitionProperty: "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, filter, backdrop-filter",
+      }}
     >
       {children}
     </m.div>

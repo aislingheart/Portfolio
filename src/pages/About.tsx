@@ -1,4 +1,5 @@
 import { useState } from "react";
+import pfp from "../assets/pfp.webp";
 import { m, AnimatePresence } from "motion/react";
 import { MapPin, Briefcase, GraduationCap, User, Wrench, Smartphone, Headphones, Gamepad2, Zap, Languages, Quote, Heart } from "lucide-react";
 import AnimatedCard from "../components/AnimatedCard";
@@ -38,6 +39,16 @@ export default function About() {
       {/* Links Section */}
       <AnimatedCard index={0} hoverLift={false} className="glass-card p-12 md:p-24 flex flex-col items-center justify-center text-center relative overflow-hidden">
         <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-[radial-gradient(circle,rgba(192,57,43,0.12)_0%,transparent_70%)] rounded-full pointer-events-none`} />
+
+        <m.img 
+          initial={{ scale: 0.5, opacity: 0, rotate: -5 }}
+          whileInView={{ scale: 1, opacity: 1, rotate: 0 }}
+          viewport={{ once: true }}
+          transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.05 }}
+          src={pfp} 
+          alt="Aisling Creed" 
+          className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-[#c0392b]/30 shadow-[0_0_30px_rgba(192,57,43,0.2)] object-cover mb-8 relative z-10"
+        />
 
         <m.h1
           initial={{ scale: 0.9, opacity: 0 }}
@@ -120,13 +131,13 @@ export default function About() {
           <div className={`absolute top-0 left-0 w-64 h-64 bg-[radial-gradient(circle,rgba(192,57,43,0.05)_0%,transparent_70%)] rounded-full -ml-20 -mt-20 pointer-events-none`} />
 
           <div className="flex items-center gap-4 mb-8 relative z-10">
-            <m.div
-              className={`w-16 h-16 rounded-full bg-[${tw.accent}]/10 flex items-center justify-center border border-[${tw.accent}]/15`}
-              whileHover={{ rotate: 10, scale: 1.1 }}
+            <m.img
+              src={pfp}
+              alt="Aisling Avatar"
+              className={`w-16 h-16 rounded-full border border-[${tw.accent}]/30 object-cover shadow-lg`}
+              whileHover={{ rotate: 5, scale: 1.1 }}
               transition={spring.gentle}
-            >
-              <User className={`text-[${tw.accent}]`} size={32} />
-            </m.div>
+            />
             <div>
               <h2 className="text-2xl font-semibold">about me 💫</h2>
               <div className="flex items-center gap-2 text-zinc-500 text-sm mt-1">

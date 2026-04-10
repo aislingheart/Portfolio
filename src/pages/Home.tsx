@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import pfp from "../assets/pfp.webp";
 import { m } from "motion/react";
 import { Link } from "react-router-dom";
-import { Cpu, Server, Zap, ArrowRight, Terminal, ShieldCheck, HeartPulse, User, Sparkles } from "lucide-react";
+import { Cpu, Server, Zap, ArrowRight, Terminal, ShieldCheck, HeartPulse, Flower2, Sparkles } from "lucide-react";
 import AnimatedCard from "../components/AnimatedCard";
 import IconBox from "../components/IconBox";
 import { tw, spring } from "../lib/theme";
@@ -60,19 +61,31 @@ export default function Home() {
         <AnimatedCard index={0} hoverLift={false} className="md:col-span-2 glass-card p-8 md:p-12 flex flex-col justify-center relative overflow-hidden">
           <div className={`absolute top-0 right-0 w-64 h-64 bg-[radial-gradient(circle,rgba(192,57,43,0.1)_0%,transparent_70%)] rounded-full -mr-20 -mt-20 pointer-events-none`} />
 
-          <m.div
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3, duration: 0.4 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-zinc-400 mb-4 w-fit relative z-10"
-          >
-            <Sparkles size={12} className={`text-[${tw.accent}]`} />
-            <span>{greeting}</span>
-          </m.div>
+          <div className="flex items-center gap-4 mb-8 relative z-10 w-fit">
+            <m.img 
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
+              src={pfp} 
+              alt="Aisling Creed" 
+              className="w-20 h-20 rounded-full border-2 border-white/10 shadow-[0_8px_20px_rgba(0,0,0,0.4)] object-cover"
+            />
+            <div className="flex flex-col gap-3">
+              <m.div
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3, duration: 0.4 }}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-zinc-400 w-fit"
+              >
+                <Sparkles size={12} className={`text-[${tw.accent}]`} />
+                <span>{greeting}</span>
+              </m.div>
 
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-zinc-400 mb-8 w-fit relative z-10">
-            <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
-            <span>open to opportunities ✨</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-zinc-400 w-fit">
+                <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
+                <span>open to opportunities ✨</span>
+              </div>
+            </div>
           </div>
 
           <h1 className="text-4xl md:text-6xl font-semibold tracking-tight mb-6 leading-[1.1] relative z-10 min-h-[88px] md:min-h-[132px]">
@@ -92,7 +105,7 @@ export default function Home() {
             </m.div>
             <m.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Link to="/about" className="px-6 py-3 bg-white/5 border border-white/10 text-zinc-200 font-medium rounded-full hover:bg-white/10 transition-colors flex items-center gap-2">
-                <User size={16} /> about me
+                <Flower2 size={16} /> about me
               </Link>
             </m.div>
           </div>

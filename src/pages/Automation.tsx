@@ -78,16 +78,18 @@ export default function Automation() {
               <m.div className="w-3 h-3 rounded-full bg-zinc-600 group-hover:bg-green-400/50 transition-colors" whileHover={{ scale: 1.3 }} />
             </div>
             <div className="text-zinc-300">
+              <span className={`text-zinc-500 group-hover:text-[${tw.accent}] transition-colors`}>import</span> vision_api<br />
               <span className={`text-zinc-500 group-hover:text-[${tw.accent}] transition-colors`}>import</span> calendar_api<br />
               <span className={`text-zinc-500 group-hover:text-[${tw.accent}] transition-colors`}>import</span> llm_parser<br />
               <br />
-              <span className="text-zinc-600"># extracting roster from unstructured text</span><br />
-              roster_data = llm_parser.parse(input_text)<br />
+              <span className="text-zinc-600"># extracting unstructured roster image into structured payload</span><br />
+              raw_text = vision_api.ocr(roster_image)<br />
+              roster_shifts = llm_parser.parse(raw_text)<br />
               <br />
-              <span className={`text-zinc-500 group-hover:text-[${tw.accent}] transition-colors`}>for</span> event <span className={`text-zinc-500 group-hover:text-[${tw.accent}] transition-colors`}>in</span> roster_data:<br />
-              &nbsp;&nbsp;calendar_api.add_event(event)<br />
+              <span className={`text-zinc-500 group-hover:text-[${tw.accent}] transition-colors`}>for</span> shift <span className={`text-zinc-500 group-hover:text-[${tw.accent}] transition-colors`}>in</span> roster_shifts:<br />
+              &nbsp;&nbsp;calendar_api.create_ical_event(shift)<br />
               <br />
-              <span className="text-zinc-400 group-hover:text-zinc-200 transition-colors">print</span>(<span className="text-zinc-500 group-hover:text-zinc-400 transition-colors">"sync complete. ✅"</span>)
+              <span className="text-zinc-400 group-hover:text-zinc-200 transition-colors">print</span>(<span className="text-zinc-500 group-hover:text-zinc-400 transition-colors">"ical sync complete. ✅"</span>)
             </div>
           </div>
         </div>

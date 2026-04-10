@@ -1,5 +1,6 @@
 import { m } from "motion/react";
-import { Cpu, CheckCircle2, Activity } from "lucide-react";
+import { Cpu, CheckCircle2 } from "lucide-react";
+import pfp from "../assets/pfp.webp";
 import PageHeader from "../components/PageHeader";
 import AnimatedCard from "../components/AnimatedCard";
 import IconBox from "../components/IconBox";
@@ -88,13 +89,13 @@ export default function Hardware() {
             this empathy-first communication builds trust where technical jargon fails."
           </p>
           <div className="flex items-center gap-4">
-            <m.div
-              className={`w-12 h-12 rounded-full bg-[${tw.accent}]/10 border border-[${tw.accent}]/15 flex items-center justify-center`}
-              whileHover={{ scale: 1.1, rotate: 10 }}
+            <m.img
+              src={pfp}
+              alt="Aisling Avatar"
+              className={`w-12 h-12 rounded-full border-2 border-[#c0392b]/30 object-cover shadow-lg`}
+              whileHover={{ rotate: 5, scale: 1.1 }}
               transition={{ type: "spring", stiffness: 300 }}
-            >
-              <Activity className={`text-[${tw.accent}]`} />
-            </m.div>
+            />
             <div>
               <p className="font-medium text-zinc-200">aisling</p>
               <p className="text-xs text-zinc-500">customer communication strategy 💛</p>

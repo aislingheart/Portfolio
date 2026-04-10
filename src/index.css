@@ -194,3 +194,38 @@
 .animate-shimmer {
   animation: shimmer 3s ease-in-out infinite;
 }
+
+/* Hardware Diagnostic X-Ray Mode Easter Egg */
+body.xray-mode {
+  background-color: #050000 !important;
+}
+
+body.xray-mode * {
+  background: transparent !important;
+  color: #c0392b !important;
+  border-color: rgba(192, 57, 43, 0.4) !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  backdrop-filter: none !important;
+  outline: 1px solid rgba(192, 57, 43, 0.15) !important;
+}
+
+body.xray-mode img, body.xray-mode canvas, body.xray-mode svg {
+  opacity: 0.3 !important;
+  filter: grayscale(100%) sepia(100%) hue-rotate(-50deg) saturate(500%) !important;
+}
+
+body.xray-mode::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(192, 57, 43, 0.05) 0px,
+    rgba(192, 57, 43, 0.05) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
