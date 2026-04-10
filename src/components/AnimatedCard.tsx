@@ -3,12 +3,11 @@
  * Pass a custom index for stagger delay ordering.
  */
 import React, { useRef } from "react";
-import type { ReactNode, Key } from "react";
+import type { ReactNode } from "react";
 import { m, useMotionValue, useSpring, useTransform } from "motion/react";
 import { cardVariants } from "../lib/theme";
 
 interface Props {
-  key?: Key;
   index: number;
   className?: string;
   hoverLift?: boolean;
@@ -71,13 +70,12 @@ export default function AnimatedCard({ index, className = "", hoverLift = true, 
       onMouseLeave={handleMouseLeave}
       {...(hoverLift ? { whileHover: { y: -6 } } : {})}
       className={className}
-      style={{ 
-        transformPerspective: 1000, 
-        rotateX, 
+      style={{
+        transformPerspective: 1000,
+        rotateX,
         rotateY,
-        // Override global CSS 'transition-all' attributes provided via injected classNames (e.g., .glass-card).
-        // By omitting 'transform' from this list, we permanently lock out the CSS layout engine from 
-        // violently interfering with Framer Motion's real-time 60fps JavaScript physics loop!
+        // Inline override: highest CSS specificity — guarantees transform is never
+        // CSS-transitioned regardless of what utility classes are applied via className
         transitionProperty: "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, filter, backdrop-filter",
       }}
     >

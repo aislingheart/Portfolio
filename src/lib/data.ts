@@ -7,7 +7,7 @@
 import type { LucideIcon } from "lucide-react";
 import {
   Mail, Camera, Instagram, Github, Twitter, Cloud,
-  Cpu, Search, Zap, ShieldAlert, Activity,
+  Cpu, Search, Zap, ShieldAlert,
   Server, Shield, Database, Network, Terminal, HardDrive,
   Calendar, MousePointer2,
 } from "lucide-react";
@@ -32,24 +32,24 @@ export interface SocialLink {
 }
 
 export const socialLinks: SocialLink[] = [
-  { icon: Mail,      label: "ashcreed42@gmail.com",          url: "mailto:ashcreed42@gmail.com" },
-  { icon: Camera,    label: "@imageworm",                    url: "https://www.instagram.com/imageworm" },
-  { icon: Instagram, label: "@aisling_heart",                url: "https://www.instagram.com/aisling_heart" },
-  { icon: Github,    label: "aislingheart",                  url: "https://github.com/aislingheart" },
-  { icon: Twitter,   label: "@aislingheart",                 url: "https://twitter.com/aislingheart" },
-  { icon: Cloud,     label: "aislingheart.bsky.social",      url: "https://bsky.app/profile/aislingheart.bsky.social" },
+  { icon: Mail, label: "ashcreed42@gmail.com", url: "mailto:ashcreed42@gmail.com" },
+  { icon: Camera, label: "@imageworm", url: "https://www.instagram.com/imageworm" },
+  { icon: Instagram, label: "@aisling_heart", url: "https://www.instagram.com/aisling_heart" },
+  { icon: Github, label: "aislingheart", url: "https://github.com/aislingheart" },
+  { icon: Twitter, label: "@aislingheart", url: "https://twitter.com/aislingheart" },
+  { icon: Cloud, label: "aislingheart.bsky.social", url: "https://bsky.app/profile/aislingheart.bsky.social" },
 ];
 
 export const quickFacts = [
-  { label: "age",       value: "21" },
-  { label: "fav OS",    value: "Android / macOS" },
-  { label: "go-to tool",value: "the spudger 🫡" },
-  { label: "fav repair",value: "the more complex, the better" },
-  { label: "music",     value: "vocaloid 🎵" },
-  { label: "pets",      value: "Milo 🐱 Luna 🐱 Becky 🐶" },
-  { label: "hobbies",   value: "📸 🎮 🎬" },
-  { label: "fuel",      value: "Aussie Lemonade Monster ⚡" },
-  { label: "fun fact",  value: "fluent in Irish 🇮🇪" },
+  { label: "age", value: "21" },
+  { label: "fav OS", value: "Android / macOS" },
+  { label: "go-to tool", value: "the spudger 🫡" },
+  { label: "fav repair", value: "the more complex, the better" },
+  { label: "music", value: "vocaloid 🎵" },
+  { label: "pets", value: "Milo 🐱 Luna 🐱 Becky 🐶" },
+  { label: "hobbies", value: "📸 🎮 🎬" },
+  { label: "fuel", value: "Aussie Lemonade Monster ⚡" },
+  { label: "fun fact", value: "fluent in Irish 🇮🇪" },
   { label: "obsession", value: "Pixel ↔ Mac continuity" },
 ];
 
@@ -96,8 +96,8 @@ export interface Education {
 }
 
 export const education: Education[] = [
-  { title: "leaving certificate",   institution: "Coláiste Dáibhéid",       dates: "Apr 2024 - May 2025" },
-  { title: "junior certificate",    institution: "Cork Educate Together",    dates: "Sep 2022 - Jun 2024" },
+  { title: "leaving certificate", institution: "Coláiste Dáibhéid", dates: "Apr 2024 - May 2025" },
+  { title: "junior certificate", institution: "Cork Educate Together", dates: "Sep 2022 - Jun 2024" },
 ];
 
 // ── Hardware ─────────────────────────────────────────────────────────
@@ -137,9 +137,9 @@ export const caseStudies: CaseStudy[] = [
 ];
 
 export const hardwareSkills = [
-  { icon: Search,      title: "panic log mastery 🔍",  desc: "proficient in interpreting kernel panic logs to isolate hardware failures in SMC, thermal sensors, and power management ICs, turning guesswork into science." },
-  { icon: Zap,          title: "micro-soldering ⚡",    desc: "experienced in precise component-level work, including 2-point solder jobs on delicate Face ID and earpiece flex cables under magnification." },
-  { icon: ShieldAlert,  title: "quality control ✅",    desc: "strict adherence to pre-closure component testing and post-repair system validation to guarantee long-term reliability and zero-defect handovers." },
+  { icon: Search, title: "panic log mastery 🔍", desc: "proficient in interpreting kernel panic logs to isolate hardware failures in SMC, thermal sensors, and power management ICs, turning guesswork into science." },
+  { icon: Zap, title: "micro-soldering ⚡", desc: "experienced in precise component-level work, including 2-point solder jobs on delicate Face ID and earpiece flex cables under magnification." },
+  { icon: ShieldAlert, title: "quality control ✅", desc: "strict adherence to pre-closure component testing and post-repair system validation to guarantee long-term reliability and zero-defect handovers." },
 ];
 
 // ── Support & Admin ──────────────────────────────────────────────────
@@ -150,19 +150,19 @@ export interface LabService {
 }
 
 export const labServices: LabService[] = [
-  { name: "Docker",      description: "containerised environment for local services, ensuring isolation and easy deployment.",       icon: Database },
-  { name: "OpenWebUI",   description: "local LLM interface for private workflows and scripting assistance.",                        icon: Terminal },
-  { name: "Jellyfin",    description: "self-hosted media management and streaming suite with hardware transcoding.",                icon: Server },
-  { name: "Tailscale",   description: "secure mesh VPN for frictionless remote access to home infrastructure from anywhere.",       icon: Shield },
-  { name: "WOL Beacon",  description: "raspberry pi configured as a Wake-on-LAN trigger for remote power management.",             icon: Zap },
-  { name: "Kali Linux",  description: "dedicated VM for network penetration testing, security auditing, and learning.",             icon: Network },
+  { name: "Docker", description: "containerised environment for local services, ensuring isolation and easy deployment.", icon: Database },
+  { name: "OpenWebUI", description: "local LLM interface for private workflows and scripting assistance.", icon: Terminal },
+  { name: "Jellyfin", description: "self-hosted media management and streaming suite with hardware transcoding.", icon: Server },
+  { name: "Tailscale", description: "secure mesh VPN for frictionless remote access to home infrastructure from anywhere.", icon: Shield },
+  { name: "WOL Beacon", description: "raspberry pi configured as a Wake-on-LAN trigger for remote power management.", icon: Zap },
+  { name: "Kali Linux", description: "dedicated VM for network penetration testing, security auditing, and learning.", icon: Network },
 ];
 
 export const operatingSystems = [
   { name: "Linux (Ubuntu/Kali)", level: 90, desc: "server admin, pen testing, VMs." },
-  { name: "macOS",               level: 95, desc: "primary workstation, env. optimisation." },
-  { name: "Windows",             level: 85, desc: "desktop support, home server management." },
-  { name: "Android/iOS",         level: 95, desc: "advanced diagnostics & mobile internals." },
+  { name: "macOS", level: 95, desc: "primary workstation, env. optimisation." },
+  { name: "Windows", level: 85, desc: "desktop support, home server management." },
+  { name: "Android/iOS", level: 95, desc: "advanced diagnostics & mobile internals." },
 ];
 
 export const techStack = [
@@ -171,9 +171,9 @@ export const techStack = [
 ];
 
 export const examSaveSteps = [
-  { label: "rapid diagnosis:",    text: "identified the OS failure as the bottleneck within seconds, ruling out hardware issues." },
-  { label: "creative solution:",  text: "swapped the failing drive for a pre-configured Ubuntu/LibreOffice SSD i kept on hand." },
-  { label: "result:",             text: "the student resumed the exam in under 5 minutes with full document compatibility and zero data loss. 🎉" },
+  { label: "rapid diagnosis:", text: "identified the OS failure as the bottleneck within seconds, ruling out hardware issues." },
+  { label: "creative solution:", text: "swapped the failing drive for a pre-configured Ubuntu/LibreOffice SSD i kept on hand." },
+  { label: "result:", text: "the student resumed the exam in under 5 minutes with full document compatibility and zero data loss. 🎉" },
 ];
 
 // ── Automation ───────────────────────────────────────────────────────
@@ -201,12 +201,12 @@ export const automations: AutomationProject[] = [
     title: "server update pipeline",
     description: "automated update workflows using Winget and UnigetUI to keep home server applications, services, and games current with minimal manual intervention.",
     icon: Cpu,
-    tech: ["Winget", "UnigetUI", "PowerShell"],
+    tech: ["Winget", "UnigetUI", "CMD"],
   },
 ];
 
 export const scriptingTools = [
-  { name: "Python",     tag: "automation",    isAccent: true },
-  { name: "AppleScript",tag: "macros",        isAccent: false },
-  { name: "PowerShell", tag: "system admin",  isAccent: false },
+  { name: "Python", tag: "automation", isAccent: true },
+  { name: "AppleScript", tag: "macros", isAccent: false },
+  { name: "CMD", tag: "system admin", isAccent: false },
 ];

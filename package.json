@@ -1,5 +1,5 @@
 {
-  "name": "react-example",
+  "name": "aisling-portfolio",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -25,7 +25,6 @@
     "autoprefixer": "^10.4.21",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",
-    "typescript": "~5.8.2",
-    "vite": "^6.2.0"
+    "typescript": "~5.8.2"
   }
 }
