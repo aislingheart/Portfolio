@@ -6,7 +6,7 @@
  */
 import type { LucideIcon } from "lucide-react";
 import {
-  Mail, Camera, Instagram, Github, Twitter, Cloud,
+  Mail, Camera, Instagram, Github, Twitter, Cloud, Linkedin,
   Cpu, Search, Zap, ShieldAlert,
   Server, Shield, Database, Network, Terminal, HardDrive,
   Calendar, MousePointer2,
@@ -15,13 +15,13 @@ import {
 // ── Home ─────────────────────────────────────────────────────────────
 export const qualifications = [
   "versatile tech expert.",
-  "mobile repair technician.",
   "hardware diagnostic specialist.",
   "systems administrator.",
   "micro-soldering expert.",
   "automation enthusiast.",
   "IT support engineer.",
   "empathetic problem solver.",
+  "always learning, always building.",
 ];
 
 // ── About ────────────────────────────────────────────────────────────
@@ -33,6 +33,7 @@ export interface SocialLink {
 
 export const socialLinks: SocialLink[] = [
   { icon: Mail, label: "ashcreed42@gmail.com", url: "mailto:ashcreed42@gmail.com" },
+  { icon: Linkedin, label: "aislingheart", url: "https://www.linkedin.com/in/aislingheart/" },
   { icon: Camera, label: "@imageworm", url: "https://www.instagram.com/imageworm" },
   { icon: Instagram, label: "@aisling_heart", url: "https://www.instagram.com/aisling_heart" },
   { icon: Github, label: "aislingheart", url: "https://github.com/aislingheart" },
@@ -69,11 +70,17 @@ export interface Job {
 
 export const jobs: Job[] = [
   {
+    title: "upskilling & professional development",
+    company: "Self-Directed",
+    dates: "May 2025 - Present",
+    isCurrent: true,
+    description: "actively expanding my skill set across systems administration, networking, and automation. deepening my Linux proficiency, exploring cloud infrastructure, and building personal projects to bridge the gap between hands-on hardware expertise and modern IT operations.",
+  },
+  {
     title: "sales assistant / mobile repair tech",
     company: "Fone Connection",
-    dates: "Mar 2025 - Present",
-    isCurrent: true,
-    description: "execute comprehensive hardware repairs (screens, batteries, components) and software troubleshooting on a wide range of iOS and Android devices. balance technical repair workflows with active customer support in a fast-paced, high-volume shopping centre environment.",
+    dates: "Mar 2025 - May 2025",
+    description: "executed comprehensive hardware repairs (screens, batteries, components) and software troubleshooting on a wide range of iOS and Android devices. balanced technical repair workflows with active customer support in a fast-paced, high-volume shopping centre environment.",
   },
   {
     title: "IT support technician assistant",

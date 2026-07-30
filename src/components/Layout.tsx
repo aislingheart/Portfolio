@@ -230,7 +230,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
         {/* Floating pill navigation */}
         <div className="fixed bottom-8 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
-        <m.nav
+          <m.nav
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
@@ -243,8 +243,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   key={item.path}
                   to={item.path}
                   className={`relative flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-200 overflow-hidden ${isActive
-                      ? "text-zinc-100 shadow-sm"
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-white/5"
+                    ? "text-zinc-100 shadow-sm"
+                    : "text-zinc-400 hover:text-zinc-200 hover:bg-white/5"
                     }`}
                 >
                   {isActive && (
@@ -278,14 +278,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               onClick={() => setShowMilo(false)}
               className="fixed inset-0 z-[200] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 cursor-pointer"
             >
-              <m.div 
+              <m.div
                 initial={{ y: 50, rotate: -5, opacity: 0 }}
                 animate={{ y: 0, rotate: 2, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
                 className="bg-[#f0f0f0] p-4 pb-16 rounded-sm shadow-2xl relative max-w-sm w-full"
               >
-                 <img src={miloImg} alt="Milo" className="w-full aspect-square object-cover shadow-inner bg-zinc-800 rounded-sm" />
-                 <p className="absolute bottom-5 left-0 w-full text-center text-zinc-800 font-serif italic text-lg opacity-80 decoration-inherit flex items-center justify-center gap-2">I approve of this portfolio~milo 🐾</p>
+                <img src={miloImg} alt="Milo" className="w-full aspect-square object-cover shadow-inner bg-zinc-800 rounded-sm" />
+                <p className="absolute bottom-5 left-0 w-full text-center text-zinc-800 font-serif italic text-lg opacity-80 decoration-inherit flex items-center justify-center gap-2">I approve of this portfolio~milo 🐾</p>
               </m.div>
             </m.div>
           )}

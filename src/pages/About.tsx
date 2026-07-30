@@ -25,7 +25,10 @@ export default function About() {
     if (label.startsWith('@')) {
       return <><span className="text-zinc-500">@</span><span className={`text-[${tw.accent}]`}>{label.slice(1)}</span></>;
     }
-    if (label === "aislingheart") {
+    if (activeLink.url.includes('linkedin.com')) {
+      return <><span className="text-zinc-500">linkedin.com/in/</span><span className={`text-[${tw.accent}]`}>{label}</span></>;
+    }
+    if (activeLink.url.includes('github.com')) {
       return <><span className="text-zinc-500">github.com/</span><span className={`text-[${tw.accent}]`}>{label}</span></>;
     }
     if (label.includes('.')) {
@@ -149,8 +152,8 @@ export default function About() {
 
           <div className="space-y-6 text-zinc-400 leading-relaxed relative z-10">
             <p>i'm a 21-year-old tech professional with an insatiable curiosity for how things work — and more importantly, how to fix them when they break. i bring a unique blend of deep empathy and rigorous problem-solving to the tech industry. i pride myself on my adaptability and a keen eye for detail.</p>
-            <p>currently, i work as a Mobile Repair Technician at Fone Connection, where i balance comprehensive hardware repairs with delivering high-quality, empathetic customer service in a fast-paced environment. i believe that technical expertise is only half the job; the other half is making the customer feel heard and understood.</p>
-            <p>my background includes IT Support at EPS Water Ireland — where i maintained infrastructure and managed ticketing systems — and providing critical technical support during live exams at Cork Educate Together. whether i'm explaining complex technical issues to a customer or executing a delicate micro-soldering repair, my goal is always to deliver an exceptional, stress-free experience.</p>
+            <p>after gaining hands-on experience as a Mobile Repair Technician at Fone Connection — where i balanced comprehensive hardware repairs with delivering high-quality, empathetic customer service — i've been focused on upskilling and professional development. i'm deepening my expertise in systems administration, networking, automation, and cloud infrastructure to broaden my career in IT.</p>
+            <p>my background also includes IT Support at EPS Water Ireland — where i maintained infrastructure and managed ticketing systems — and providing critical technical support during live exams at Cork Educate Together. whether i'm explaining complex technical issues to a customer or executing a delicate micro-soldering repair, my goal is always to deliver an exceptional, stress-free experience.</p>
           </div>
         </AnimatedCard>
 

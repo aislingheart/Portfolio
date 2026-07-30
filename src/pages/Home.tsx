@@ -96,6 +96,7 @@ export default function Home() {
             hey, i'm Aisling! 👋 i bridge the gap between complex hardware diagnostics and robust systems administration.
             from micro-soldering delicate Face ID flex cables to rescuing live exam sessions with rapid Linux SSD swaps,
             i thrive on high-stakes technical challenges that need both precision and empathy.
+            currently upskilling across sysadmin, networking, and automation — always building, always learning.
           </p>
           <div className="flex flex-wrap gap-4 mt-auto relative z-10">
             <m.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
