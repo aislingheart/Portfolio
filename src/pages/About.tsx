@@ -118,7 +118,7 @@ export default function About() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className={`w-14 h-14 md:w-16 md:h-16 flex items-center justify-center transition-all duration-200 ${
-                activeLink.label === link.label ? `bg-[${tw.accent}] text-white` : "text-zinc-400 hover:bg-white/10 hover:text-zinc-200"
+                activeLink.url === link.url ? `bg-[${tw.accent}] text-white` : "text-zinc-400 hover:bg-white/10 hover:text-zinc-200"
               } ${i !== socialLinks.length - 1 ? "border-r border-white/10" : ""}`}
               aria-label={`Select ${link.label}`}
             >
