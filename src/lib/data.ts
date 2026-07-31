@@ -77,8 +77,8 @@ export const technicalProficiency: TechCategory[] = [
       { name: "macOS", level: 100 },
       { name: "Windows", level: 100 },
       { name: "Linux (Ubuntu/Kali)", level: 90 },
-      { name: "iOS / iPadOS", level: 95 },
-      { name: "Android", level: 80 },
+      { name: "Android", level: 100 },
+      { name: "iOS / iPadOS", level: 80 },
       { name: "Docker", level: 60 },
       { name: "VMware", level: 75 },
       { name: "WSL", level: 75 },
@@ -221,7 +221,7 @@ export const operatingSystems = [
   { name: "macOS", level: 100, desc: "primary workstation, env. optimisation." },
   { name: "Windows", level: 100, desc: "desktop support, home server management." },
   { name: "Linux (Ubuntu/Kali)", level: 90, desc: "server admin, pen testing, VMs." },
-  { name: "Android/iOS", level: 95, desc: "advanced diagnostics & mobile internals." },
+  { name: "Android/iOS", level: 100, desc: "advanced diagnostics & mobile internals." },
 ];
 
 export const techStack = [
