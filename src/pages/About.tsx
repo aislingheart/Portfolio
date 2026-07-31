@@ -279,7 +279,7 @@ export default function About() {
                             whileInView={{ width: `${item.level}%` }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                            className={`h-full rounded-full bg-gradient-to-r from-zinc-500 to-[${tw.accent}] group-hover:from-[${tw.accent}] group-hover:to-[${tw.accentSoft}] transition-colors duration-500`}
+                            className={`h-full bg-[${tw.accent}] group-hover:bg-[${tw.accentSoft}] transition-colors duration-300`}
                           />
                         </div>
                       </m.div>

@@ -74,14 +74,21 @@ export const technicalProficiency: TechCategory[] = [
   {
     category: "systems & infrastructure",
     items: [
-      { name: "macOS", level: 95 },
+      { name: "macOS", level: 100 },
+      { name: "Windows", level: 100 },
+      { name: "Linux (Ubuntu/Kali)", level: 90 },
       { name: "iOS / iPadOS", level: 95 },
       { name: "Android", level: 80 },
-      { name: "Windows", level: 80 },
-      { name: "Linux (Ubuntu/Kali)", level: 80 },
       { name: "Docker", level: 60 },
       { name: "VMware", level: 75 },
       { name: "WSL", level: 75 },
+    ],
+  },
+  {
+    category: "command line",
+    items: [
+      { name: "Linux / macOS Terminal", level: 95 },
+      { name: "CMD / PowerShell", level: 80 },
     ],
   },
   {
@@ -211,9 +218,9 @@ export const labServices: LabService[] = [
 ];
 
 export const operatingSystems = [
+  { name: "macOS", level: 100, desc: "primary workstation, env. optimisation." },
+  { name: "Windows", level: 100, desc: "desktop support, home server management." },
   { name: "Linux (Ubuntu/Kali)", level: 90, desc: "server admin, pen testing, VMs." },
-  { name: "macOS", level: 95, desc: "primary workstation, env. optimisation." },
-  { name: "Windows", level: 85, desc: "desktop support, home server management." },
   { name: "Android/iOS", level: 95, desc: "advanced diagnostics & mobile internals." },
 ];
 
