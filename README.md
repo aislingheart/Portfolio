@@ -1,6 +1,6 @@
 <div align="center">
 
-# ✨ Aisling Creed — Tech Portfolio
+# ✨ Aisling Creed | Tech Portfolio
 
 **hardware diagnostics · systems administration · workflow automation**
 
@@ -11,7 +11,7 @@
 
 ---
 
-A personal portfolio showcasing my journey in tech — from micro-soldering delicate Face ID flex cables to rescuing live exam sessions with rapid Linux SSD swaps. Built with a dark, glassmorphic aesthetic and interactive particle effects.
+A personal portfolio site covering my tech work: from micro-soldering flex cables to rescuing live exam sessions with rapid Linux SSD swaps. Built with a dark glassmorphic UI and interactive particle effects.
 
 ## 🖥️ Preview
 
@@ -35,11 +35,11 @@ A personal portfolio showcasing my journey in tech — from micro-soldering deli
 
 ```
 src/
-├── components/       # Reusable UI — Layout, AnimatedCard, PageHeader, TerminalMode
+├── components/       # Reusable UI: Layout, AnimatedCard, PageHeader, TerminalMode
 ├── lib/
 │   ├── data.ts       # All portfolio content (jobs, skills, links, case studies)
 │   └── theme.ts      # Design tokens, animation presets
-├── pages/            # Route pages — Home, About, Hardware, SupportAdmin, Automation
+├── pages/            # Route pages: Home, About, Hardware, SupportAdmin, Automation
 ├── assets/           # Images (pfp, milo)
 ├── index.css         # Global styles, glass cards, keyframes
 └── App.tsx           # Router setup
@@ -47,13 +47,13 @@ src/
 
 ## ✨ Features
 
-- **Interactive particle canvas** — cursor-reactive constellation effect with autonomous ghost mode
-- **Glassmorphic UI** — layered frosted-glass cards with subtle hover reveals
-- **Terminal easter egg** — full CLI emulator with `neofetch`, `cat`, and more
-- **X-ray mode** — hardware diagnostic wireframe view (click "hardware-focused ✨" in the footer)
-- **Cat-approved** — click "cat-approved 🐱" in the footer to meet Milo 🐾
-- **Dynamic greeting** — time-aware messages (morning, evening, night owl)
-- **Typewriter** — rotating qualifications with blinking cursor
+- **Interactive particle canvas**: cursor-reactive constellation effect with autonomous ghost mode
+- **Glassmorphic UI**: layered frosted-glass cards with subtle hover reveals
+- **Terminal easter egg**: full CLI emulator with `neofetch`, `cat`, and more
+- **X-ray mode**: hardware diagnostic wireframe view (click "hardware-focused ✨" in the footer)
+- **Cat-approved**: click "cat-approved 🐱" in the footer to meet Milo 🐾
+- **Dynamic greeting**: time-aware messages (morning, evening, night owl)
+- **Typewriter**: rotating qualifications with blinking cursor
 
 ## 🚀 Run Locally
 
@@ -81,7 +81,7 @@ npm run dev
 
 ## 📬 Contact
 
-**Open to opportunities** — feel free to reach out!
+**Open to opportunities**: feel free to reach out!
 
 [![Email](https://img.shields.io/badge/Email-aislingcreed42@gmail.com-c0392b?style=flat-square&logo=gmail&logoColor=white)](mailto:aislingcreed42@gmail.com)
 [![GitHub](https://img.shields.io/badge/GitHub-aislingheart-181717?style=flat-square&logo=github)](https://github.com/aislingheart)

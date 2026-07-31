@@ -10,9 +10,7 @@ export default function SupportAdmin() {
   return (
     <div className="space-y-12">
       <PageHeader title="support & admin 🛡️">
-        i build and maintain robust digital environments. whether it's managing a complex,
-        self-hosted home lab or performing high-stakes crisis triage in an educational setting,
-        i prioritise uptime, security, and a seamless user experience.
+        i build and manage clean tech environments. from running my own homelab server stack to fixing urgent tech issues during live exams, i focus on reliable systems, smart setups, and smooth user experiences.
       </PageHeader>
 
       {/* The Exam Save */}
@@ -136,8 +134,7 @@ export default function SupportAdmin() {
           <div className="mt-8 p-4 bg-white/[0.04] rounded-2xl border border-white/5 relative overflow-hidden group">
             <div className={`absolute inset-0 bg-gradient-to-r from-[${tw.accent}]/0 via-[${tw.accent}]/5 to-[${tw.accent}]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000`} />
             <p className="text-sm text-zinc-400 italic leading-relaxed relative z-10">
-              "i thrive in support and admin work. i complete tasks more effectively by leveraging terminal-first
-              workflows across all major operating systems, prioritising speed and accuracy."
+              "i really enjoy support and admin work. working command-line first across Linux, macOS, and Windows helps me troubleshoot and get things done fast without unnecessary steps."
             </p>
           </div>
         </div>

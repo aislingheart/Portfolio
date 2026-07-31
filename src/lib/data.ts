@@ -2,7 +2,7 @@
  * All portfolio content lives here.
  *
  * Updating a job title, adding a case study, or tweaking a description
- * only requires editing this file — no JSX hunting needed.
+ * only requires editing this file. No JSX hunting needed.
  */
 import type { LucideIcon } from "lucide-react";
 import {
@@ -126,25 +126,25 @@ export const jobs: Job[] = [
     company: "Self-Directed",
     dates: "May 2025 - Present",
     isCurrent: true,
-    description: "actively expanding my skill set across systems administration, networking, and automation. deepening my Linux proficiency, exploring cloud infrastructure, and building personal projects to bridge the gap between hands-on hardware expertise and modern IT operations.",
+    description: "building out my skills across Linux sysadmin, networking, and workflow automation. setting up homelab servers, writing scripts, and bridging hands-on hardware troubleshooting with modern IT support.",
   },
   {
     title: "sales assistant / mobile repair tech",
     company: "Fone Connection",
     dates: "Mar 2025 - May 2025",
-    description: "executed comprehensive hardware repairs (screens, batteries, components) and software troubleshooting on a wide range of iOS and Android devices. balanced technical repair workflows with active customer support in a fast-paced, high-volume shopping centre environment.",
+    description: "handled hardware repairs (screens, batteries, flex cables, component replacements) and software troubleshooting across iOS and Android. paired technical bench work with direct customer support in a busy shop environment.",
   },
   {
     title: "IT support technician assistant",
     company: "EPS Water Ireland",
     dates: "Feb 2023",
-    description: "supported and assisted IT staff in the maintenance of workplace computers and phones. readied new machines for users, upgraded older hardware, and utilized ticketing systems to solve co-worker issues independently.",
+    description: "assisted IT staff with setup and maintenance for workplace PCs and mobile devices. prepped fresh machines for new staff, upgraded legacy hardware, and managed ticketing queues to resolve user issues.",
   },
   {
     title: "exam supervisor & tech support",
     company: "Cork Educate Together",
     dates: "Jun 2021 - Jul 2021",
-    description: "ensured a smooth exam experience for students by providing attentive supervision and technical assistance. demonstrated flexibility and quick thinking by troubleshooting and resolving technical issues on the spot.",
+    description: "provided on-site IT support and supervision during student exams. handled sudden hardware and software hiccups on the fly so students didn't lose time or progress.",
   },
 ];
 
@@ -172,33 +172,33 @@ export const caseStudies: CaseStudy[] = [
   {
     title: "iPhone 12 compound refurbishment",
     subtitle: "from bootloop to profit",
-    description: "a severely damaged device presented with a broken earpiece, low battery health, shattered screen, and constant bootlooping. successfully diagnosed, refurbished, and restored to full functionality for a net 80 euro profit.",
+    description: "a heavily damaged iPhone 12 came in with a shattered screen, dead battery, broken earpiece, and a constant bootloop. diagnosed the board panic, replaced the components, micro-soldered the flex, and brought it back to 100% functionality.",
     tags: ["iOS", "Refurbishment", "Diagnostics"],
     details: [
-      "identified bootloop root cause via deep panic log analysis.",
+      "traced the bootloop cause by analyzing kernel panic logs.",
       "replaced screen and battery with high-quality, tested components.",
       "repaired Face ID flex via micro-soldering to restore earpiece functionality.",
-      "conducted full system stress-test post-closure to guarantee stability.",
+      "ran post-repair stress tests to make sure everything stayed stable.",
     ],
   },
   {
     title: "panic log analysis: SMC crash",
     subtitle: "deep diagnostic challenge",
-    description: "diagnosed a device that kept restarting randomly after a third-party repair. used kernel panic logs to trace the issue back to faulty thermal sensors and corrupted battery monitoring data.",
+    description: "diagnosed a device restarting randomly after a third-party repair. used kernel panic logs to trace the issue back to faulty thermal sensors and corrupted battery monitoring data.",
     tags: ["Panic Logs", "SMC", "Thermal Sensors"],
     details: [
       "extracted and parsed kernel logs via 3uTools and iOS diagnostics.",
-      "identified SMC crash caused by incorrect data from the MagSafe flex thermal sensor.",
+      "found the SMC crash was caused by corrupt data coming off the thermal sensor.",
       "isolated battery level monitoring as a secondary failure point.",
-      "educated customer on the importance of component sourcing and repair quality.",
+      "explained the failure mechanism to the client so they understood what went wrong.",
     ],
   },
 ];
 
 export const hardwareSkills = [
-  { icon: Search, title: "panic log mastery 🔍", desc: "proficient in interpreting kernel panic logs to isolate hardware failures in SMC, thermal sensors, and power management ICs, turning guesswork into science." },
-  { icon: Zap, title: "micro-soldering ⚡", desc: "experienced in precise component-level work, including 2-point solder jobs on delicate Face ID and earpiece flex cables under magnification." },
-  { icon: ShieldAlert, title: "quality control ✅", desc: "strict adherence to pre-closure component testing and post-repair system validation to guarantee long-term reliability and zero-defect handovers." },
+  { icon: Search, title: "panic log mastery 🔍", desc: "reading kernel panic logs to pinpoint exact hardware failures in SMC, thermal sensors, and power ICs instead of guessing." },
+  { icon: Zap, title: "micro-soldering ⚡", desc: "component-level work under magnification, including 2-point soldering on delicate Face ID and earpiece flex cables." },
+  { icon: ShieldAlert, title: "quality control ✅", desc: "pre-closure bench testing and thorough post-repair validation checks to ensure long-term device reliability." },
 ];
 
 // ── Support & Admin ──────────────────────────────────────────────────
@@ -209,12 +209,12 @@ export interface LabService {
 }
 
 export const labServices: LabService[] = [
-  { name: "Docker", description: "containerised environment for local services, ensuring isolation and easy deployment.", icon: Database },
-  { name: "OpenWebUI", description: "local LLM interface for private workflows and scripting assistance.", icon: Terminal },
-  { name: "Jellyfin", description: "self-hosted media management and streaming suite with hardware transcoding.", icon: Server },
-  { name: "Tailscale", description: "secure mesh VPN for frictionless remote access to home infrastructure from anywhere.", icon: Shield },
-  { name: "WOL Beacon", description: "raspberry pi configured as a Wake-on-LAN trigger for remote power management.", icon: Zap },
-  { name: "Kali Linux", description: "dedicated VM for network penetration testing, security auditing, and learning.", icon: Network },
+  { name: "Docker", description: "containerized setup for self-hosted apps and services, keeping environments isolated and easy to update.", icon: Database },
+  { name: "OpenWebUI", description: "local interface for LLMs to help with scripting and local testing.", icon: Terminal },
+  { name: "Jellyfin", description: "self-hosted media server with hardware transcoding enabled.", icon: Server },
+  { name: "Tailscale", description: "mesh VPN setup for secure remote access to home servers from anywhere.", icon: Shield },
+  { name: "WOL Beacon", description: "Raspberry Pi setup as a Wake-on-LAN trigger for remote machine power management.", icon: Zap },
+  { name: "Kali Linux", description: "dedicated VM for network testing, security labs, and learning.", icon: Network },
 ];
 
 export const operatingSystems = [
@@ -230,9 +230,9 @@ export const techStack = [
 ];
 
 export const examSaveSteps = [
-  { label: "rapid diagnosis:", text: "identified the OS failure as the bottleneck within seconds, ruling out hardware issues." },
-  { label: "creative solution:", text: "swapped the failing drive for a pre-configured Ubuntu/LibreOffice SSD i kept on hand." },
-  { label: "result:", text: "the student resumed the exam in under 5 minutes with full document compatibility and zero data loss. 🎉" },
+  { label: "rapid diagnosis:", text: "spotted the OS boot crash right away and ruled out hardware failure within seconds." },
+  { label: "creative solution:", text: "swapped in a spare SSD pre-loaded with Ubuntu and LibreOffice that I had ready." },
+  { label: "result:", text: "the student was back working on their exam in under 5 minutes with zero lost work. 🎉" },
 ];
 
 // ── Automation ───────────────────────────────────────────────────────
@@ -246,19 +246,19 @@ export interface AutomationProject {
 export const automations: AutomationProject[] = [
   {
     title: "roster to calendar sync",
-    description: "python workflow that extracts work rosters from unstructured text or images and converts them into standardised, perfectly formatted calendar events.",
+    description: "Python script that reads work shift images or text and auto-creates formatted calendar events.",
     icon: Calendar,
     tech: ["Python", "LLM", "iCal"],
   },
   {
     title: "raycast environment macros",
-    description: "custom Raycast macros and AppleScript keybinds designed to instantly open pre-configured development and support environments with a single command.",
+    description: "custom Raycast macros and AppleScript shortcuts to launch my daily dev and support tools instantly.",
     icon: MousePointer2,
     tech: ["Raycast", "AppleScript", "macOS"],
   },
   {
     title: "server update pipeline",
-    description: "automated update workflows using Winget and UnigetUI to keep home server applications, services, and games current with minimal manual intervention.",
+    description: "automated scripts using Winget and UnigetUI to keep home server apps and utilities up to date.",
     icon: Cpu,
     tech: ["Winget", "UnigetUI", "CMD"],
   },

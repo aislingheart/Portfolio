@@ -11,9 +11,7 @@ export default function Hardware() {
   return (
     <div className="space-y-12">
       <PageHeader title="hardware diagnostics 🔧">
-        i specialise in advanced mobile hardware diagnostics and precision repairs.
-        my approach combines physical component work with deep software-level analysis
-        to solve "unfixable" issues, ensuring devices don't just turn on, but operate reliably.
+        i focus on mobile hardware diagnostics and board-level repairs. i combine physical repair work with panic log analysis to fix complex faults and bring damaged devices back to reliable daily use.
       </PageHeader>
 
       <div className="grid md:grid-cols-2 gap-6">
@@ -84,9 +82,7 @@ export default function Hardware() {
         <div className="max-w-3xl relative z-10">
           <h2 className="text-2xl font-semibold mb-6">the bucket analogy 🪣</h2>
           <p className="text-lg text-zinc-400 italic mb-8 leading-relaxed">
-            "i explain battery health to non-technical users by comparing it to a bucket on a rocking ship.
-            keeping water between 20% and 80% keeps the bucket stable. too much weight destabilises it; too little makes it wobble.
-            this empathy-first communication builds trust where technical jargon fails."
+            "i like explaining battery health using simple analogies like a bucket on a rocking ship. keeping charge between 20% and 80% keeps it steady; overfilling or draining it completely strains the cell. clear explanations help users understand their tech without getting lost in jargon."
           </p>
           <div className="flex items-center gap-4">
             <m.img

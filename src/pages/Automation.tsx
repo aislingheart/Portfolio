@@ -10,9 +10,7 @@ export default function Automation() {
   return (
     <div className="space-y-12">
       <PageHeader title="workflow automation ⚡">
-        i leverage scripting and smart tooling to eliminate repetitive tasks. by combining
-        practical knowledge with the right tools for the job, i build highly functional
-        automations that enhance productivity and system reliability.
+        i write scripts and set up tools to automate repetitive tasks. whether it's parsing schedules, setting up custom macros, or streamlining server updates, i like making workflows faster and easier.
       </PageHeader>
 
       <div className="grid md:grid-cols-3 gap-6">
@@ -48,15 +46,14 @@ export default function Automation() {
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold tracking-tight">smart development 🧠</h2>
             <p className="text-zinc-400 leading-relaxed">
-              i believe in using the best tools for the job. while i'm not a full-time software engineer,
-              i'm highly proficient in directing tools and workflows to generate functional scripts,
-              complex automations, and web applications.
+              i like picking the right tool for the job. while my primary focus is sysadmin and hardware,
+              i write scripts and use modern tools to build automations, helper utilities, and web interfaces when needed.
             </p>
             <ul className="space-y-4">
               {[
-                "prompt engineering for complex logic extraction.",
-                "debugging generated code through iterative testing.",
-                "integrating scripts into existing macOS/Windows workflows.",
+                "using smart prompting and AI assistance to map out script logic.",
+                "testing and debugging generated code against real test data.",
+                "hooking scripts into macOS, Windows, and Linux automation tools.",
               ].map((text, idx) => (
                 <m.li
                   key={idx}
@@ -118,10 +115,9 @@ export default function Automation() {
         <div className="glass-card p-8 flex flex-col justify-center relative overflow-hidden group">
           <div className={`absolute inset-0 bg-gradient-to-r from-[${tw.accent}]/0 via-[${tw.accent}]/5 to-[${tw.accent}]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000`} />
           <p className="text-lg text-zinc-400 italic leading-relaxed text-center relative z-10">
-            "automation isn't about being a master coder — it's about having the vision to see
-            where a machine can do the work better than a human, and the resourcefulness to make it happen."
+            "automation is about seeing where a quick script can save hours of manual work, and having the curiosity to build it."
           </p>
-          <p className="text-sm text-zinc-500 text-center mt-4 relative z-10">— my philosophy 💭</p>
+          <p className="text-sm text-zinc-500 text-center mt-4 relative z-10">my take 💭</p>
         </div>
       </m.section>
     </div>

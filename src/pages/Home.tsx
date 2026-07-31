@@ -42,15 +42,15 @@ export default function Home() {
   }, [currentText, isDeleting, currentIndex]);
 
   const navCards = [
-    { path: "/hardware",      icon: Cpu,    title: "hardware diagnostics 🔧",  desc: "compound refurbishments, deep panic log analysis, and precision micro-soldering. breathing life back into \"unfixable\" devices.", rotate: -5 },
-    { path: "/support-admin",  icon: Server, title: "support & admin 🛡️",       desc: "high-stakes crisis triage, resilient home lab infrastructure, and empathetic technical support that puts people first.", rotate: 5 },
-    { path: "/automation",     icon: Zap,    title: "workflow automation ⚡",    desc: "scripting, package management, and environment efficiencies. building tools that eliminate repetitive manual labour.", rotate: -5 },
+    { path: "/hardware",      icon: Cpu,    title: "hardware diagnostics 🔧",  desc: "component repairs, panic log diagnostics, and micro-soldering. bringing broken or \"unfixable\" gear back to life.", rotate: -5 },
+    { path: "/support-admin",  icon: Server, title: "support & admin 🛡️",       desc: "crisis triage, homelab server management, and practical tech support that puts people first.", rotate: 5 },
+    { path: "/automation",     icon: Zap,    title: "workflow automation ⚡",    desc: "custom scripts, environment shortcuts, and automated workflows to skip repetitive manual tasks.", rotate: -5 },
   ];
 
   const methodology = [
-    { icon: ShieldCheck, title: "strict quality control",           desc: "thorough testing post-repair to ensure zero-defect handovers and long-term reliability.", accent: false },
-    { icon: HeartPulse,  title: "empathetic communication 💛",      desc: "translating complex diagnostics into accessible analogies (like \"the bucket\") to build trust.", accent: true },
-    { icon: Terminal,    title: "cognitive diversity",               desc: "embracing different troubleshooting methodologies as a team's greatest asset in crisis scenarios.", accent: false },
+    { icon: ShieldCheck, title: "quality control",                desc: "rigorous bench testing before and after repairs so devices stay reliable long term.", accent: false },
+    { icon: HeartPulse,  title: "clear communication 💛",        desc: "explaining complex diagnostic findings with simple, clear analogies (like \"the bucket\" for battery health).", accent: true },
+    { icon: Terminal,    title: "problem-solving mindset",        desc: "using adaptable troubleshooting steps to handle unexpected failures under pressure.", accent: false },
   ];
 
   return (
@@ -93,10 +93,10 @@ export default function Home() {
             <span className={`text-[${tw.accent}] animate-pulse font-light`}>|</span>
           </h1>
           <p className="text-lg text-zinc-400 leading-relaxed max-w-xl mb-8 relative z-10">
-            hey, i'm Aisling! 👋 i bridge the gap between complex hardware diagnostics and robust systems administration.
-            from micro-soldering delicate Face ID flex cables to rescuing live exam sessions with rapid Linux SSD swaps,
-            i thrive on high-stakes technical challenges that need both precision and empathy.
-            currently upskilling across sysadmin, networking, and automation — always building, always learning.
+            hey, i'm Aisling! 👋 i work across hardware diagnostics, systems administration, and workflow automation.
+            whether that's micro-soldering delicate flex cables, managing homelab servers, or swapping a Linux drive to save a live exam,
+            i love solving real technical problems with practical solutions.
+            currently building out my skills in sysadmin, networking, and scripting.
           </p>
           <div className="flex flex-wrap gap-4 mt-auto relative z-10">
             <m.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
