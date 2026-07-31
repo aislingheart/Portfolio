@@ -4,7 +4,7 @@ import { m, AnimatePresence } from "motion/react";
 import { MapPin, Briefcase, GraduationCap, User, Wrench, Smartphone, Headphones, Gamepad2, Zap, Languages, Quote, Heart } from "lucide-react";
 import AnimatedCard from "../components/AnimatedCard";
 import { tw, spring, cardVariants } from "../lib/theme";
-import { socialLinks, quickFacts, coreSkills, jobs, education } from "../lib/data";
+import { socialLinks, quickFacts, coreSkills, technicalProficiency, jobs, education } from "../lib/data";
 
 /** Maps quick-fact labels to their icons */
 const factIcons: Record<string, typeof User> = {
@@ -248,6 +248,44 @@ export default function About() {
                 <m.span key={skill} className="skill-tag" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   {skill}
                 </m.span>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-white/5">
+            <h3 className="text-lg font-semibold mb-6 text-zinc-300 flex items-center gap-2">
+              <Wrench size={16} className="text-zinc-500" />
+              technical proficiency 🛠️
+            </h3>
+            <div className="space-y-6">
+              {technicalProficiency.map((cat) => (
+                <div key={cat.category}>
+                  <p className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-3">{cat.category}</p>
+                  <div className="space-y-3">
+                    {cat.items.map((item) => (
+                      <m.div
+                        key={item.name}
+                        className="group cursor-default"
+                        whileHover={{ x: 3 }}
+                        transition={spring.gentle}
+                      >
+                        <div className="flex justify-between text-xs mb-1.5">
+                          <span className="font-medium text-zinc-300 group-hover:text-zinc-100 transition-colors">{item.name}</span>
+                          <span className="text-zinc-600">{item.level}%</span>
+                        </div>
+                        <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
+                          <m.div
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${item.level}%` }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                            className={`h-full rounded-full bg-gradient-to-r from-zinc-500 to-[${tw.accent}] group-hover:from-[${tw.accent}] group-hover:to-[${tw.accentSoft}] transition-colors duration-500`}
+                          />
+                        </div>
+                      </m.div>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           </div>

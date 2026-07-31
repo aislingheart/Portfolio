@@ -60,6 +60,51 @@ export const coreSkills = [
   "troubleshooting", "adaptability", "conflict resolution",
 ];
 
+export interface TechProficiency {
+  name: string;
+  level: number; // percentage 0-100
+}
+
+export interface TechCategory {
+  category: string;
+  items: TechProficiency[];
+}
+
+export const technicalProficiency: TechCategory[] = [
+  {
+    category: "systems & infrastructure",
+    items: [
+      { name: "macOS", level: 95 },
+      { name: "iOS / iPadOS", level: 95 },
+      { name: "Android", level: 80 },
+      { name: "Windows", level: 80 },
+      { name: "Linux (Ubuntu/Kali)", level: 80 },
+      { name: "Docker", level: 60 },
+      { name: "VMware", level: 75 },
+      { name: "WSL", level: 75 },
+    ],
+  },
+  {
+    category: "networking & remote",
+    items: [
+      { name: "SSH", level: 80 },
+      { name: "Tailscale", level: 80 },
+      { name: "RDP / Parsec", level: 70 },
+      { name: "Wireshark", level: 60 },
+      { name: "Wake-on-LAN", level: 75 },
+    ],
+  },
+  {
+    category: "hardware & diagnostics",
+    items: [
+      { name: "iPhone Repair", level: 85 },
+      { name: "Panic Log Analysis", level: 80 },
+      { name: "Micro-soldering", level: 65 },
+      { name: "3uTools", level: 65 },
+    ],
+  },
+];
+
 export interface Job {
   title: string;
   company: string;
