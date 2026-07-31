@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import pfp from "../assets/pfp.webp";
 import { m } from "motion/react";
 import { Link } from "react-router-dom";
-import { Cpu, Server, Zap, ArrowRight, Terminal, ShieldCheck, HeartPulse, Flower2, Sparkles } from "lucide-react";
+import { Cpu, Server, Zap, ArrowRight, Terminal, ShieldCheck, HeartPulse, Flower2, Sparkles, Mail } from "lucide-react";
 import AnimatedCard from "../components/AnimatedCard";
 import IconBox from "../components/IconBox";
 import { tw, spring } from "../lib/theme";
@@ -108,6 +108,11 @@ export default function Home() {
               <Link to="/about" className="px-6 py-3 bg-white/5 border border-white/10 text-zinc-200 font-medium rounded-full hover:bg-white/10 transition-colors flex items-center gap-2">
                 <Flower2 size={16} /> about me
               </Link>
+            </m.div>
+            <m.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+              <a href="mailto:aislingcreed42@gmail.com" className="px-6 py-3 bg-white/5 border border-white/10 text-zinc-200 font-medium rounded-full hover:bg-white/10 transition-colors flex items-center gap-2">
+                <Mail size={16} /> contact me
+              </a>
             </m.div>
           </div>
         </AnimatedCard>
