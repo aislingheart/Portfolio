@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { m, LazyMotion, domAnimation, AnimatePresence, MotionConfig } from "motion/react";
 import { Link, useLocation } from "react-router-dom";
-import { Cpu, Server, Zap, Home as HomeIcon, Flower2, Heart } from "lucide-react";
+import { Cpu, Server, Zap, Home as HomeIcon, Flower2, Heart, FolderGit2 } from "lucide-react";
 import TerminalMode from "./TerminalMode";
 import { usePrefersReducedMotion } from "../lib/usePrefersReducedMotion";
 
@@ -235,6 +235,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { path: "/hardware", name: "hardware", icon: Cpu },
     { path: "/support-admin", name: "support", icon: Server },
     { path: "/automation", name: "automation", icon: Zap },
+    { path: "/projects", name: "projects", icon: FolderGit2 },
   ];
 
   return (

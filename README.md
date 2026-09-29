@@ -15,9 +15,11 @@ A personal portfolio site covering my tech work: from micro-soldering flex cable
 
 ## 🖥️ Preview
 
-| Home | About | Hardware |
-|:---:|:---:|:---:|
-| Typewriter intro, interactive sparkle canvas | Social link selector, work experience timeline | Case studies, diagnostic skill cards |
+| Home | About | Projects | Hardware |
+|:---:|:---:|:---:|:---:|
+| Typewriter intro, interactive sparkle canvas | Social link selector, work experience timeline | Curated project write-ups, GitHub link | Case studies, diagnostic skill cards |
+
+Also: **Support & Admin** (crisis triage, homelab stack) and **Automation** (scripts and tooling).
 
 ## ⚙️ Tech Stack
 
@@ -35,13 +37,13 @@ A personal portfolio site covering my tech work: from micro-soldering flex cable
 
 ```
 src/
-├── components/       # Reusable UI: Layout, AnimatedCard, PageHeader, TerminalMode
+├── components/       # Reusable UI: Layout, AnimatedCard, PageHeader, TerminalMode, ScrollToTop
 ├── lib/
-│   ├── data.ts       # All portfolio content (jobs, skills, links, case studies)
+│   ├── data.ts       # All portfolio content (jobs, skills, links, case studies, projects)
 │   └── theme.ts      # Design tokens, animation presets
-├── pages/            # Route pages: Home, About, Hardware, SupportAdmin, Automation
+├── pages/            # Route pages: Home, About, Hardware, SupportAdmin, Automation, Projects, NotFound
 ├── assets/           # Images (pfp, milo)
-├── index.css         # Global styles, glass cards, keyframes
+├── index.css         # Global styles, accent theme tokens, glass cards, keyframes
 └── App.tsx           # Router setup
 ```
 

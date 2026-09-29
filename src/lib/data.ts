@@ -12,6 +12,112 @@ import {
   Calendar, MousePointer2,
 } from "lucide-react";
 
+// ── Projects ─────────────────────────────────────────────────────────
+/**
+ * Curated rather than auto-fetched from the GitHub API.
+ *
+ * The public profile has 7 repos, but only the Portfolio site is a real
+ * code project: one is a 211MB fork of someone else's project, one is
+ * 0KB, one is a pair of PNGs, and the rest are older experiments. Listing
+ * them all would undercut the repair, sysadmin and automation work that
+ * actually represents this portfolio, so each entry below is a deliberate
+ * inclusion with a real description.
+ *
+ * `githubUrl` is optional; add it when a project has a public repo.
+ */
+export interface Project {
+  title: string;
+  summary: string;
+  details: string[];
+  tech: string[];
+  category: "code" | "infrastructure" | "repair";
+  status?: "active" | "ongoing" | "complete";
+  githubUrl?: string;
+  demoUrl?: string;
+}
+
+export const projects: Project[] = [
+  {
+    title: "this portfolio",
+    summary:
+      "the site you're looking at. a dark glassmorphic portfolio built with React 19, TypeScript and Tailwind, deployed to GitHub Pages.",
+    details: [
+      "cursor-reactive particle canvas with an autonomous mode for touch devices.",
+      "lazy-loaded routes, code-split per page to keep the initial bundle small.",
+      "full keyboard navigation, visible focus rings and reduced-motion support.",
+    ],
+    tech: ["React 19", "TypeScript", "Tailwind CSS 4", "Vite", "Framer Motion", "GitHub Pages"],
+    category: "code",
+    status: "active",
+    githubUrl: "https://github.com/aislingheart/Portfolio",
+    demoUrl: "https://aislingheart.github.io/Portfolio/",
+  },
+  {
+    title: "roster to calendar sync",
+    summary:
+      "reads a work shift roster as an image or plain text and turns it into correctly formatted calendar events, no manual retyping.",
+    details: [
+      "OCR + LLM parsing turns an unstructured roster image into a structured shift payload.",
+      "emits iCal events straight into the calendar, so a schedule change syncs in one run.",
+      "handles the messy real-world cases: split shifts, overnight starts, overlapping weeks.",
+    ],
+    tech: ["Python", "LLM", "OCR", "iCal"],
+    category: "code",
+    status: "active",
+  },
+  {
+    title: "homelab server stack",
+    summary:
+      "a self-hosted environment running containerised services, reachable securely from anywhere without exposing ports to the internet.",
+    details: [
+      "Docker for isolated, reproducible services that are easy to update and roll back.",
+      "Tailscale mesh VPN for remote access — no port forwarding, no exposed attack surface.",
+      "Raspberry Pi running a Wake-on-LAN beacon so machines can be powered on remotely.",
+      "Jellyfin with hardware transcoding, and OpenWebUI as a local LLM interface for scripting help.",
+    ],
+    tech: ["Docker", "Tailscale", "Jellyfin", "OpenWebUI", "Raspberry Pi", "Kali Linux"],
+    category: "infrastructure",
+    status: "active",
+  },
+  {
+    title: "server update pipeline",
+    summary:
+      "scripted updates for home server apps and utilities, so staying current doesn't depend on remembering to check by hand.",
+    details: [
+      "drives Winget and UnigetUI non-interactively for repeatable, unattended updates.",
+      "wraps the update runs in scripts that log what changed, making failures traceable.",
+    ],
+    tech: ["Winget", "UnigetUI", "PowerShell"],
+    category: "infrastructure",
+    status: "ongoing",
+  },
+  {
+    title: "raycast environment macros",
+    summary:
+      "custom Raycast commands and AppleScript shortcuts that bring up the dev and support tools I use daily in a couple of keystrokes.",
+    details: [
+      "wraps repetitive terminal invocations and app launches behind one search action.",
+      "scripted fixes for the tasks that otherwise mean digging through notes.",
+    ],
+    tech: ["Raycast", "AppleScript", "macOS"],
+    category: "code",
+    status: "complete",
+  },
+  {
+    title: "iphone board-level repair",
+    summary:
+      "component-level diagnostics and repair on iOS devices: tracing panic logs to the failed part, then soldering it back to a working state.",
+    details: [
+      "diagnose from kernel panic logs rather than guesswork — SMC, thermal sensors, power ICs.",
+      "micro-soldering under magnification, including 2-point joints on Face ID and earpiece flex.",
+      "bench-tested before and after every repair so devices stay reliable past the handover.",
+    ],
+    tech: ["3uTools", "iOS diagnostics", "Micro-soldering", "Panic log analysis"],
+    category: "repair",
+    status: "ongoing",
+  },
+];
+
 // ── Home ─────────────────────────────────────────────────────────────
 export const qualifications = [
   "versatile tech expert.",

@@ -100,7 +100,7 @@ export default function Home() {
           </p>
           <div className="flex flex-wrap gap-4 mt-auto relative z-10">
             <m.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Link to="/hardware" className="magnetic-btn px-6 py-3 bg-zinc-100 text-zinc-900 font-medium rounded-full hover:bg-white transition-colors flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.08)]">
+              <Link to="/projects" className="magnetic-btn px-6 py-3 bg-zinc-100 text-zinc-900 font-medium rounded-full hover:bg-white transition-colors flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.08)]">
                 view projects <ArrowRight size={16} />
               </Link>
             </m.div>
