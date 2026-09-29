@@ -3,7 +3,7 @@ import { Shield, Terminal, HardDrive, CheckCircle2 } from "lucide-react";
 import PageHeader from "../components/PageHeader";
 import AnimatedCard from "../components/AnimatedCard";
 import IconBox from "../components/IconBox";
-import { tw, fadeInUp } from "../lib/theme";
+import { fadeInUp } from "../lib/theme";
 import { labServices, operatingSystems, techStack, examSaveSteps } from "../lib/data";
 
 export default function SupportAdmin() {
@@ -19,7 +19,7 @@ export default function SupportAdmin() {
         <div className="grid md:grid-cols-2 relative z-10">
           <div className="p-8 md:p-12 space-y-6">
             <m.div
-              className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[${tw.accent}]/10 border border-[${tw.accent}]/15 text-xs font-medium text-[${tw.accent}] w-fit`}
+              className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/15 text-xs font-medium text-accent w-fit`}
               animate={{ opacity: [1, 0.6, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
@@ -39,7 +39,7 @@ export default function SupportAdmin() {
                   whileHover={{ x: 4 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
-                  <div className={`mt-0.5 text-zinc-500 group-hover:text-[${tw.accent}] transition-colors`}>
+                  <div className={`mt-0.5 text-zinc-500 group-hover:text-accent transition-colors`}>
                     <CheckCircle2 size={20} />
                   </div>
                   <p className="text-sm text-zinc-400">
@@ -55,7 +55,7 @@ export default function SupportAdmin() {
                 <HardDrive size={80} className="mx-auto text-zinc-600" />
               </m.div>
               <div className="font-mono text-xs text-zinc-500">
-                <span className={`text-[${tw.accent}]`}>[disk_swap_successful]</span><br />
+                <span className={`text-accent`}>[disk_swap_successful]</span><br />
                 boot_loader: grub_linux<br />
                 status: <span className="text-emerald-400">operational ✓</span>
               </div>
@@ -69,7 +69,7 @@ export default function SupportAdmin() {
         <div className="flex justify-between items-end">
           <h2 className="text-2xl font-semibold tracking-tight">home lab infrastructure 🏠</h2>
           <m.span
-            className={`text-xs font-medium text-[${tw.accent}] bg-[${tw.accent}]/10 px-2 py-1 rounded-md`}
+            className={`text-xs font-medium text-accent bg-accent/10 px-2 py-1 rounded-md`}
             animate={{ opacity: [1, 0.5, 1] }}
             transition={{ duration: 3, repeat: Infinity }}
           >
@@ -79,7 +79,7 @@ export default function SupportAdmin() {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {labServices.map((service, i) => (
             <AnimatedCard key={service.name} index={i} className="glass-card p-6 group">
-              <IconBox icon={service.icon} size={24} className={`text-zinc-400 mb-4 group-hover:text-[${tw.accent}] transition-all`} />
+              <IconBox icon={service.icon} size={24} className={`text-zinc-400 mb-4 group-hover:text-accent transition-all`} />
               <h4 className="font-medium mb-2 group-hover:text-white transition-colors">{service.name}</h4>
               <p className="text-xs text-zinc-500 leading-relaxed group-hover:text-zinc-400 transition-colors">{service.description}</p>
             </AnimatedCard>
@@ -91,7 +91,7 @@ export default function SupportAdmin() {
       <m.section {...fadeInUp} className="grid md:grid-cols-2 gap-6">
         <div className="glass-card p-8 group">
           <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 group-hover:text-white transition-colors">
-            <Terminal size={20} className={`text-zinc-400 group-hover:text-[${tw.accent}] transition-colors`} />
+            <Terminal size={20} className={`text-zinc-400 group-hover:text-accent transition-colors`} />
             operating systems 💻
           </h3>
           <div className="space-y-4">
@@ -112,7 +112,7 @@ export default function SupportAdmin() {
                     whileInView={{ width: `${os.level}%` }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                    className={`h-full bg-[${tw.accent}] group-hover:bg-[${tw.accentSoft}] transition-colors duration-300`}
+                    className={`h-full bg-accent group-hover:bg-accent-soft transition-colors duration-300`}
                   />
                 </div>
               </m.div>
@@ -132,7 +132,7 @@ export default function SupportAdmin() {
             ))}
           </div>
           <div className="mt-8 p-4 bg-white/[0.04] rounded-2xl border border-white/5 relative overflow-hidden group">
-            <div className={`absolute inset-0 bg-gradient-to-r from-[${tw.accent}]/0 via-[${tw.accent}]/5 to-[${tw.accent}]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000`} />
+            <div className={`absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/5 to-accent/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000`} />
             <p className="text-sm text-zinc-400 italic leading-relaxed relative z-10">
               "i really enjoy support and admin work. working command-line first across Linux, macOS, and Windows helps me troubleshoot and get things done fast without unnecessary steps."
             </p>

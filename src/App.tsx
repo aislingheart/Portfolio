@@ -8,6 +8,7 @@ const About = lazy(() => import("./pages/About"));
 const Hardware = lazy(() => import("./pages/Hardware"));
 const SupportAdmin = lazy(() => import("./pages/SupportAdmin"));
 const Automation = lazy(() => import("./pages/Automation"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
             <Route path="/hardware" element={<Hardware />} />
             <Route path="/support-admin" element={<SupportAdmin />} />
             <Route path="/automation" element={<Automation />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </Layout>

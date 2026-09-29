@@ -6,3 +6,8 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# This project uses npm (package-lock.json is committed and CI runs `npm ci`).
+# Ignore pnpm artifacts so they can't be committed by accident.
+pnpm-lock.yaml
+.pnpm-store/

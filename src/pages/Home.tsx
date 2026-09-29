@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Cpu, Server, Zap, ArrowRight, Terminal, ShieldCheck, HeartPulse, Flower2, Sparkles, Mail } from "lucide-react";
 import AnimatedCard from "../components/AnimatedCard";
 import IconBox from "../components/IconBox";
-import { tw, spring } from "../lib/theme";
+import { spring } from "../lib/theme";
 import { qualifications } from "../lib/data";
 
 function getGreeting(): string {
@@ -77,7 +77,7 @@ export default function Home() {
                 transition={{ delay: 0.3, duration: 0.4 }}
                 className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-zinc-400 w-fit"
               >
-                <Sparkles size={12} className={`text-[${tw.accent}]`} />
+                <Sparkles size={12} className={`text-accent`} />
                 <span>{greeting}</span>
               </m.div>
 
@@ -90,7 +90,7 @@ export default function Home() {
 
           <h1 className="text-4xl md:text-6xl font-semibold tracking-tight mb-6 leading-[1.1] relative z-10 min-h-[88px] md:min-h-[132px]">
             {currentText}
-            <span className={`text-[${tw.accent}] animate-pulse font-light`}>|</span>
+            <span className={`text-accent animate-pulse font-light`}>|</span>
           </h1>
           <p className="text-lg text-zinc-400 leading-relaxed max-w-xl mb-8 relative z-10">
             hey, i'm Aisling! 👋 i work across hardware diagnostics, systems administration, and workflow automation.
@@ -125,11 +125,11 @@ export default function Home() {
                 icon={card.icon}
                 size={24}
                 hoverRotate={card.rotate}
-                className={`w-12 h-12 rounded-2xl bg-white/5 text-zinc-400 mb-6 group-hover:bg-[${tw.accent}]/15 group-hover:text-[${tw.accent}] transition-all`}
+                className={`w-12 h-12 rounded-2xl bg-white/5 text-zinc-400 mb-6 group-hover:bg-accent/15 group-hover:text-accent transition-all`}
               />
               <h3 className="text-xl font-semibold mb-3 group-hover:text-white transition-colors glow-text">{card.title}</h3>
               <p className="text-zinc-400 leading-relaxed mb-8 flex-grow">{card.desc}</p>
-              <div className={`flex items-center gap-2 text-sm font-medium text-zinc-400 group-hover:gap-3 group-hover:text-[${tw.accent}] transition-all`}>
+              <div className={`flex items-center gap-2 text-sm font-medium text-zinc-400 group-hover:gap-3 group-hover:text-accent transition-all`}>
                 explore <ArrowRight size={16} />
               </div>
             </Link>
@@ -150,7 +150,7 @@ export default function Home() {
               >
                 {item.accent ? (
                   <m.div
-                    className={`mt-0.5 text-[${tw.accent}]`}
+                    className={`mt-0.5 text-accent`}
                     animate={{ scale: [1, 1.15, 1] }}
                     transition={{ duration: 2, repeat: Infinity, repeatDelay: 4 }}
                   >

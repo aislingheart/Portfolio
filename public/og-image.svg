@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="glowA" cx="18%" cy="12%" r="60%">
+      <stop offset="0%" stop-color="#c0392b" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#c0392b" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="88%" cy="92%" r="55%">
+      <stop offset="0%" stop-color="#e74c3c" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#e74c3c" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.5" fill="#ffffff" opacity="0.035"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0a0a0c"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#glowA)"/>
+  <rect width="1200" height="630" fill="url(#glowB)"/>
+
+  <!-- accent rule -->
+  <rect x="80" y="182" width="64" height="5" rx="2.5" fill="#c0392b"/>
+
+  <text x="80" y="272" font-family="Inter, Helvetica, Arial, sans-serif" font-size="82" font-weight="700" fill="#f4f4f5" letter-spacing="-2.5">Aisling Creed</text>
+
+  <text x="80" y="336" font-family="Inter, Helvetica, Arial, sans-serif" font-size="30" font-weight="500" fill="#a1a1aa">hardware diagnostics · systems administration</text>
+  <text x="80" y="380" font-family="Inter, Helvetica, Arial, sans-serif" font-size="30" font-weight="500" fill="#a1a1aa">· workflow automation</text>
+
+  <!-- pill row -->
+  <g font-family="'JetBrains Mono', monospace" font-size="21" fill="#e4e4e7">
+    <rect x="80" y="430" width="196" height="52" rx="26" fill="#ffffff" opacity="0.05" stroke="#ffffff" stroke-opacity="0.12"/>
+    <text x="106" y="463">Linux</text>
+
+    <rect x="292" y="430" width="176" height="52" rx="26" fill="#ffffff" opacity="0.05" stroke="#ffffff" stroke-opacity="0.12"/>
+    <text x="318" y="463">macOS</text>
+
+    <rect x="484" y="430" width="182" height="52" rx="26" fill="#ffffff" opacity="0.05" stroke="#ffffff" stroke-opacity="0.12"/>
+    <text x="510" y="463">Networking</text>
+  </g>
+
+  <!-- status dot -->
+  <circle cx="88" cy="545" r="6" fill="#34d399"/>
+  <text x="108" y="553" font-family="Inter, Helvetica, Arial, sans-serif" font-size="24" font-weight="500" fill="#71717a">open to opportunities</text>
+</svg>

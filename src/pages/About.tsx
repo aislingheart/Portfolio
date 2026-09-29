@@ -3,7 +3,7 @@ import pfp from "../assets/pfp.webp";
 import { m, AnimatePresence } from "motion/react";
 import { MapPin, Briefcase, GraduationCap, User, Wrench, Smartphone, Headphones, Gamepad2, Zap, Languages, Quote, Heart } from "lucide-react";
 import AnimatedCard from "../components/AnimatedCard";
-import { tw, spring, cardVariants } from "../lib/theme";
+import { spring } from "../lib/theme";
 import { socialLinks, quickFacts, coreSkills, technicalProficiency, jobs, education } from "../lib/data";
 
 /** Maps quick-fact labels to their icons */
@@ -20,21 +20,21 @@ export default function About() {
     const label = activeLink.label;
     if (label.includes('@') && !label.startsWith('@')) {
       const [prefix, suffix] = label.split('@');
-      return <><span className="text-zinc-500">{prefix}@</span><span className={`text-[${tw.accent}]`}>{suffix}</span></>;
+      return <><span className="text-zinc-500">{prefix}@</span><span className={`text-accent`}>{suffix}</span></>;
     }
     if (label.startsWith('@')) {
-      return <><span className="text-zinc-500">@</span><span className={`text-[${tw.accent}]`}>{label.slice(1)}</span></>;
+      return <><span className="text-zinc-500">@</span><span className={`text-accent`}>{label.slice(1)}</span></>;
     }
     if (activeLink.url.includes('linkedin.com')) {
-      return <><span className="text-zinc-500">linkedin.com/in/</span><span className={`text-[${tw.accent}]`}>{label}</span></>;
+      return <><span className="text-zinc-500">linkedin.com/in/</span><span className={`text-accent`}>{label}</span></>;
     }
     if (activeLink.url.includes('github.com')) {
-      return <><span className="text-zinc-500">github.com/</span><span className={`text-[${tw.accent}]`}>{label}</span></>;
+      return <><span className="text-zinc-500">github.com/</span><span className={`text-accent`}>{label}</span></>;
     }
     if (label.includes('.')) {
-      return <><span className="text-zinc-500">bsky.app/</span><span className={`text-[${tw.accent}]`}>{label}</span></>;
+      return <><span className="text-zinc-500">bsky.app/</span><span className={`text-accent`}>{label}</span></>;
     }
-    return <span className={`text-[${tw.accent}]`}>{label}</span>;
+    return <span className={`text-accent`}>{label}</span>;
   };
 
   return (
@@ -60,7 +60,7 @@ export default function About() {
           transition={{ duration: 0.4, delay: 0.15 }}
           className="text-6xl md:text-8xl font-bold tracking-tighter mb-4 relative z-10 flex flex-col md:flex-row gap-2 md:gap-6"
         >
-          <m.span className={`text-[${tw.accent}]`} whileHover={{ scale: 1.05 }} transition={spring.gentle}>Aisling</m.span>
+          <m.span className={`text-accent`} whileHover={{ scale: 1.05 }} transition={spring.gentle}>Aisling</m.span>
           <m.span className="text-zinc-100" whileHover={{ scale: 1.05 }} transition={spring.gentle}>Creed</m.span>
         </m.h1>
 
@@ -118,7 +118,7 @@ export default function About() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className={`w-14 h-14 md:w-16 md:h-16 flex items-center justify-center transition-all duration-200 ${
-                activeLink.url === link.url ? `bg-[${tw.accent}] text-white` : "text-zinc-400 hover:bg-white/10 hover:text-zinc-200"
+                activeLink.url === link.url ? `bg-accent text-white` : "text-zinc-400 hover:bg-white/10 hover:text-zinc-200"
               } ${i !== socialLinks.length - 1 ? "border-r border-white/10" : ""}`}
               aria-label={`Select ${link.label}`}
             >
@@ -137,7 +137,7 @@ export default function About() {
             <m.img
               src={pfp}
               alt="Aisling Avatar"
-              className={`w-16 h-16 rounded-full border border-[${tw.accent}]/30 object-cover shadow-lg`}
+              className={`w-16 h-16 rounded-full border border-accent/30 object-cover shadow-lg`}
               whileHover={{ rotate: 5, scale: 1.1 }}
               transition={spring.gentle}
             />
@@ -185,10 +185,10 @@ export default function About() {
 
           <div className="mt-auto pt-4 border-t border-white/5">
             <div className="flex items-start gap-2">
-              <Quote size={14} className={`text-[${tw.accent}] shrink-0 mt-0.5`} />
+              <Quote size={14} className={`text-accent shrink-0 mt-0.5`} />
               <p className="text-xs text-zinc-400 italic leading-relaxed">
                 "if it's not working,{" "}
-                <span className={`text-[${tw.accent}] font-semibold not-italic`}>MAKE IT F*CKIN' WORK.</span>"
+                <span className={`text-accent font-semibold not-italic`}>MAKE IT F*CKIN' WORK.</span>"
               </p>
             </div>
           </div>
@@ -199,7 +199,7 @@ export default function About() {
       <div className="grid md:grid-cols-2 gap-6">
         <AnimatedCard index={3} hoverLift={false} className="glass-card p-8">
           <h3 className="text-xl font-semibold mb-8 flex items-center gap-2">
-            <Briefcase size={20} className={`text-[${tw.accent}]`} />
+            <Briefcase size={20} className={`text-accent`} />
             work experience 💼
           </h3>
           <div className="space-y-10">
@@ -212,7 +212,7 @@ export default function About() {
               >
                 <div className={`absolute w-3 h-3 rounded-full -left-[6.5px] top-1.5 ${job.isCurrent ? "timeline-dot-active" : "bg-zinc-600 group-hover:bg-zinc-400 transition-colors"}`} />
                 <h4 className="font-medium text-zinc-200 text-lg">{job.title}</h4>
-                <p className={`text-sm ${job.isCurrent ? `text-[${tw.accent}] font-medium` : "text-zinc-500"} mb-3`}>
+                <p className={`text-sm ${job.isCurrent ? `text-accent font-medium` : "text-zinc-500"} mb-3`}>
                   {job.company} • {job.dates}
                 </p>
                 <p className="text-sm text-zinc-400 leading-relaxed">{job.description}</p>
@@ -279,7 +279,7 @@ export default function About() {
                             whileInView={{ width: `${item.level}%` }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                            className={`h-full bg-[${tw.accent}] group-hover:bg-[${tw.accentSoft}] transition-colors duration-300`}
+                            className={`h-full bg-accent group-hover:bg-accent-soft transition-colors duration-300`}
                           />
                         </div>
                       </m.div>

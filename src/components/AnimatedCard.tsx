@@ -3,7 +3,7 @@
  * Pass a custom index for stagger delay ordering.
  */
 import React, { useRef } from "react";
-import type { ReactNode } from "react";
+import type { Key, ReactNode } from "react";
 import { m, useMotionValue, useSpring, useTransform } from "motion/react";
 import { cardVariants } from "../lib/theme";
 
@@ -12,6 +12,8 @@ interface Props {
   className?: string;
   hoverLift?: boolean;
   children: ReactNode;
+  /** React 19 no longer widens `key` implicitly, so it must be declared. */
+  key?: Key;
 }
 
 export default function AnimatedCard({ index, className = "", hoverLift = true, children }: Props) {

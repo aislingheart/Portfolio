@@ -94,7 +94,7 @@ export default function TerminalMode({ onClose }: TerminalModeProps) {
         // Sampled beige/peach color directly from the provided image
         const cat = "text-[#d2b09a] font-bold font-mono";
 
-        const Row = ({ logo, l, v }: { logo: React.ReactNode, l: string, v: string }) => (
+        const Row = ({ logo, l, v }: { logo: React.ReactNode; l: string; v: string; key?: React.Key }) => (
           <div className="grid grid-cols-[260px_1fr] md:grid-cols-[300px_1fr] gap-2 md:gap-4 items-center">
             <span className={`${cat} whitespace-pre`}>{logo}</span>
             <span className={infoCol}>{l ? <span className={labelCol}>{l}: </span> : ""}{l ? "" : <span className={userHost}>{v}</span>}</span>

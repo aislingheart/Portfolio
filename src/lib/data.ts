@@ -8,7 +8,7 @@ import type { LucideIcon } from "lucide-react";
 import {
   Mail, Camera, Instagram, Github, Twitter, Cloud, Linkedin,
   Cpu, Search, Zap, ShieldAlert,
-  Server, Shield, Database, Network, Terminal, HardDrive,
+  Server, Shield, Database, Network, Terminal,
   Calendar, MousePointer2,
 } from "lucide-react";
 
@@ -32,7 +32,7 @@ export interface SocialLink {
 }
 
 export const socialLinks: SocialLink[] = [
-  { icon: Mail, label: "ashcreed42@gmail.com", url: "mailto:ashcreed42@gmail.com" },
+  { icon: Mail, label: "aislingcreed42@gmail.com", url: "mailto:aislingcreed42@gmail.com" },
   { icon: Linkedin, label: "aislingheart", url: "https://www.linkedin.com/in/aislingheart/" },
   { icon: Camera, label: "@imageworm", url: "https://www.instagram.com/imageworm" },
   { icon: Instagram, label: "@aisling_heart", url: "https://www.instagram.com/aisling_heart" },
@@ -41,8 +41,29 @@ export const socialLinks: SocialLink[] = [
   { icon: Cloud, label: "aislingheart.bsky.social", url: "https://bsky.app/profile/aislingheart.bsky.social" },
 ];
 
+/**
+ * Date of birth (YYYY-MM-DD), used to derive the displayed age so it can
+ * never go stale. Update this ONE value and the age on the About page
+ * recalculates itself automatically.
+ */
+const BIRTH_DATE = "2004-10-27";
+
+function calculateAge(dob: string): number {
+  const birth = new Date(dob);
+  const now = new Date();
+  let age = now.getFullYear() - birth.getFullYear();
+  const monthDelta = now.getMonth() - birth.getMonth();
+  // Haven't had the birthday yet this year.
+  if (monthDelta < 0 || (monthDelta === 0 && now.getDate() < birth.getDate())) {
+    age -= 1;
+  }
+  return age;
+}
+
+const currentAge = calculateAge(BIRTH_DATE);
+
 export const quickFacts = [
-  { label: "age", value: "21" },
+  { label: "age", value: `${currentAge}` },
   { label: "fav OS", value: "Android / macOS" },
   { label: "go-to tool", value: "the spudger 🫡" },
   { label: "fav repair", value: "the more complex, the better" },

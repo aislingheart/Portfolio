@@ -3,12 +3,22 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Accent palette.
+   * These MUST live in @theme (not :root) so Tailwind generates real
+   * utilities from them: text-accent, bg-accent/15, border-accent/30,
+   * group-hover:text-accent, from-accent/5, etc.
+   *
+   * Do NOT reintroduce `text-[${tw.accent}]`-style interpolation. Tailwind
+   * scans source as plain text, so it can never resolve a template
+   * expression and silently omits the utility. Always use the static
+   * `accent` / `accent-soft` names. */
+  --color-accent: #c0392b;
+  --color-accent-soft: #e74c3c;
 }
 
 :root {
   --color-bg: #0a0a0c;
-  --color-accent: #c0392b;
-  --color-accent-soft: #e74c3c;
 }
 
 @layer base {
@@ -22,6 +32,19 @@
   ::selection {
     background: rgba(192, 57, 43, 0.35);
     color: white;
+  }
+
+  /* Keyboard focus must always be visible. These sites are almost entirely
+   * dark-on-dark, so a subtle zinc ring would be invisible — use accent. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Suppress the ring for pointer interactions, keep it for keyboard. */
+  :focus:not(:focus-visible) {
+    outline: none;
   }
 
   h1,
@@ -155,24 +178,6 @@
   .reveal-line:hover::after {
     @apply w-full;
   }
-
-  /* Floating sparkle particles */
-  .sparkle {
-    @apply absolute rounded-full pointer-events-none;
-    animation: sparkle-float linear infinite;
-  }
-}
-
-@keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
 }
 
 @keyframes blob-drift {
@@ -203,44 +208,6 @@
   50% {
     box-shadow: 0 0 20px rgba(192, 57, 43, 0.8), 0 0 40px rgba(192, 57, 43, 0.2);
   }
-}
-
-@keyframes sparkle-float {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 0;
-  }
-
-  10% {
-    opacity: 1;
-  }
-
-  90% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translateY(-100vh) rotate(720deg);
-    opacity: 0;
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-shimmer {
-  animation: shimmer 3s ease-in-out infinite;
 }
 
 /* Hardware Diagnostic X-Ray Mode Easter Egg */
@@ -276,4 +243,37 @@ body.xray-mode::before {
       transparent 4px);
   pointer-events: none;
   z-index: 9999;
+}
+
+/* Respect the OS "reduce motion" setting.
+ * Framer Motion animations are handled in JS via MotionConfig; this block
+ * covers the pure-CSS loops (blobs, timeline dot, typewriter cursor, sheen). */
+@media (prefers-reduced-motion: reduce) {
+  .atmosphere-blob,
+  .timeline-dot-active {
+    animation: none !important;
+  }
+
+  .glass-card,
+  .glass-card::before,
+  .skill-tag,
+  .magnetic-btn,
+  .magnetic-btn:hover,
+  .magnetic-btn:active,
+  .cursor-glow,
+  .reveal-line::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+
+  .magnetic-btn:hover,
+  .skill-tag:hover {
+    transform: none !important;
+  }
+
+  /* Framer's own `whileHover`/entrance transitions are disabled via
+   * <MotionConfig reducedMotion>, but CSS-driven utilities are not. */
+  * {
+    scroll-behavior: auto !important;
+  }
 }

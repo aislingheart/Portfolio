@@ -1,12 +1,17 @@
 import React, { useRef, useEffect, useState } from "react";
-import { m, LazyMotion, domAnimation, AnimatePresence } from "motion/react";
+import { m, LazyMotion, domAnimation, AnimatePresence, MotionConfig } from "motion/react";
 import { Link, useLocation } from "react-router-dom";
 import { Cpu, Server, Zap, Home as HomeIcon, Flower2, Heart } from "lucide-react";
 import TerminalMode from "./TerminalMode";
-import miloImg from "../assets/milo.webp";
+import { usePrefersReducedMotion } from "../lib/usePrefersReducedMotion";
+
+/** Particle budget scales down on small/low-power screens. */
+const PARTICLE_COUNT_DESKTOP = 100;
+const PARTICLE_COUNT_MOBILE = 40;
 
 function FloatingSparkles() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -14,21 +19,34 @@ function FloatingSparkles() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    // Honour the OS reduce-motion setting: render a single static frame
+    // instead of spinning requestAnimationFrame forever.
+    if (prefersReducedMotion) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
+
     let particles: { x: number; y: number; vx: number; vy: number; size: number; opacity: number }[] = [];
     let animationFrameId: number;
     let mouse = { x: -1000, y: -1000 };
     let isMouseActive = false;
     let inactivityTimeout: number;
 
-    const PARTICLE_COUNT = 100;
     const MOUSE_RADIUS = 180;
     const LINE_MAX_DIST = 120;
+
+    // Scale the particle budget to the viewport. The link-drawing pass below
+    // is O(n^2), so this directly caps per-frame cost on phones.
+    const particleBudget = () =>
+      window.innerWidth < 768 || window.innerHeight < 600
+        ? PARTICLE_COUNT_MOBILE
+        : PARTICLE_COUNT_DESKTOP;
 
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
 
-      particles = Array.from({ length: PARTICLE_COUNT }, () => ({
+      particles = Array.from({ length: particleBudget() }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         vx: (Math.random() - 0.5) * 0.5,
@@ -121,11 +139,22 @@ function FloatingSparkles() {
       animationFrameId = requestAnimationFrame(animate);
     };
 
+    // Don't burn CPU/battery animating a background the user can't see.
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(animationFrameId);
+      } else {
+        cancelAnimationFrame(animationFrameId);
+        animate();
+      }
+    };
+
     window.addEventListener("resize", resize);
     window.addEventListener("mousemove", handlePointerMove);
     window.addEventListener("touchmove", handlePointerMove);
     document.addEventListener("mouseleave", handlePointerLeave);
     document.addEventListener("touchend", handlePointerLeave);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     resize();
     animate();
@@ -136,11 +165,18 @@ function FloatingSparkles() {
       window.removeEventListener("touchmove", handlePointerMove);
       document.removeEventListener("mouseleave", handlePointerLeave);
       document.removeEventListener("touchend", handlePointerLeave);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [prefersReducedMotion]);
 
-  return <canvas ref={canvasRef} className="fixed inset-0 -z-5 pointer-events-none" />;
+  return (
+    <canvas
+      ref={canvasRef}
+      aria-hidden="true"
+      className="fixed inset-0 -z-5 pointer-events-none"
+    />
+  );
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -148,9 +184,39 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const [showTerminal, setShowTerminal] = useState(false);
   const [showMilo, setShowMilo] = useState(false);
+  const [miloImg, setMiloImg] = useState<string | null>(null);
   const [xrayMode, setXrayMode] = useState(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  // milo.webp is ~700KB. Load it on demand so it never lands in the initial
+  // bundle for the 99% of visitors who never open the cat easter egg.
+  useEffect(() => {
+    if (!showMilo || miloImg) return;
+    let cancelled = false;
+    import("../assets/milo.webp")
+      .then((mod) => {
+        if (!cancelled) setMiloImg(mod.default);
+      })
+      .catch(() => {
+        // Easter egg is non-critical; silently skip if the asset fails.
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [showMilo, miloImg]);
+
+  // Close the Milo modal on Escape.
+  useEffect(() => {
+    if (!showMilo) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setShowMilo(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [showMilo]);
 
   useEffect(() => {
+    if (prefersReducedMotion) return;
     const handleMouseMove = (e: MouseEvent) => {
       if (glowRef.current) {
         // Use transform instead of left/top to avoid layout thrashing
@@ -161,7 +227,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  }, [prefersReducedMotion]);
 
   const navItems = [
     { path: "/", name: "home", icon: HomeIcon },
@@ -173,10 +239,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <LazyMotion features={domAnimation}>
+      {/* reducedMotion="user" makes Framer skip transform/opacity animations
+          automatically when the OS asks for reduced motion. */}
+      <MotionConfig reducedMotion="user">
       <div className="min-h-screen flex flex-col relative">
         {/* Interactive cursor glow */}
         <div
           ref={glowRef}
+          aria-hidden="true"
           className="cursor-glow"
           style={{ transform: "translate(-500px, -500px)" }}
         />
@@ -215,15 +285,32 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               and way too many energy drinks.
             </p>
             <div className="flex gap-6 text-zinc-500 text-sm">
-              <span onClick={() => setShowTerminal(true)} className="hover:text-zinc-200 transition-colors cursor-pointer reveal-line">terminal-first</span>
-              <span onClick={() => {
-                const next = !xrayMode;
-                setXrayMode(next);
-                document.body.classList.toggle('xray-mode', next);
-              }} className="hover:text-zinc-200 transition-colors cursor-pointer reveal-line">
+              <button
+                type="button"
+                onClick={() => setShowTerminal(true)}
+                className="hover:text-zinc-200 transition-colors cursor-pointer reveal-line"
+              >
+                terminal-first
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  const next = !xrayMode;
+                  setXrayMode(next);
+                  document.body.classList.toggle('xray-mode', next);
+                }}
+                aria-pressed={xrayMode}
+                className="hover:text-zinc-200 transition-colors cursor-pointer reveal-line"
+              >
                 hardware-focused ✨
-              </span>
-              <span onClick={() => setShowMilo(true)} className="hover:text-[#c0392b] transition-colors cursor-pointer reveal-line">cat-approved 🐱</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowMilo(true)}
+                className="hover:text-accent transition-colors cursor-pointer reveal-line"
+              >
+                cat-approved 🐱
+              </button>
             </div>
           </div>
         </footer>
@@ -242,6 +329,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <Link
                   key={item.path}
                   to={item.path}
+                  aria-label={item.name}
+                  aria-current={isActive ? "page" : undefined}
                   className={`relative flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-200 overflow-hidden ${isActive
                     ? "text-zinc-100 shadow-sm"
                     : "text-zinc-400 hover:text-zinc-200 hover:bg-white/5"
@@ -279,12 +368,26 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               className="fixed inset-0 z-[200] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 cursor-pointer"
             >
               <m.div
+                role="dialog"
+                aria-modal="true"
+                aria-label="Milo the cat approves of this portfolio"
                 initial={{ y: 50, rotate: -5, opacity: 0 }}
                 animate={{ y: 0, rotate: 2, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
                 className="bg-[#f0f0f0] p-4 pb-16 rounded-sm shadow-2xl relative max-w-sm w-full"
               >
-                <img src={miloImg} alt="Milo" className="w-full aspect-square object-cover shadow-inner bg-zinc-800 rounded-sm" />
+                {miloImg ? (
+                  <img
+                    src={miloImg}
+                    alt="Milo, the cat who supervises quality assurance on this site"
+                    className="w-full aspect-square object-cover shadow-inner bg-zinc-800 rounded-sm"
+                  />
+                ) : (
+                  <div
+                    aria-hidden="true"
+                    className="w-full aspect-square bg-zinc-800 rounded-sm animate-pulse"
+                  />
+                )}
                 <p className="absolute bottom-5 left-0 w-full text-center text-zinc-800 font-serif italic text-lg opacity-80 decoration-inherit flex items-center justify-center gap-2">I approve of this portfolio~milo 🐾</p>
               </m.div>
             </m.div>
@@ -294,6 +397,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {/* Terminal Mode Egg */}
         {showTerminal && <TerminalMode onClose={() => setShowTerminal(false)} />}
       </div>
+      </MotionConfig>
     </LazyMotion>
   );
 }

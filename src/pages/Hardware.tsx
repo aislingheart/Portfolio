@@ -4,7 +4,6 @@ import pfp from "../assets/pfp.webp";
 import PageHeader from "../components/PageHeader";
 import AnimatedCard from "../components/AnimatedCard";
 import IconBox from "../components/IconBox";
-import { tw } from "../lib/theme";
 import { caseStudies, hardwareSkills } from "../lib/data";
 
 export default function Hardware() {
@@ -18,7 +17,7 @@ export default function Hardware() {
         {caseStudies.map((study, i) => (
           <AnimatedCard key={study.title} index={i} className="glass-card p-8 flex flex-col group">
             <div className="flex justify-between items-start mb-6">
-              <div className={`p-3 rounded-2xl bg-white/5 text-zinc-400 group-hover:bg-[${tw.accent}]/15 group-hover:text-[${tw.accent}] transition-colors`}>
+              <div className={`p-3 rounded-2xl bg-white/5 text-zinc-400 group-hover:bg-accent/15 group-hover:text-accent transition-colors`}>
                 <IconBox icon={Cpu} hoverRotate={-10} />
               </div>
               <div className="flex gap-2 flex-wrap justify-end">
@@ -34,7 +33,7 @@ export default function Hardware() {
               </div>
             </div>
             <h3 className="text-2xl font-semibold mb-1 group-hover:text-white transition-colors glow-text">{study.title}</h3>
-            <p className={`text-[${tw.accent}] text-sm font-medium mb-4`}>{study.subtitle}</p>
+            <p className={`text-accent text-sm font-medium mb-4`}>{study.subtitle}</p>
             <p className="text-zinc-400 mb-8 flex-grow leading-relaxed">{study.description}</p>
 
             <div className="space-y-3 border-t border-white/5 pt-6">
@@ -47,7 +46,7 @@ export default function Hardware() {
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 + idx * 0.08 }}
                 >
-                  <CheckCircle2 size={16} className={`text-zinc-500 shrink-0 mt-0.5 group-hover:text-[${tw.accent}] transition-colors`} />
+                  <CheckCircle2 size={16} className={`text-zinc-500 shrink-0 mt-0.5 group-hover:text-accent transition-colors`} />
                   <span>{detail}</span>
                 </m.div>
               ))}
@@ -60,7 +59,7 @@ export default function Hardware() {
         {hardwareSkills.map((item, i) => (
           <AnimatedCard key={item.title} index={i + 2} className="glass-card p-6 group">
             <div className="flex items-center gap-3 mb-4 text-zinc-400 group-hover:text-zinc-200 transition-colors">
-              <IconBox icon={item.icon} size={20} className={`group-hover:text-[${tw.accent}] transition-colors`} hoverRotate={5} />
+              <IconBox icon={item.icon} size={20} className={`group-hover:text-accent transition-colors`} hoverRotate={5} />
               <h4 className="font-semibold">{item.title}</h4>
             </div>
             <p className="text-sm text-zinc-400 leading-relaxed group-hover:text-zinc-300 transition-colors">
