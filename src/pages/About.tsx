@@ -202,11 +202,14 @@ export default function About() {
             <Briefcase size={20} className={`text-accent`} />
             work experience 💼
           </h3>
-          <div className="space-y-10">
+          {/* The rail is drawn once on the container so it stays continuous.
+              Putting border-l on each item instead leaves the space-y gaps
+              unlined, which breaks the line between entries. */}
+          <div className="relative space-y-10 before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-px before:bg-white/10 before:content-['']">
             {jobs.map((job) => (
               <m.div
                 key={job.title}
-                className="relative pl-6 border-l border-white/10 group cursor-default"
+                className="relative pl-6 group cursor-default"
                 whileHover={{ x: 4 }}
                 transition={spring.gentle}
               >
@@ -226,11 +229,11 @@ export default function About() {
             <GraduationCap size={20} className="text-zinc-400" />
             education 🎓
           </h3>
-          <div className="space-y-8">
+          <div className="relative space-y-8 before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-px before:bg-white/10 before:content-['']">
             {education.map((edu, idx) => (
               <m.div
                 key={edu.title}
-                className="relative pl-6 border-l border-white/10 group cursor-default"
+                className="relative pl-6 group cursor-default"
                 whileHover={{ x: 4 }}
                 transition={spring.gentle}
               >
