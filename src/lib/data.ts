@@ -143,17 +143,11 @@ export interface Job {
 
 export const jobs: Job[] = [
   {
-    title: "upskilling & professional development",
-    company: "Self-Directed",
-    dates: "May 2025 - Present",
-    isCurrent: true,
-    description: "building out my skills across Linux sysadmin, networking, and workflow automation. setting up homelab servers, writing scripts, and bridging hands-on hardware troubleshooting with modern IT support.",
-  },
-  {
     title: "sales assistant / mobile repair tech",
     company: "Fone Connection",
-    dates: "Mar 2025 - May 2025",
-    description: "handled hardware repairs (screens, batteries, flex cables, component replacements) and software troubleshooting across iOS and Android. paired technical bench work with direct customer support in a busy shop environment.",
+    dates: "Mar 2025 - Present",
+    isCurrent: true,
+    description: "on the bench handling hardware repairs (screens, batteries, flex cables, component replacements) and software troubleshooting across iOS and Android, paired with direct customer support in a busy shop environment. alongside the day job i'm independently building skills across Linux sysadmin, networking, and workflow automation — homelab servers, scripts, and automation tooling.",
   },
   {
     title: "IT support technician assistant",

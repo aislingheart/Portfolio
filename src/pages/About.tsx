@@ -152,7 +152,7 @@ export default function About() {
 
           <div className="space-y-6 text-zinc-400 leading-relaxed relative z-10">
             <p>i've always loved taking things apart to figure out how they work, and getting them working again when they break. i approach tech with a mix of hands-on troubleshooting and straightforward communication, whether that's diagnosing a board fault or helping someone solve a tricky software issue.</p>
-            <p>after working as a mobile repair tech at Fone Connection fixing screens, batteries, and logic board components, i've been focusing on expanding my skills into sysadmin, networking, and automation. i'm currently building out my knowledge in Linux server environments, homelab setups, and script-driven workflows.</p>
+            <p>since March 2025 i've been working as a mobile repair technician and upskilling independently alongside it. on the bench at Fone Connection i fixed screens, batteries, and logic board components, and i keep expanding into sysadmin, networking, and automation — Linux server environments, homelab setups, and script-driven workflows.</p>
             <p>my background also includes IT support at EPS Water Ireland (handling hardware setup and ticketing) and running live tech support during school exams at Cork Educate Together. whether i'm walking someone through a fix or doing delicate soldering under magnification, my goal is to keep things clean, clear, and stress-free.</p>
           </div>
         </AnimatedCard>
