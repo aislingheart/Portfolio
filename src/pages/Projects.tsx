@@ -156,17 +156,17 @@ export default function Projects() {
             on github
           </h2>
           <p className="text-sm text-zinc-400 leading-relaxed max-w-xl">
-            this portfolio is open source and built from scratch. most of my repair and
-            sysadmin work is physical or server-side rather than something that lives in
-            a repo, so the code side is intentionally small.
+            my two real code projects are open source. most of my repair and
+            sysadmin work is physical or server-side rather than something that lives
+            in a repo, so the code side is intentionally small.
           </p>
         </div>
 
         <div className="relative z-10 flex items-center gap-6 shrink-0">
           <div className="text-center">
-            <div className="text-2xl font-semibold text-zinc-100">1</div>
+            <div className="text-2xl font-semibold text-zinc-100">2</div>
             <div className="text-[11px] uppercase tracking-wider text-zinc-500 mt-1">
-              public repo
+              public repos
             </div>
           </div>
           <div className="h-10 w-px bg-white/10" />

@@ -16,12 +16,12 @@ import {
 /**
  * Curated rather than auto-fetched from the GitHub API.
  *
- * The public profile has 7 repos, but only the Portfolio site is a real
- * code project: one is a 211MB fork of someone else's project, one is
- * 0KB, one is a pair of PNGs, and the rest are older experiments. Listing
- * them all would undercut the repair, sysadmin and automation work that
- * actually represents this portfolio, so each entry below is a deliberate
- * inclusion with a real description.
+ * The public profile has 8 repos, but several are not worth listing:
+ * OmniWM is a 211MB fork of someone else's project, `web` is empty,
+ * embed-weather is a single HTML file, and penelope is two PNGs. Two
+ * entries genuinely do represent real work — this portfolio site and
+ * MyHRT — so those are included, alongside the server build documented in
+ * ~/servers-info.md, which is infrastructure work that has no repo at all.
  *
  * `githubUrl` is optional; add it when a project has a public repo.
  */
@@ -53,29 +53,34 @@ export const projects: Project[] = [
     demoUrl: "https://aislingheart.github.io/Portfolio/",
   },
   {
-    title: "roster to calendar sync",
+    title: "MyHRT",
     summary:
-      "reads a work shift roster as an image or plain text and turns it into correctly formatted calendar events, no manual retyping.",
+      "an android app for tracking gender-affirming hormone therapy, built around a pharmacokinetics simulation engine that models actual hormone levels over time from your dose history.",
     details: [
-      "OCR + LLM parsing turns an unstructured roster image into a structured shift payload.",
-      "emits iCal events straight into the calendar, so a schedule change syncs in one run.",
-      "handles the messy real-world cases: split shifts, overnight starts, overlapping weeks.",
+      "simulates serum estradiol and testosterone curves from real dose logs, accounting for route of administration and ester type.",
+      "clinical timing guidance: dose spacing, sublingual hold times, gel application, injection site rotation.",
+      "frequency-aware reminders that survive a device reboot instead of dying with it.",
+      "runs fully on-device with an offline reference engine, so no cloud API key is needed to use it.",
+      "published as v1.0.0 with a downloadable APK; MIT licensed.",
     ],
-    tech: ["Python", "LLM", "OCR", "iCal"],
+    tech: ["Kotlin", "Android", "Gradle", "Pharmacokinetics modelling"],
     category: "code",
     status: "active",
+    githubUrl: "https://github.com/aislingheart/MyHRT",
   },
   {
-    title: "homelab server stack",
+    title: "homelab media & AI server",
     summary:
-      "a self-hosted environment running containerised services, reachable securely from anywhere without exposing ports to the internet.",
+      "a self-hosted stack on CachyOS — media automation, a GPU-accelerated Jellyfin, and a local LLM — all reachable through one nginx reverse proxy without exposing ports to the internet.",
     details: [
-      "Docker for isolated, reproducible services that are easy to update and roll back.",
-      "Tailscale mesh VPN for remote access — no port forwarding, no exposed attack surface.",
-      "Raspberry Pi running a Wake-on-LAN beacon so machines can be powered on remotely.",
-      "Jellyfin with hardware transcoding, and OpenWebUI as a local LLM interface for scripting help.",
+      "full *arr automation stack (Sonarr, Radarr, Lidarr, Prowlarr, Bazarr) driving qBittorrent, with the whole library on a 2TB mount.",
+      "nginx reverse proxy with subpath routing, so eight services live under one host without port juggling.",
+      "used nginx sub_filter to rewrite Open WebUI's hardcoded absolute asset paths, which otherwise collided with the dashboard's root routes.",
+      "ollama serving gemma2 locally with Jellyfin hardware transcoding on an RTX 5050.",
+      "everything in docker compose, so the media and AI stacks come up from one command each.",
+      "migrated the whole thing off Windows, including repairing the SQLite paths the Windows install left behind.",
     ],
-    tech: ["Docker", "Tailscale", "Jellyfin", "OpenWebUI", "Raspberry Pi", "Kali Linux"],
+    tech: ["CachyOS", "Docker", "nginx", "Jellyfin", "Sonarr", "Radarr", "Prowlarr", "qBittorrent", "Ollama", "Open WebUI", "Homarr"],
     category: "infrastructure",
     status: "active",
   },
