@@ -15,12 +15,11 @@ import {
 /**
  * Curated rather than auto-fetched from the GitHub API.
  *
- * The public profile has 8 repos, but several are not worth listing:
+ * The public profile has 10 repos, but several are not worth listing:
  * OmniWM is a 211MB fork of someone else's project, `web` is empty,
- * embed-weather is a single HTML file, and penelope is two PNGs. Two
- * entries genuinely do represent real work — this portfolio site and
- * MyHRT — so those are included, alongside the server build documented in
- * ~/servers-info.md, which is infrastructure work that has no repo at all.
+ * embed-weather is a single HTML file, and penelope is two PNGs. The four
+ * entries below are the ones that represent real work, and every one of
+ * them is public.
  *
  * `githubUrl` is optional; add it when a project has a public repo.
  */
@@ -36,6 +35,20 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    title: "nginx subpath routing",
+    summary:
+      "a write-up of serving many self-hosted apps from one hostname and one port behind path prefixes, weighted toward the failure modes rather than the happy path.",
+    details: [
+      "the four things that actually break, none of which point at the cause: the proxy_pass trailing slash, the websocket map, sub_filter silently no-op'ing on gzipped bodies, and apps needing their own base URL set.",
+      "config validated with nginx -t rather than eyeballed, which is how the map-directive context error got caught.",
+      "the `sub_filter` section explains why the defaults make a page half-work instead of fail — the most confusing symptom to debug.",
+    ],
+    tech: ["nginx", "Docker", "sub_filter", "reverse proxy"],
+    category: "code",
+    status: "complete",
+    githubUrl: "https://github.com/aislingheart/nginx-subpath-routing",
+  },
   {
     title: "this portfolio",
     summary:
@@ -78,10 +91,12 @@ export const projects: Project[] = [
       "ollama serving gemma2 locally with Jellyfin hardware transcoding on an RTX 5050.",
       "everything in docker compose, so the media and AI stacks come up from one command each.",
       "migrated the whole thing off Windows, including repairing the SQLite paths the Windows install left behind.",
+      "the dashboard is provisioned over Homarr's tRPC API from a JSON layout, so it's reviewable in a diff and reproducible after a rebuild.",
     ],
-    tech: ["CachyOS", "Docker", "nginx", "Jellyfin", "Sonarr", "Radarr", "Prowlarr", "qBittorrent", "Ollama", "Open WebUI", "Homarr"],
+    tech: ["CachyOS", "Docker", "nginx", "Jellyfin", "Sonarr", "Radarr", "Prowlarr", "qBittorrent", "Ollama", "Open WebUI", "Homarr", "Python"],
     category: "infrastructure",
     status: "active",
+    githubUrl: "https://github.com/aislingheart/homelab-stack",
   },
   {
     title: "server update pipeline",
