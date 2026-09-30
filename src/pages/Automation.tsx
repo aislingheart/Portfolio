@@ -10,10 +10,10 @@ export default function Automation() {
   return (
     <div className="space-y-12">
       <PageHeader title="workflow automation ⚡">
-        i write scripts and set up tools to automate repetitive tasks. whether it's parsing schedules, setting up custom macros, or streamlining server updates, i like making workflows faster and easier.
+        i write scripts and set up tools to automate repetitive tasks. whether it's keeping servers updated, spinning up whole stacks from one command, or wiring up custom macros, i like making workflows faster and easier.
       </PageHeader>
 
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-2 gap-6">
         {automations.map((item, i) => (
           <AnimatedCard key={item.title} index={i} className="glass-card p-8 flex flex-col group">
             <IconBox
@@ -75,18 +75,16 @@ export default function Automation() {
               <m.div className="w-3 h-3 rounded-full bg-zinc-600 group-hover:bg-green-400/50 transition-colors" whileHover={{ scale: 1.3 }} />
             </div>
             <div className="text-zinc-300">
-              <span className={`text-zinc-500 group-hover:text-accent transition-colors`}>import</span> vision_api<br />
-              <span className={`text-zinc-500 group-hover:text-accent transition-colors`}>import</span> calendar_api<br />
-              <span className={`text-zinc-500 group-hover:text-accent transition-colors`}>import</span> llm_parser<br />
+              <span className={`text-zinc-500 group-hover:text-accent transition-colors`}># unattended update run</span><br />
+              winget upgrade --accept-source-agreements \<br />
+              &nbsp;&nbsp;--accept-package-agreements --silent<br />
               <br />
-              <span className="text-zinc-600"># extracting unstructured roster image into structured payload</span><br />
-              raw_text = vision_api.ocr(roster_image)<br />
-              roster_shifts = llm_parser.parse(raw_text)<br />
+              <span className={`text-zinc-500 group-hover:text-accent transition-colors`}>for</span> stack <span className={`text-zinc-500 group-hover:text-accent transition-colors`}>in</span> media ai; <span className={`text-zinc-500 group-hover:text-accent transition-colors`}>do</span><br />
+              &nbsp;&nbsp;docker compose -f ~/<span className="text-zinc-300">$&#123;stack&#125;</span> pull --quiet<br />
+              &nbsp;&nbsp;docker compose -f ~/<span className="text-zinc-300">$&#123;stack&#125;</span> up -d --remove-orphans<br />
+              &nbsp;&nbsp;<span className={`text-zinc-500 group-hover:text-accent transition-colors`}>echo</span> "$&#123;stack&#125; updated" &gt;&gt; update.log<br />
               <br />
-              <span className={`text-zinc-500 group-hover:text-accent transition-colors`}>for</span> shift <span className={`text-zinc-500 group-hover:text-accent transition-colors`}>in</span> roster_shifts:<br />
-              &nbsp;&nbsp;calendar_api.create_ical_event(shift)<br />
-              <br />
-              <span className="text-zinc-400 group-hover:text-zinc-200 transition-colors">print</span>(<span className="text-zinc-500 group-hover:text-zinc-400 transition-colors">"ical sync complete. ✅"</span>)
+              <span className={`text-zinc-500 group-hover:text-accent transition-colors`}>echo</span> "no manual step left. ✅"
             </div>
           </div>
         </div>

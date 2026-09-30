@@ -9,9 +9,8 @@ import {
   Mail, Camera, Instagram, Github, Twitter, Cloud, Linkedin,
   Cpu, Search, Zap, ShieldAlert,
   Server, Shield, Database, Network, Terminal,
-  Calendar, MousePointer2,
+  MousePointer2,
 } from "lucide-react";
-
 // ── Projects ─────────────────────────────────────────────────────────
 /**
  * Curated rather than auto-fetched from the GitHub API.
@@ -370,12 +369,6 @@ export interface AutomationProject {
 }
 
 export const automations: AutomationProject[] = [
-  {
-    title: "roster to calendar sync",
-    description: "Python script that reads work shift images or text and auto-creates formatted calendar events.",
-    icon: Calendar,
-    tech: ["Python", "LLM", "iCal"],
-  },
   {
     title: "raycast environment macros",
     description: "custom Raycast macros and AppleScript shortcuts to launch my daily dev and support tools instantly.",
