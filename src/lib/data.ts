@@ -15,11 +15,11 @@ import {
 /**
  * Curated rather than auto-fetched from the GitHub API.
  *
- * The public profile has 10 repos, but several are not worth listing:
- * OmniWM is a 211MB fork of someone else's project, `web` is empty,
- * embed-weather is a single HTML file, and penelope is two PNGs. The four
- * entries below are the ones that represent real work, and every one of
- * them is public.
+ * The public profile has other repos that aren't worth listing on their own:
+ * forks like OmniWM, empty or single-file repos (`web`, embed-weather,
+ * penelope), and companion feeds like komorebi-extensions. The five entries
+ * below with a `githubUrl` are the standalone projects that represent real
+ * work, and every one of them is public.
  *
  * `githubUrl` is optional; add it when a project has a public repo.
  */
@@ -35,6 +35,22 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    title: "Komorebi",
+    summary:
+      "an open-source Android command palette, Raycast-compatible extension runner, and system customization toolkit built with Jetpack Compose and Material 3.",
+    details: [
+      "universal search overlay across apps, shortcuts, contacts, files, media, system settings, and installed extensions.",
+      "runs JavaScript/TypeScript Raycast and Vicinae extensions inline via an embedded QuickJS runtime (@raycast/api and @vicinae/api), supporting lists, grids, forms, detail views, OAuth, and an extension store.",
+      "built-in system tweaks and automations: dynamic notification island, edge lighting, physical button remapping, lockscreen shortcuts, Quick Settings tiles, charge optimization, and Shut-Up! for hiding accessibility and developer flags from sensitive apps.",
+      "supports both Shizuku (rootless over ADB/Wireless Debugging) and root shell providers for privileged actions, plus a built-in auto-updater pulling APKs straight from GitHub Releases.",
+      "actively developed alongside a companion Android-first extension catalog (komorebi-extensions); MIT licensed.",
+    ],
+    tech: ["Kotlin", "Android", "Jetpack Compose", "Material 3", "QuickJS", "Shizuku", "Room", "Gradle"],
+    category: "code",
+    status: "active",
+    githubUrl: "https://github.com/aislingheart/komorebi",
+  },
   {
     title: "nginx subpath routing",
     summary:
