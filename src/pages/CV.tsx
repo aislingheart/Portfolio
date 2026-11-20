@@ -42,7 +42,7 @@ export default function CV() {
             </div>
             <div className="text-xs text-zinc-400 flex items-center gap-1.5">
               <MapPin size={13} className="text-accent" />
-              <span>Cork, Ireland (fluent in English &amp; Irish)</span>
+              <span>Limerick, Ireland (fluent in English &amp; Irish)</span>
             </div>
           </div>
 

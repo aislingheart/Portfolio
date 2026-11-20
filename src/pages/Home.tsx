@@ -109,7 +109,7 @@ export default function Home() {
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-medium text-zinc-400"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)] animate-pulse" />
-              <span>open to IT support, sysadmin &amp; junior dev roles · Cork, IE</span>
+              <span>open to IT support, sysadmin &amp; junior dev roles · Limerick, IE</span>
             </m.div>
 
             <h1 className="text-4xl md:text-6xl font-semibold tracking-tight leading-[1.1] text-gradient">

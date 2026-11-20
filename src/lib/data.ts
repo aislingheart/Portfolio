@@ -200,7 +200,7 @@ export const socialLinks: SocialLink[] = [
 ];
 
 export const quickFacts = [
-  { label: "based in", value: "Cork, Ireland 🇮🇪" },
+  { label: "based in", value: "Limerick, Ireland 🇮🇪" },
   { label: "target roles", value: "IT Support · Sysadmin · Android" },
   { label: "fav OS", value: "Linux (CachyOS) / Android / macOS" },
   { label: "go-to tool", value: "the spudger 🫡" },

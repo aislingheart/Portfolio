@@ -67,7 +67,7 @@ export default function TerminalMode({ onClose }: TerminalModeProps) {
           response = "WARNING: logic board schematic requires root privileges to view.";
         } else if (args[1] === "resume.pdf") {
           response = [
-            "Aisling Creed — Cork, Ireland",
+            "Aisling Creed — Limerick, Ireland",
             "Roles: IT Support · Linux Sysadmin · Hardware Diagnostics · Android",
             "Open /#/cv in the browser for the full printable PDF version.",
           ];
