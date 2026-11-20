@@ -1,55 +1,76 @@
-import { Search, Terminal, Shield, Cpu, Lock, Globe, Layers, HardDrive } from "lucide-react";
+import { Terminal, Shield, Cpu, Lock, Globe, Layers, HardDrive, Sparkles } from "lucide-react";
+import searchOverlayImg from "../assets/komorebi/search-overlay.webp";
+import searchCalculatorImg from "../assets/komorebi/search-calculator.webp";
+import extensionsStoreImg from "../assets/komorebi/extensions-store.webp";
+import settingsImg from "../assets/komorebi/settings.webp";
+import searchSettingsImg from "../assets/komorebi/search-settings.webp";
+
+const komorebiScreens = [
+  { src: searchOverlayImg, label: "Command Palette", alt: "Komorebi universal command palette overlay" },
+  { src: searchCalculatorImg, label: "Calculator & Currency", alt: "Komorebi live calculator and currency converter" },
+  { src: extensionsStoreImg, label: "Extensions & Store", alt: "Komorebi Raycast and Vicinae extensions store" },
+  { src: settingsImg, label: "Settings", alt: "Komorebi Material 3 Expressive settings" },
+  { src: searchSettingsImg, label: "Search & Triggers", alt: "Komorebi search and gesture trigger settings" },
+];
 
 /**
- * Architectural preview of Komorebi's Android command palette and QuickJS
- * extension runtime pipeline.
+ * Real Komorebi app screenshots from GitHub paired with a concise
+ * architecture strip covering universal search, extension runtime, and assistant.
  */
 export function KomorebiVisual() {
   return (
     <div
-      className="rounded-2xl bg-[#0a0a0c]/80 border border-white/[0.08] p-4 sm:p-5 space-y-4 font-mono text-xs overflow-hidden"
-      aria-label="Komorebi architecture preview showing universal search overlay, QuickJS extension runtime, and Shizuku shell bridge"
+      className="rounded-2xl bg-[#0a0a0c]/80 border border-white/[0.08] p-4 sm:p-5 space-y-4 overflow-hidden"
+      aria-label="Komorebi screenshots and architecture overview"
     >
-      {/* Simulated command palette header */}
-      <div className="flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08]">
-        <div className="flex items-center gap-2.5 text-zinc-200 min-w-0">
-          <Search size={14} className="text-accent shrink-0" />
-          <span className="truncate">komorebi &gt; run extension / system action</span>
-        </div>
-        <span className="px-2 py-0.5 rounded bg-accent/15 text-accent text-[10px] shrink-0">
-          QuickJS
-        </span>
+      {/* Real screenshots strip */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+        {komorebiScreens.map((shot) => (
+          <figure key={shot.label} className="space-y-1.5 group/shot">
+            <div className="rounded-xl overflow-hidden border border-white/[0.08] bg-black/50 aspect-[9/19.5] shadow-md">
+              <img
+                src={shot.src}
+                alt={shot.alt}
+                loading="lazy"
+                className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover/shot:scale-[1.03]"
+              />
+            </div>
+            <figcaption className="text-[11px] font-mono text-zinc-400 text-center truncate">
+              {shot.label}
+            </figcaption>
+          </figure>
+        ))}
       </div>
 
-      {/* 3-stage pipeline */}
-      <div className="grid sm:grid-cols-3 gap-2.5">
+      {/* 3-stage capability pipeline */}
+      <div className="grid sm:grid-cols-3 gap-2.5 pt-1 font-mono text-xs">
         <div className="p-3 rounded-xl bg-white/[0.025] border border-white/[0.06] space-y-1">
           <div className="flex items-center gap-1.5 text-zinc-200 font-medium">
             <Layers size={13} className="text-accent" />
-            <span>1. overlay UI</span>
+            <span>1. universal search</span>
           </div>
           <p className="text-[11px] text-zinc-500 font-sans leading-snug">
-            Jetpack Compose + Material 3 search across apps, files, contacts &amp; settings
+            Apps, files, contacts, live calculator/currency, and offline ML Kit OCR photo search
           </p>
         </div>
 
         <div className="p-3 rounded-xl bg-white/[0.025] border border-white/[0.06] space-y-1">
           <div className="flex items-center gap-1.5 text-zinc-200 font-medium">
             <Terminal size={13} className="text-accent" />
-            <span>2. JS runtime</span>
+            <span>2. extension store</span>
           </div>
           <p className="text-[11px] text-zinc-500 font-sans leading-snug">
-            Embedded QuickJS executing @raycast/api &amp; @vicinae/api inline
+            Native Raycast &amp; Vicinae JS/TS runtime in Compose with compatibility checks &amp; OAuth
           </p>
         </div>
 
         <div className="p-3 rounded-xl bg-white/[0.025] border border-white/[0.06] space-y-1">
           <div className="flex items-center gap-1.5 text-zinc-200 font-medium">
-            <Shield size={13} className="text-accent" />
-            <span>3. shell bridge</span>
+            <Sparkles size={13} className="text-accent" />
+            <span>3. assistant &amp; device</span>
           </div>
           <p className="text-[11px] text-zinc-500 font-sans leading-snug">
-            Shizuku (rootless) or root provider for tweaks, tiles &amp; remapping
+            On-device assistant, private Health Connect queries, AGSL ripple trigger &amp; optional Shizuku/root
           </p>
         </div>
       </div>

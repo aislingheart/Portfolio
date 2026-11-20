@@ -43,17 +43,17 @@ export const projects: Project[] = [
   {
     title: "Komorebi",
     summary:
-      "an open-source Android command palette, Raycast-compatible extension runner, and system customization toolkit built with Jetpack Compose and Material 3.",
+      "a fast, extensible Android command palette, universal launcher, and Raycast / Vicinae extension runtime built with Jetpack Compose and Material 3 Expressive.",
     featuredSummary:
-      "open-source Android command palette running Raycast/Vicinae JS extensions inline via an embedded QuickJS runtime, paired with Shizuku/root system tweaks.",
+      "open-source Android command palette and universal launcher running Raycast & Vicinae JS/TS extensions natively in Compose, with offline ML Kit photo search, live calculator/converter, and on-device Health Connect assistant.",
     details: [
-      "universal search overlay across apps, shortcuts, contacts, files, media, system settings, and installed extensions.",
-      "runs JavaScript/TypeScript Raycast and Vicinae extensions inline via an embedded QuickJS runtime (@raycast/api and @vicinae/api), supporting lists, grids, forms, detail views, OAuth, and an extension store.",
-      "built-in system tweaks and automations: dynamic notification island, edge lighting, physical button remapping, lockscreen shortcuts, Quick Settings tiles, charge optimization, and Shut-Up! for hiding accessibility and developer flags from sensitive apps.",
-      "supports both Shizuku (rootless over ADB/Wireless Debugging) and root shell providers for privileged actions, plus a built-in auto-updater pulling APKs straight from GitHub Releases.",
-      "actively developed alongside a companion Android-first extension catalog (komorebi-extensions); MIT licensed.",
+      "universal command palette searching apps, shortcuts, contacts, local files, system settings, custom web engines, and third-party providers — with context-aware ranking and offline ML Kit OCR semantic photo search.",
+      "native Raycast Store & Vicinae Store browser with automatic Android compatibility analysis (Full / Partial Support), running @raycast/api and @vicinae/api JS/TS extensions natively in Jetpack Compose with OAuth and deep-link support.",
+      "built-in productivity tools: live math, unit, timezone & currency converter (cached rates + offline fallback), clipboard history, quicklinks & dynamic snippets, emoji/kaomoji picker, native internet speed test, nearby bus times, and QR/UUID/password generators.",
+      "on-device assistant and private Health Connect queries (steps, sleep, heart rate, weight, workouts) with deterministic tools for media, alarms, notification digests, calendar, tasks, routines, and screen context.",
+      "Pixel-inspired Material 3 Expressive UI (Pitch-Black AMOLED, AGSL gesture ripple reveal, default assistant & universal search gesture triggers), optional Shizuku/root privileged commands, JSON config backup, and built-in GitHub Releases updater (Android 8.0+, MIT).",
     ],
-    tech: ["Kotlin", "Android", "Jetpack Compose", "Material 3", "QuickJS", "Shizuku", "Room", "Gradle"],
+    tech: ["Kotlin", "Android", "Jetpack Compose", "Material 3", "QuickJS", "ML Kit OCR", "Health Connect", "Shizuku"],
     category: "code",
     status: "active",
     featured: true,
@@ -578,9 +578,9 @@ export interface AutomationProject {
 
 export const automations: AutomationProject[] = [
   {
-    title: "Komorebi command palette & QuickJS runner",
+    title: "Komorebi command palette & extension runtime",
     description:
-      "Android launcher overlay that runs Raycast and Vicinae JS/TS extensions inline, plus physical button remapping, Quick Settings tiles, and Shizuku/root system automations.",
+      "Android universal launcher and command palette running Raycast & Vicinae JS/TS extensions natively in Compose, with live conversions, quicklinks, dynamic snippets, on-device assistant routines, and optional Shizuku/root system actions.",
     icon: Terminal,
     tech: ["Kotlin", "Jetpack Compose", "QuickJS", "Shizuku"],
   },

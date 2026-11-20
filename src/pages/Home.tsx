@@ -76,7 +76,7 @@ const navCards = [
     to: "/automation",
     icon: Zap,
     title: "workflow automation ⚙️",
-    desc: "Komorebi QuickJS runner, dashboard-as-code, and cross-OS scripting.",
+    desc: "Komorebi extension runtime, dashboard-as-code, and cross-OS scripting.",
     hoverRotate: 0,
   },
 ];
