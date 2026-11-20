@@ -10,6 +10,7 @@ const Hardware = lazy(() => import("./pages/Hardware"));
 const SupportAdmin = lazy(() => import("./pages/SupportAdmin"));
 const Automation = lazy(() => import("./pages/Automation"));
 const Projects = lazy(() => import("./pages/Projects"));
+const CV = lazy(() => import("./pages/CV"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
             <Route path="/support-admin" element={<SupportAdmin />} />
             <Route path="/automation" element={<Automation />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/cv" element={<CV />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

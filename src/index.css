@@ -277,3 +277,43 @@ body.xray-mode::before {
     scroll-behavior: auto !important;
   }
 }
+
+/* Clean, ATS-friendly print stylesheet for /cv */
+@media print {
+  @page {
+    margin: 14mm 16mm;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    background-image: none !important;
+    color: #18181b !important;
+  }
+
+  .cv-sheet {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .cv-sheet * {
+    color: #18181b !important;
+    border-color: #d4d4d8 !important;
+    text-shadow: none !important;
+  }
+
+  .cv-sheet h2 {
+    color: #991b1b !important;
+  }
+
+  .cv-sheet a {
+    text-decoration: none !important;
+  }
+}

@@ -1,174 +1,335 @@
 import { useState, useEffect } from "react";
-import pfp from "../assets/pfp.webp";
 import { m } from "motion/react";
+import {
+  ArrowRight, Cpu, Server, Zap, Mail, FileText,
+  Github, Linkedin, ExternalLink, FolderGit2,
+} from "lucide-react";
 import { Link } from "react-router-dom";
-import { Cpu, Server, Zap, ArrowRight, Terminal, ShieldCheck, HeartPulse, Flower2, Sparkles, Mail } from "lucide-react";
-import AnimatedCard from "../components/AnimatedCard";
-import IconBox from "../components/IconBox";
-import { spring } from "../lib/theme";
-import { qualifications } from "../lib/data";
+import pfp from "../assets/pfp.webp";
+import { qualifications, projects } from "../lib/data";
+import { usePrefersReducedMotion } from "../lib/usePrefersReducedMotion";
 
-function getGreeting(): string {
-  const hour = new Date().getHours();
-  if (hour < 6) return "you're up late! go sleep 😴";
-  if (hour < 12) return "good morning! ☕";
-  if (hour < 17) return "hey there! 👋";
-  if (hour < 21) return "good evening! 🌅";
-  return "night owl mode 🦉";
-}
-
-export default function Home() {
-  const [currentText, setCurrentText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
+function TypewriterQualification() {
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const [index, setIndex] = useState(0);
+  const [subIndex, setSubIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [greeting] = useState(getGreeting);
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    const fullText = qualifications[currentIndex];
+    if (prefersReducedMotion) return;
 
-    if (!isDeleting && currentText === fullText) {
-      timeout = setTimeout(() => setIsDeleting(true), 2000);
-    } else if (isDeleting && currentText === "") {
-      setIsDeleting(false);
-      setCurrentIndex((prev) => (prev + 1) % qualifications.length);
-    } else {
-      timeout = setTimeout(() => {
-        setCurrentText(fullText.substring(0, currentText.length + (isDeleting ? -1 : 1)));
-      }, isDeleting ? 30 : 70);
+    const currentWord = qualifications[index];
+    const typingSpeed = isDeleting ? 35 : 70;
+
+    if (!isDeleting && subIndex === currentWord.length) {
+      const pause = setTimeout(() => setIsDeleting(true), 2200);
+      return () => clearTimeout(pause);
     }
 
+    if (isDeleting && subIndex === 0) {
+      const nextWord = setTimeout(() => {
+        setIsDeleting(false);
+        setIndex((prev) => (prev + 1) % qualifications.length);
+      }, 400);
+      return () => clearTimeout(nextWord);
+    }
+
+    const timeout = setTimeout(() => {
+      setSubIndex((prev) => prev + (isDeleting ? -1 : 1));
+    }, typingSpeed);
+
     return () => clearTimeout(timeout);
-  }, [currentText, isDeleting, currentIndex]);
+  }, [subIndex, isDeleting, index, prefersReducedMotion]);
 
-  const navCards = [
-    { path: "/hardware",      icon: Cpu,    title: "hardware diagnostics 🔧",  desc: "component repairs, panic log diagnostics, and micro-soldering. bringing broken or \"unfixable\" gear back to life.", rotate: -5 },
-    { path: "/support-admin",  icon: Server, title: "support & admin 🛡️",       desc: "crisis triage, homelab server management, and practical tech support that puts people first.", rotate: 5 },
-    { path: "/automation",     icon: Zap,    title: "workflow automation ⚡",    desc: "custom scripts, environment shortcuts, and automated workflows to skip repetitive manual tasks.", rotate: -5 },
-  ];
-
-  const methodology = [
-    { icon: ShieldCheck, title: "quality control",                desc: "rigorous bench testing before and after repairs so devices stay reliable long term.", accent: false },
-    { icon: HeartPulse,  title: "clear communication 💛",        desc: "explaining complex diagnostic findings with simple, clear analogies (like \"the bucket\" for battery health).", accent: true },
-    { icon: Terminal,    title: "problem-solving mindset",        desc: "using adaptable troubleshooting steps to handle unexpected failures under pressure.", accent: false },
-  ];
+  if (prefersReducedMotion) {
+    return <span className="text-zinc-200">{qualifications[0]}</span>;
+  }
 
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <span className="inline-flex items-center">
+      <span className="text-zinc-200">{qualifications[index].substring(0, subIndex)}</span>
+      <m.span
+        animate={{ opacity: [1, 0] }}
+        transition={{ duration: 0.7, repeat: Infinity, ease: "easeInOut" }}
+        className="w-0.5 h-6 md:h-8 ml-1 inline-block rounded-full bg-accent"
+      />
+    </span>
+  );
+}
 
+const navCards = [
+  {
+    to: "/hardware",
+    icon: Cpu,
+    title: "hardware diagnostics 🔧",
+    desc: "mobile board-level repair, kernel panic log analysis, and micro-soldering.",
+    hoverRotate: -12,
+  },
+  {
+    to: "/support-admin",
+    icon: Server,
+    title: "support & admin 🛡️",
+    desc: "CachyOS Docker/nginx homelab, Gluetun VPN isolation, and live incident triage.",
+    hoverRotate: 12,
+  },
+  {
+    to: "/automation",
+    icon: Zap,
+    title: "workflow automation ⚙️",
+    desc: "Komorebi QuickJS runner, dashboard-as-code, and cross-OS scripting.",
+    hoverRotate: 0,
+  },
+];
+
+export default function Home() {
+  const featuredProjects = projects.filter((p) => p.featured);
+
+  return (
+    <div className="space-y-10">
+      {/* Main Hero Bento Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
         {/* Intro Card */}
-        <AnimatedCard index={0} hoverLift={false} className="md:col-span-2 glass-card p-8 md:p-12 flex flex-col justify-center relative overflow-hidden">
-          <div className={`absolute top-0 right-0 w-64 h-64 bg-[radial-gradient(circle,rgba(192,57,43,0.1)_0%,transparent_70%)] rounded-full -mr-20 -mt-20 pointer-events-none`} />
+        <m.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="md:col-span-8 glass-card glass-card-maroon p-8 md:p-11 flex flex-col justify-between relative overflow-hidden group"
+        >
+          {/* Ambient radial gradient */}
+          <div
+            className="absolute -right-24 -top-24 w-72 h-72 rounded-full blur-3xl pointer-events-none transition-opacity duration-500 opacity-60 group-hover:opacity-100"
+            style={{ background: "radial-gradient(circle, rgba(192,57,43,0.12) 0%, transparent 70%)" }}
+          />
 
-          <div className="flex items-center gap-4 mb-8 relative z-10 w-fit">
-            <m.img 
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: "spring", stiffness: 200, damping: 20 }}
-              src={pfp} 
-              alt="Aisling Creed" 
-              className="w-20 h-20 rounded-full border-2 border-white/10 shadow-[0_8px_20px_rgba(0,0,0,0.4)] object-cover"
-            />
-            <div className="flex flex-col gap-3">
-              <m.div
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3, duration: 0.4 }}
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-zinc-400 w-fit"
+          <div className="space-y-6 relative z-10">
+            <m.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.1, duration: 0.3 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-medium text-zinc-400"
+            >
+              <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)] animate-pulse" />
+              <span>open to IT support, sysadmin &amp; junior dev roles · Cork, IE</span>
+            </m.div>
+
+            <h1 className="text-4xl md:text-6xl font-semibold tracking-tight leading-[1.1] text-gradient">
+              hey, i'm aisling.
+              <span className="block text-xl md:text-3xl font-normal text-zinc-400 mt-3 h-10 md:h-12 flex items-center">
+                <TypewriterQualification />
+              </span>
+            </h1>
+
+            <p className="text-zinc-400 text-base md:text-lg max-w-xl leading-relaxed">
+              i diagnose faulty hardware down to the kernel panic log, self-host containerized Linux infrastructure behind nginx and VPN isolation, and ship open-source Android tools like{" "}
+              <Link to="/projects" className="text-zinc-200 underline decoration-accent/50 underline-offset-4 hover:text-white hover:decoration-accent transition-colors">
+                Komorebi
+              </Link>{" "}
+              and{" "}
+              <Link to="/projects" className="text-zinc-200 underline decoration-accent/50 underline-offset-4 hover:text-white hover:decoration-accent transition-colors">
+                MyHRT
+              </Link>.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3 pt-8 relative z-10">
+            <Link
+              to="/projects"
+              className="magnetic-btn px-5 py-3 bg-white text-zinc-950 rounded-full font-medium text-sm flex items-center gap-2 hover:bg-zinc-200 group/btn"
+            >
+              <FolderGit2 size={15} />
+              <span>view projects</span>
+              <ArrowRight size={15} className="group-hover/btn:translate-x-1 transition-transform" />
+            </Link>
+
+            <Link
+              to="/cv"
+              className="magnetic-btn px-5 py-3 bg-accent/15 hover:bg-accent/25 text-zinc-100 rounded-full font-medium text-sm border border-accent/30 flex items-center gap-2"
+            >
+              <FileText size={15} className="text-accent-soft" />
+              <span>cv / resume</span>
+            </Link>
+
+            <a
+              href="mailto:aislingcreed42@gmail.com"
+              className="magnetic-btn px-5 py-3 bg-white/[0.04] hover:bg-white/[0.08] text-zinc-200 rounded-full font-medium text-sm border border-white/[0.08] flex items-center gap-2"
+            >
+              <Mail size={15} className="text-zinc-400" />
+              <span>contact</span>
+            </a>
+
+            <div className="flex items-center gap-2 sm:ml-auto">
+              <a
+                href="https://github.com/aislingheart"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub profile"
+                title="GitHub"
+                className="p-2.5 rounded-full bg-white/[0.04] hover:bg-white/[0.1] border border-white/[0.08] text-zinc-400 hover:text-white transition-colors"
               >
-                <Sparkles size={12} className={`text-accent`} />
-                <span>{greeting}</span>
-              </m.div>
-
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-zinc-400 w-fit">
-                <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
-                <span>open to opportunities ✨</span>
-              </div>
+                <Github size={16} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/aislingheart/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn profile"
+                title="LinkedIn"
+                className="p-2.5 rounded-full bg-white/[0.04] hover:bg-white/[0.1] border border-white/[0.08] text-zinc-400 hover:text-white transition-colors"
+              >
+                <Linkedin size={16} />
+              </a>
             </div>
           </div>
+        </m.div>
 
-          <h1 className="text-4xl md:text-6xl font-semibold tracking-tight mb-6 leading-[1.1] relative z-10 min-h-[88px] md:min-h-[132px]">
-            {currentText}
-            <span className={`text-accent animate-pulse font-light`}>|</span>
-          </h1>
-          <p className="text-lg text-zinc-400 leading-relaxed max-w-xl mb-8 relative z-10">
-            hey, i'm Aisling! 👋 i work across hardware diagnostics, systems administration, and workflow automation.
-            whether that's micro-soldering delicate flex cables, managing homelab servers, or swapping a Linux drive to save a live exam,
-            i love solving real technical problems with practical solutions.
-            currently building out my skills in sysadmin, networking, and scripting.
-          </p>
-          <div className="flex flex-wrap gap-4 mt-auto relative z-10">
-            <m.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Link to="/projects" className="magnetic-btn px-6 py-3 bg-zinc-100 text-zinc-900 font-medium rounded-full hover:bg-white transition-colors flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.08)]">
-                view projects <ArrowRight size={16} />
-              </Link>
-            </m.div>
-            <m.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Link to="/about" className="px-6 py-3 bg-white/5 border border-white/10 text-zinc-200 font-medium rounded-full hover:bg-white/10 transition-colors flex items-center gap-2">
-                <Flower2 size={16} /> about me
-              </Link>
-            </m.div>
-            <m.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <a href="mailto:aislingcreed42@gmail.com" className="px-6 py-3 bg-white/5 border border-white/10 text-zinc-200 font-medium rounded-full hover:bg-white/10 transition-colors flex items-center gap-2">
-                <Mail size={16} /> contact me
-              </a>
-            </m.div>
+        {/* Avatar Card */}
+        <m.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="md:col-span-4 glass-card glass-card-maroon p-6 flex flex-col items-center justify-center relative group"
+        >
+          <div className="relative w-full aspect-square max-w-[260px] rounded-[1.25rem] overflow-hidden border border-white/[0.08]">
+            <img
+              src={pfp}
+              alt="Aisling Creed"
+              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0c]/70 via-transparent to-transparent" />
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+              style={{ background: "radial-gradient(circle at 50% 100%, rgba(192,57,43,0.18) 0%, transparent 60%)" }}
+            />
           </div>
-        </AnimatedCard>
+          <div className="mt-4 text-center">
+            <p className="text-sm font-medium text-zinc-200">aisling creed</p>
+            <p className="text-xs text-zinc-500 mt-0.5">hardware · linux · android</p>
+          </div>
+        </m.div>
+      </div>
 
-        {/* Nav Cards */}
-        {navCards.map((card, i) => (
-          <AnimatedCard key={card.path} index={i + 1} className="">
-            <Link to={card.path} className="group block p-8 glass-card glass-card-maroon h-full flex flex-col">
-              <IconBox
-                icon={card.icon}
-                size={24}
-                hoverRotate={card.rotate}
-                className={`w-12 h-12 rounded-2xl bg-white/5 text-zinc-400 mb-6 group-hover:bg-accent/15 group-hover:text-accent transition-all`}
-              />
-              <h3 className="text-xl font-semibold mb-3 group-hover:text-white transition-colors glow-text">{card.title}</h3>
-              <p className="text-zinc-400 leading-relaxed mb-8 flex-grow">{card.desc}</p>
-              <div className={`flex items-center gap-2 text-sm font-medium text-zinc-400 group-hover:gap-3 group-hover:text-accent transition-all`}>
-                explore <ArrowRight size={16} />
-              </div>
-            </Link>
-          </AnimatedCard>
-        ))}
+      {/* Featured Shipped Work — Immediate Proof for Hiring Managers */}
+      <section className="space-y-4">
+        <div className="flex items-end justify-between gap-4 px-1">
+          <div>
+            <h2 className="text-xl md:text-2xl font-semibold tracking-tight">featured work</h2>
+            <p className="text-xs md:text-sm text-zinc-500 mt-0.5">
+              real projects shipped in the open — code, infrastructure, and diagnostics.
+            </p>
+          </div>
+          <Link
+            to="/projects"
+            className="text-xs font-medium text-zinc-400 hover:text-accent transition-colors inline-flex items-center gap-1 shrink-0"
+          >
+            <span>all projects</span>
+            <ArrowRight size={13} />
+          </Link>
+        </div>
 
-        {/* How I Work Card */}
-        <AnimatedCard index={4} hoverLift={false} className="glass-card p-8 md:p-10 flex flex-col justify-center relative overflow-hidden">
-          <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-white/[0.02] to-transparent pointer-events-none" />
-          <h3 className="text-xl font-semibold mb-6 relative z-10">how i work 💡</h3>
-          <div className="space-y-5 relative z-10">
-            {methodology.map((item, idx) => (
-              <m.div
-                key={idx}
-                className="flex gap-4 group cursor-default"
-                whileHover={{ x: 4 }}
-                transition={spring.gentle}
-              >
-                {item.accent ? (
-                  <m.div
-                    className={`mt-0.5 text-accent`}
-                    animate={{ scale: [1, 1.15, 1] }}
-                    transition={{ duration: 2, repeat: Infinity, repeatDelay: 4 }}
-                  >
-                    <item.icon size={20} />
-                  </m.div>
-                ) : (
-                  <div className="mt-0.5 text-zinc-500 group-hover:text-zinc-200 transition-colors">
-                    <item.icon size={20} />
-                  </div>
-                )}
-                <div>
-                  <h4 className="font-medium mb-1 text-zinc-300 group-hover:text-zinc-100 transition-colors">{item.title}</h4>
-                  <p className="text-zinc-500 text-sm">{item.desc}</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {featuredProjects.map((project, i) => (
+            <m.article
+              key={project.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.12 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -4 }}
+              className="glass-card glass-card-maroon p-6 flex flex-col justify-between gap-5 group"
+            >
+              <div className="space-y-3">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-accent/10 border border-accent/20 text-accent-soft">
+                    {project.category}
+                  </span>
+                  {project.status && (
+                    <span className="inline-flex items-center gap-1.5 text-[11px] text-emerald-400 font-mono">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                      {project.status}
+                    </span>
+                  )}
                 </div>
-              </m.div>
-            ))}
-          </div>
-        </AnimatedCard>
+
+                <h3 className="text-lg font-semibold text-zinc-100 group-hover:text-white transition-colors">
+                  {project.title}
+                </h3>
+
+                <p className="text-sm text-zinc-400 leading-relaxed">
+                  {project.featuredSummary ?? project.summary}
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex flex-wrap gap-1.5">
+                  {project.tech.slice(0, 4).map((t) => (
+                    <span
+                      key={t}
+                      className="px-2 py-0.5 rounded-md bg-white/[0.04] border border-white/[0.07] text-[11px] font-mono text-zinc-400"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-4 pt-3 border-t border-white/[0.06] text-xs font-medium">
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-zinc-300 hover:text-accent transition-colors"
+                    >
+                      <Github size={13} />
+                      <span>source</span>
+                      <ExternalLink size={11} />
+                    </a>
+                  )}
+                  <Link
+                    to={project.caseStudyPath ?? "/projects"}
+                    className="inline-flex items-center gap-1 text-zinc-400 hover:text-zinc-100 transition-colors ml-auto"
+                  >
+                    <span>{project.caseStudyPath ? "architecture" : "details"}</span>
+                    <ArrowRight size={12} />
+                  </Link>
+                </div>
+              </div>
+            </m.article>
+          ))}
+        </div>
+      </section>
+
+      {/* Core Domain Navigation Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {navCards.map((card, i) => (
+          <Link key={card.to} to={card.to} className="group block">
+            <m.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.28 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -4 }}
+              className="glass-card glass-card-maroon p-7 h-full flex flex-col justify-between"
+            >
+              <div className="space-y-3.5">
+                <m.div
+                  whileHover={{ rotate: card.hoverRotate, scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                  className="w-11 h-11 rounded-2xl bg-white/[0.04] flex items-center justify-center text-zinc-400 group-hover:bg-accent/15 group-hover:text-accent transition-all duration-300"
+                >
+                  <card.icon size={20} />
+                </m.div>
+                <h2 className="text-lg font-semibold group-hover:text-white transition-colors">
+                  {card.title}
+                </h2>
+                <p className="text-sm text-zinc-400 leading-relaxed group-hover:text-zinc-300 transition-colors">
+                  {card.desc}
+                </p>
+              </div>
+              <div className="pt-5 flex items-center text-xs font-medium text-zinc-500 group-hover:text-accent transition-colors">
+                <span>explore</span>
+                <ArrowRight size={14} className="ml-1.5 group-hover:translate-x-1.5 transition-transform duration-300" />
+              </div>
+            </m.div>
+          </Link>
+        ))}
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { m, LazyMotion, domAnimation, AnimatePresence, MotionConfig } from "motion/react";
 import { Link, useLocation } from "react-router-dom";
-import { Cpu, Server, Zap, Home as HomeIcon, Flower2, Heart, FolderGit2 } from "lucide-react";
+import { Cpu, Server, Zap, Home as HomeIcon, Flower2, Heart, FolderGit2, FileText } from "lucide-react";
 import TerminalMode from "./TerminalMode";
 import { usePrefersReducedMotion } from "../lib/usePrefersReducedMotion";
 
@@ -174,7 +174,7 @@ function FloatingSparkles() {
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="fixed inset-0 -z-5 pointer-events-none"
+      className="fixed inset-0 -z-5 pointer-events-none no-print"
     />
   );
 }
@@ -236,6 +236,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { path: "/support-admin", name: "support", icon: Server },
     { path: "/automation", name: "automation", icon: Zap },
     { path: "/projects", name: "projects", icon: FolderGit2 },
+    { path: "/cv", name: "cv", icon: FileText },
   ];
 
   return (
@@ -248,7 +249,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div
           ref={glowRef}
           aria-hidden="true"
-          className="cursor-glow"
+          className="cursor-glow no-print"
           style={{ transform: "translate(-500px, -500px)" }}
         />
 
@@ -256,13 +257,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <FloatingSparkles />
 
         {/* Atmospheric background */}
-        <div className="atmosphere">
+        <div className="atmosphere no-print">
           <div className="atmosphere-blob bg-[#c0392b] w-[600px] h-[600px] -top-48 -left-48 opacity-[0.12]" />
           <div className="atmosphere-blob bg-zinc-500 w-[500px] h-[500px] top-1/2 -right-24 opacity-[0.06]" />
           <div className="atmosphere-blob bg-[#e74c3c] w-[400px] h-[400px] -bottom-48 left-1/3 opacity-[0.08]" />
         </div>
 
-        <main className="flex-grow max-w-5xl mx-auto w-full px-6 pt-16 pb-40">
+        <main className="flex-grow max-w-5xl mx-auto w-full px-6 pt-16 pb-40 print:p-0 print:max-w-none">
           <m.div
             key={location.pathname}
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
@@ -273,7 +274,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </m.div>
         </main>
 
-        <footer className="py-12 px-6 border-t border-white/5 mt-auto relative z-10 bg-[#0a0a0c]/80 backdrop-blur-md pb-[180px] md:pb-[140px]">
+        <footer className="no-print py-12 px-6 border-t border-white/5 mt-auto relative z-10 bg-[#0a0a0c]/80 backdrop-blur-md pb-[180px] md:pb-[140px]">
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <p className="text-zinc-500 text-sm flex items-center gap-1.5">
               © {new Date().getFullYear()} aisling. built with
@@ -317,12 +318,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </footer>
 
         {/* Floating pill navigation */}
-        <div className="fixed bottom-8 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+        <div className="no-print fixed bottom-8 left-0 right-0 z-50 flex justify-center px-3 pointer-events-none">
           <m.nav
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="glass-nav px-2 py-2 flex items-center gap-1 md:gap-2 pointer-events-auto shadow-2xl shadow-black/40 border-white/10"
+            className="glass-nav px-1.5 md:px-2 py-2 flex items-center gap-0.5 md:gap-1.5 pointer-events-auto shadow-2xl shadow-black/40 border-white/10"
           >
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
@@ -332,7 +333,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   to={item.path}
                   aria-label={item.name}
                   aria-current={isActive ? "page" : undefined}
-                  className={`relative flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-200 overflow-hidden ${isActive
+                  className={`relative flex items-center gap-2 px-3 md:px-3.5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 overflow-hidden ${isActive
                     ? "text-zinc-100 shadow-sm"
                     : "text-zinc-400 hover:text-zinc-200 hover:bg-white/5"
                     }`}

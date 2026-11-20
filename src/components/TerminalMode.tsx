@@ -54,15 +54,23 @@ export default function TerminalMode({ onClose }: TerminalModeProps) {
         ];
         break;
       case "ls":
-        response = "about.txt  hardware.md  resume.pdf  projects/  syslog  config.yaml";
+        if (args[1] === "projects" || args[1] === "projects/") {
+          response = "komorebi/  myhrt/  homelab-stack/  nginx-subpath-routing/  portfolio/";
+        } else {
+          response = "about.txt  hardware.md  resume.pdf  projects/  syslog  config.yaml";
+        }
         break;
       case "cat":
         if (args[1] === "about.txt") {
-          response = "hardware diagnostic specialist, software empath, and terminal enthusiast.";
+          response = "IT support, Linux & Docker sysadmin, hardware diagnostic specialist, and Android tooling developer.";
         } else if (args[1] === "hardware.md") {
           response = "WARNING: logic board schematic requires root privileges to view.";
         } else if (args[1] === "resume.pdf") {
-          response = "cat: resume.pdf: cannot display binary file... just kidding, it's pretty good though.";
+          response = [
+            "Aisling Creed — Cork, Ireland",
+            "Roles: IT Support · Linux Sysadmin · Hardware Diagnostics · Android",
+            "Open /#/cv in the browser for the full printable PDF version.",
+          ];
         } else if (args[1] === "config.yaml") {
           response = [
             "theme: dark",
@@ -74,8 +82,8 @@ export default function TerminalMode({ onClose }: TerminalModeProps) {
           response = "kernel: [12.345] BUG: scheduling while atomic... wait, just a CSS issue.";
         } else if (!args[1]) {
           response = "cat: missing file operand";
-        } else if (args[1] === "projects/") {
-          response = "cat: projects/: Is a directory";
+        } else if (args[1] === "projects" || args[1] === "projects/") {
+          response = "cat: projects/: Is a directory (try 'ls projects/')";
         } else {
           response = `cat: ${args[1]}: No such file or directory`;
         }
@@ -106,7 +114,7 @@ export default function TerminalMode({ onClose }: TerminalModeProps) {
           <Row key="2" logo="       .=#@*@@%#+++*@*             " l="" v="------------------------------------" />,
           <Row key="3" logo="         :=##+=-:---=--.           " l="OS" v="Aisling Web Environment" />,
           <Row key="4" logo="          =--++=-.--++-=*          " l="Host" v="Portfolio Simulator" />,
-          <Row key="5" logo="         +*+=:..:.    :*@@         " l="Kernel" v="React 18.2" />,
+          <Row key="5" logo="         +*+=:..:.    :*@@         " l="Kernel" v="React 19" />,
           <Row key="6" logo="       :@%+==. .=-  .-#+=%%        " l="Uptime" v="Too many hours" />,
           <Row key="7" logo="    .#@@@**#*=-.-=::-++=::@        " l="Packages" v="42 (npm)" />,
           <Row key="8" logo="  -@@@#+#*+**-.--  +--:  :@:       " l="Shell" v="bash 5.9" />,

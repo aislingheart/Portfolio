@@ -9,9 +9,10 @@ import {
   Mail, Camera, Instagram, Github, Twitter, Cloud, Linkedin,
   Cpu, Search, Zap, ShieldAlert,
   Server, Shield, Database, Network, Terminal,
-  MousePointer2,
+  MousePointer2, Globe, Lock, Layers, LayoutDashboard,
 } from "lucide-react";
-// ── Projects ─────────────────────────────────────────────────────────
+
+// ── Projects ──────────────────────────────────────────────────────────
 /**
  * Curated rather than auto-fetched from the GitHub API.
  *
@@ -26,12 +27,16 @@ import {
 export interface Project {
   title: string;
   summary: string;
+  featuredSummary?: string;
   details: string[];
   tech: string[];
   category: "code" | "infrastructure" | "repair";
   status?: "active" | "ongoing" | "complete";
+  featured?: boolean;
+  visual?: "komorebi" | "myhrt" | "homelab";
   githubUrl?: string;
   demoUrl?: string;
+  caseStudyPath?: string;
 }
 
 export const projects: Project[] = [
@@ -39,6 +44,8 @@ export const projects: Project[] = [
     title: "Komorebi",
     summary:
       "an open-source Android command palette, Raycast-compatible extension runner, and system customization toolkit built with Jetpack Compose and Material 3.",
+    featuredSummary:
+      "open-source Android command palette running Raycast/Vicinae JS extensions inline via an embedded QuickJS runtime, paired with Shizuku/root system tweaks.",
     details: [
       "universal search overlay across apps, shortcuts, contacts, files, media, system settings, and installed extensions.",
       "runs JavaScript/TypeScript Raycast and Vicinae extensions inline via an embedded QuickJS runtime (@raycast/api and @vicinae/api), supporting lists, grids, forms, detail views, OAuth, and an extension store.",
@@ -49,6 +56,8 @@ export const projects: Project[] = [
     tech: ["Kotlin", "Android", "Jetpack Compose", "Material 3", "QuickJS", "Shizuku", "Room", "Gradle"],
     category: "code",
     status: "active",
+    featured: true,
+    visual: "komorebi",
     githubUrl: "https://github.com/aislingheart/komorebi",
   },
   {
@@ -72,7 +81,7 @@ export const projects: Project[] = [
     details: [
       "cursor-reactive particle canvas with an autonomous mode for touch devices.",
       "lazy-loaded routes, code-split per page to keep the initial bundle small.",
-      "full keyboard navigation, visible focus rings and reduced-motion support.",
+      "full keyboard navigation, visible focus rings, printable CV route, and reduced-motion support.",
     ],
     tech: ["React 19", "TypeScript", "Tailwind CSS 4", "Vite", "Framer Motion", "GitHub Pages"],
     category: "code",
@@ -84,6 +93,8 @@ export const projects: Project[] = [
     title: "MyHRT",
     summary:
       "an android app for tracking gender-affirming hormone therapy, built around a pharmacokinetics simulation engine that models actual hormone levels over time from your dose history.",
+    featuredSummary:
+      "offline-first Kotlin Android app simulating serum estradiol & testosterone curves over time by route and ester type, with reboot-safe reminders.",
     details: [
       "simulates serum estradiol and testosterone curves from real dose logs, accounting for route of administration and ester type.",
       "clinical timing guidance: dose spacing, sublingual hold times, gel application, injection site rotation.",
@@ -94,25 +105,32 @@ export const projects: Project[] = [
     tech: ["Kotlin", "Android", "Gradle", "Pharmacokinetics modelling"],
     category: "code",
     status: "active",
+    featured: true,
+    visual: "myhrt",
     githubUrl: "https://github.com/aislingheart/MyHRT",
   },
   {
     title: "homelab media & AI server",
     summary:
-      "a self-hosted stack on CachyOS — media automation, a GPU-accelerated Jellyfin, and a local LLM — all reachable through one nginx reverse proxy without exposing ports to the internet.",
+      "a self-hosted stack on CachyOS combining media automation, VPN namespace isolation, GPU-accelerated Jellyfin/Unmanic, and a local LLM behind one nginx reverse proxy.",
+    featuredSummary:
+      "self-hosted CachyOS server running 10+ containerized services behind one nginx subpath proxy, Gluetun VPN killswitch isolation, and RTX 5050 GPU acceleration.",
     details: [
-      "full *arr automation stack (Sonarr, Radarr, Lidarr, Prowlarr, Bazarr) driving qBittorrent, with the whole library on a 2TB mount.",
-      "nginx reverse proxy with subpath routing, so eight services live under one host without port juggling.",
-      "used nginx sub_filter to rewrite Open WebUI's hardcoded absolute asset paths, which otherwise collided with the dashboard's root routes.",
-      "ollama serving gemma2 locally with Jellyfin hardware transcoding on an RTX 5050.",
-      "everything in docker compose, so the media and AI stacks come up from one command each.",
-      "migrated the whole thing off Windows, including repairing the SQLite paths the Windows install left behind.",
-      "the dashboard is provisioned over Homarr's tRPC API from a JSON layout, so it's reviewable in a diff and reproducible after a rebuild.",
+      "full *arr automation stack (Sonarr, Radarr, Lidarr, Prowlarr, Bazarr) driving qBittorrent on a 2TB library mount, all sharing Gluetun's VPN network namespace with an always-on firewall killswitch.",
+      "nginx reverse proxy with subpath routing, so ten services live under one host without port juggling.",
+      "used surgical nginx sub_filter rules to fix Open WebUI's hardcoded asset paths and SvelteKit base-path routing under /ai/.",
+      "ollama serving gemma2 locally alongside RTX 5050 hardware transcoding in Jellyfin and NVENC HEVC compression in Unmanic.",
+      "everything in docker compose with healthcheck gating, so the media and AI stacks come up cleanly from one command each.",
+      "migrated the whole stack off Windows to CachyOS, repairing the SQLite database paths left behind by the Windows install.",
+      "the Homarr dashboard is provisioned over its tRPC API from a JSON layout, so it's reviewable in a diff and reproducible after a rebuild.",
     ],
-    tech: ["CachyOS", "Docker", "nginx", "Jellyfin", "Sonarr", "Radarr", "Prowlarr", "qBittorrent", "Ollama", "Open WebUI", "Homarr", "Python"],
+    tech: ["CachyOS", "Docker Compose", "nginx", "Gluetun", "Jellyfin", "Unmanic", "Sonarr", "Radarr", "Prowlarr", "qBittorrent", "Ollama", "Open WebUI", "Homarr", "Python"],
     category: "infrastructure",
     status: "active",
+    featured: true,
+    visual: "homelab",
     githubUrl: "https://github.com/aislingheart/homelab-stack",
+    caseStudyPath: "/support-admin",
   },
   {
     title: "server update pipeline",
@@ -150,22 +168,21 @@ export const projects: Project[] = [
     tech: ["3uTools", "iOS diagnostics", "Micro-soldering", "Panic log analysis"],
     category: "repair",
     status: "ongoing",
+    caseStudyPath: "/hardware",
   },
 ];
 
-// ── Home ─────────────────────────────────────────────────────────────
+// ── Home ──────────────────────────────────────────────────────────────
 export const qualifications = [
-  "versatile tech expert.",
+  "IT support & systems admin.",
+  "Linux & Docker infrastructure.",
   "hardware diagnostic specialist.",
-  "systems administrator.",
-  "micro-soldering expert.",
-  "automation enthusiast.",
-  "IT support engineer.",
-  "empathetic problem solver.",
-  "always learning, always building.",
+  "Android & tooling developer.",
+  "workflow automation builder.",
+  "micro-soldering technician.",
 ];
 
-// ── About ────────────────────────────────────────────────────────────
+// ── About ─────────────────────────────────────────────────────────────
 export interface SocialLink {
   icon: LucideIcon;
   label: string;
@@ -182,94 +199,137 @@ export const socialLinks: SocialLink[] = [
   { icon: Cloud, label: "aislingheart.bsky.social", url: "https://bsky.app/profile/aislingheart.bsky.social" },
 ];
 
-/**
- * Date of birth (YYYY-MM-DD), used to derive the displayed age so it can
- * never go stale. Update this ONE value and the age on the About page
- * recalculates itself automatically.
- */
-const BIRTH_DATE = "2004-10-27";
-
-function calculateAge(dob: string): number {
-  const birth = new Date(dob);
-  const now = new Date();
-  let age = now.getFullYear() - birth.getFullYear();
-  const monthDelta = now.getMonth() - birth.getMonth();
-  // Haven't had the birthday yet this year.
-  if (monthDelta < 0 || (monthDelta === 0 && now.getDate() < birth.getDate())) {
-    age -= 1;
-  }
-  return age;
-}
-
-const currentAge = calculateAge(BIRTH_DATE);
-
 export const quickFacts = [
-  { label: "age", value: `${currentAge}` },
-  { label: "fav OS", value: "Android / macOS" },
+  { label: "based in", value: "Cork, Ireland 🇮🇪" },
+  { label: "target roles", value: "IT Support · Sysadmin · Android" },
+  { label: "fav OS", value: "Linux (CachyOS) / Android / macOS" },
   { label: "go-to tool", value: "the spudger 🫡" },
   { label: "fav repair", value: "the more complex, the better" },
   { label: "music", value: "vocaloid 🎵" },
   { label: "pets", value: "Milo 🐱 Luna 🐱 Becky 🐶" },
   { label: "hobbies", value: "📸 🎮 🎬" },
-  { label: "fuel", value: "Aussie Lemonade Monster ⚡" },
   { label: "fun fact", value: "fluent in Irish 🇮🇪" },
   { label: "obsession", value: "Pixel ↔ Mac continuity" },
 ];
 
 export const coreSkills = [
-  "attention to detail", "customer service", "problem-solving",
-  "empathy", "time management", "active listening",
-  "troubleshooting", "adaptability", "conflict resolution",
+  "root-cause diagnostics", "customer support", "incident triage",
+  "clear documentation", "attention to detail", "time management",
+  "cross-platform troubleshooting", "adaptability", "clear communication",
 ];
 
-export interface TechProficiency {
+export type CapabilityTier = "daily" | "production" | "hands-on";
+
+export interface CapabilityItem {
   name: string;
-  level: number; // percentage 0-100
+  tier: CapabilityTier;
+  proof: string;
 }
 
-export interface TechCategory {
+export interface CapabilityCategory {
   category: string;
-  items: TechProficiency[];
+  items: CapabilityItem[];
 }
 
-export const technicalProficiency: TechCategory[] = [
+export const technicalCapabilities: CapabilityCategory[] = [
   {
     category: "systems & infrastructure",
     items: [
-      { name: "macOS", level: 100 },
-      { name: "Windows", level: 100 },
-      { name: "Linux (Ubuntu/Kali)", level: 90 },
-      { name: "Android", level: 100 },
-      { name: "iOS / iPadOS", level: 80 },
-      { name: "Docker", level: 60 },
-      { name: "VMware", level: 75 },
-      { name: "WSL", level: 75 },
+      {
+        name: "Linux (CachyOS / Arch / Ubuntu)",
+        tier: "daily",
+        proof: "Self-hosted server admin, systemd, SQLite migrations, Docker Compose stacks, live exam Ubuntu SSD rescues.",
+      },
+      {
+        name: "Docker & Docker Compose",
+        tier: "production",
+        proof: "10+ containerized media, download, and local AI services with healthcheck gating and GPU passthrough.",
+      },
+      {
+        name: "nginx Reverse Proxy",
+        tier: "production",
+        proof: "Subpath routing, WebSocket $connection_upgrade maps, surgical sub_filter rewrites, validated via nginx -t.",
+      },
+      {
+        name: "Windows & macOS",
+        tier: "daily",
+        proof: "Workstation provisioning, Winget/UnigetUI automation, ticketing support, Raycast/AppleScript macros.",
+      },
+      {
+        name: "Android & iOS Internals",
+        tier: "daily",
+        proof: "Shizuku/ADB shell tooling, Accessibility & Notification APIs, iOS kernel panic log triage and component repair.",
+      },
+      {
+        name: "VMware & WSL",
+        tier: "hands-on",
+        proof: "Isolated Linux security VMs (Kali), cross-OS dev and test environments.",
+      },
     ],
   },
   {
-    category: "command line",
+    category: "development & automation",
     items: [
-      { name: "Linux / macOS Terminal", level: 95 },
-      { name: "CMD / PowerShell", level: 80 },
+      {
+        name: "Kotlin & Jetpack Compose",
+        tier: "production",
+        proof: "Built and shipped Komorebi (command palette + QuickJS runner) and MyHRT (pharmacokinetics simulator) as Android APKs.",
+      },
+      {
+        name: "TypeScript & React",
+        tier: "production",
+        proof: "React 19 + Vite + Tailwind portfolio, plus TypeScript/JS extensions targeting @raycast/api and @vicinae/api.",
+      },
+      {
+        name: "Bash / Zsh, Python & PowerShell",
+        tier: "daily",
+        proof: "Unattended server update pipelines, JSON-driven Homarr dashboard provisioning, string/build validation scripts.",
+      },
+      {
+        name: "Git, Gradle & GitHub Actions",
+        tier: "daily",
+        proof: "Multi-ABI Android release builds, automated CI type-checking, GitHub Releases auto-updaters, GitHub Pages deploys.",
+      },
     ],
   },
   {
     category: "networking & remote",
     items: [
-      { name: "SSH", level: 80 },
-      { name: "Tailscale", level: 80 },
-      { name: "RDP / Parsec", level: 70 },
-      { name: "Wireshark", level: 60 },
-      { name: "Wake-on-LAN", level: 75 },
+      {
+        name: "Gluetun VPN Namespace Isolation",
+        tier: "production",
+        proof: "Routes 7 containers through an OpenVPN killswitch via shared service network namespaces and outbound firewall rules.",
+      },
+      {
+        name: "Tailscale, SSH & Wake-on-LAN",
+        tier: "daily",
+        proof: "Mesh VPN access to homelab services, key-based SSH administration, Raspberry Pi WOL power triggers.",
+      },
+      {
+        name: "Wireshark & Remote Support",
+        tier: "hands-on",
+        proof: "Packet inspection, RDP/Parsec low-latency remote sessions, network adapter and routing diagnostics.",
+      },
     ],
   },
   {
     category: "hardware & diagnostics",
     items: [
-      { name: "iPhone Repair", level: 85 },
-      { name: "Panic Log Analysis", level: 80 },
-      { name: "Micro-soldering", level: 65 },
-      { name: "3uTools", level: 65 },
+      {
+        name: "iOS / Android Repair & QA",
+        tier: "daily",
+        proof: "Screens, batteries, charging ports, flex assemblies, and pre/post-closure bench validation at Fone Connection.",
+      },
+      {
+        name: "Kernel Panic Log Analysis",
+        tier: "daily",
+        proof: "Pinpointing SMC crashes, missing thermal sensors, and power IC faults via 3uTools and iOS diagnostic logs.",
+      },
+      {
+        name: "Micro-Soldering",
+        tier: "hands-on",
+        proof: "Component-level work under magnification including 2-point Face ID and earpiece flex restorations.",
+      },
     ],
   },
 ];
@@ -279,6 +339,7 @@ export interface Job {
   company: string;
   dates: string;
   description: string;
+  highlights: string[];
   isCurrent?: boolean;
 }
 
@@ -288,19 +349,36 @@ export const jobs: Job[] = [
     company: "Fone Connection",
     dates: "Mar 2025 - Present",
     isCurrent: true,
-    description: "on the bench handling hardware repairs (screens, batteries, flex cables, component replacements) and software troubleshooting across iOS and Android, paired with direct customer support in a busy shop environment. alongside the day job i'm independently building skills across Linux sysadmin, networking, and workflow automation — homelab servers, scripts, and automation tooling.",
+    description:
+      "on the bench handling mobile hardware repairs and software troubleshooting across iOS and Android, paired with front-of-house customer support in a busy shop environment. alongside the role, independently building production Linux infrastructure, Android apps, and automation tooling.",
+    highlights: [
+      "diagnose hardware and board-level faults across iOS and Android using kernel panic logs, thermal/SMC traces, and systematic component isolation.",
+      "perform screens, batteries, flex cables, and micro-soldering repairs under magnification with pre- and post-closure bench QA.",
+      "translate complex technical failures into clear, jargon-free explanations for walk-in customers so handovers stay calm and transparent.",
+    ],
   },
   {
     title: "IT support technician assistant",
     company: "EPS Water Ireland",
     dates: "Feb 2023",
-    description: "assisted IT staff with setup and maintenance for workplace PCs and mobile devices. prepped fresh machines for new staff, upgraded legacy hardware, and managed ticketing queues to resolve user issues.",
+    description:
+      "assisted internal IT staff with workstation provisioning, legacy hardware upgrades, and day-to-day user support across office PCs and mobile devices.",
+    highlights: [
+      "imaged and prepped fresh Windows workstations and mobile devices for onboarding staff.",
+      "upgraded legacy office hardware (storage and memory) to extend device lifespan and cut boot/app slowdowns.",
+      "worked alongside the IT team on incoming ticketing queues to triage and resolve staff hardware and software issues.",
+    ],
   },
   {
     title: "exam supervisor & tech support",
     company: "Cork Educate Together",
     dates: "Jun 2021 - Jul 2021",
-    description: "provided on-site IT support and supervision during student exams. handled sudden hardware and software hiccups on the fly so students didn't lose time or progress.",
+    description:
+      "provided live, on-site IT support and supervision during state/school exam sessions where downtime directly risked student progress.",
+    highlights: [
+      "resolved sudden hardware, OS boot, and peripheral failures on the fly under strict time pressure.",
+      "executed a live SSD swap with a pre-loaded Ubuntu + LibreOffice drive to recover a crashed Windows exam laptop in under 5 minutes with zero lost work.",
+    ],
   },
 ];
 
@@ -311,11 +389,11 @@ export interface Education {
 }
 
 export const education: Education[] = [
-  { title: "leaving certificate", institution: "Coláiste Dáibhéid", dates: "Apr 2024 - May 2025" },
-  { title: "junior certificate", institution: "Cork Educate Together", dates: "Sep 2022 - Jun 2024" },
+  { title: "leaving certificate", institution: "Coláiste Dáibhéid", dates: "Completed May 2025" },
+  { title: "junior certificate", institution: "Cork Educate Together", dates: "Completed Jun 2024" },
 ];
 
-// ── Hardware ─────────────────────────────────────────────────────────
+// ── Hardware ──────────────────────────────────────────────────────────
 export interface CaseStudy {
   title: string;
   subtitle: string;
@@ -327,37 +405,74 @@ export interface CaseStudy {
 export const caseStudies: CaseStudy[] = [
   {
     title: "iPhone 12 compound refurbishment",
-    subtitle: "from bootloop to profit",
-    description: "a heavily damaged iPhone 12 came in with a shattered screen, dead battery, broken earpiece, and a constant bootloop. diagnosed the board panic, replaced the components, micro-soldered the flex, and brought it back to 100% functionality.",
+    subtitle: "from bootloop to reliable daily driver",
+    description:
+      "a heavily damaged iPhone 12 came in with a shattered screen, dead battery, broken earpiece, and a constant bootloop. diagnosed the board panic, replaced the components, micro-soldered the flex, and brought it back to 100% functionality.",
     tags: ["iOS", "Refurbishment", "Diagnostics"],
     details: [
-      "traced the bootloop cause by analyzing kernel panic logs.",
-      "replaced screen and battery with high-quality, tested components.",
-      "repaired Face ID flex via micro-soldering to restore earpiece functionality.",
-      "ran post-repair stress tests to make sure everything stayed stable.",
+      "traced the bootloop cause by analyzing kernel panic logs instead of blindly swapping parts.",
+      "replaced screen and battery with tested components.",
+      "repaired the Face ID / earpiece flex via micro-soldering to restore audio and proximity sensing.",
+      "ran post-repair stress and thermal tests before handover so the fix held long term.",
     ],
   },
   {
     title: "panic log analysis: SMC crash",
     subtitle: "deep diagnostic challenge",
-    description: "diagnosed a device restarting randomly after a third-party repair. used kernel panic logs to trace the issue back to faulty thermal sensors and corrupted battery monitoring data.",
+    description:
+      "diagnosed a device restarting randomly every few minutes after a third-party repair. used kernel panic logs to trace the issue back to faulty thermal sensors and corrupted battery monitoring data.",
     tags: ["Panic Logs", "SMC", "Thermal Sensors"],
     details: [
-      "extracted and parsed kernel logs via 3uTools and iOS diagnostics.",
-      "found the SMC crash was caused by corrupt data coming off the thermal sensor.",
-      "isolated battery level monitoring as a secondary failure point.",
-      "explained the failure mechanism to the client so they understood what went wrong.",
+      "extracted and parsed panic-full logs via 3uTools and iOS analytics.",
+      "identified the SMC watchdog reset triggered by missing thermal sensor readings.",
+      "isolated corrupted battery gas-gauge data as a secondary failure point.",
+      "explained the root cause clearly to the customer so they understood why the prior repair failed.",
     ],
   },
 ];
 
 export const hardwareSkills = [
-  { icon: Search, title: "panic log mastery 🔍", desc: "reading kernel panic logs to pinpoint exact hardware failures in SMC, thermal sensors, and power ICs instead of guessing." },
-  { icon: Zap, title: "micro-soldering ⚡", desc: "component-level work under magnification, including 2-point soldering on delicate Face ID and earpiece flex cables." },
-  { icon: ShieldAlert, title: "quality control ✅", desc: "pre-closure bench testing and thorough post-repair validation checks to ensure long-term device reliability." },
+  {
+    icon: Search,
+    title: "panic log mastery 🔍",
+    desc: "reading kernel panic logs to pinpoint exact hardware failures in SMC, thermal sensors, and power ICs instead of guessing.",
+  },
+  {
+    icon: Zap,
+    title: "micro-soldering ⚡",
+    desc: "component-level work under magnification, including 2-point soldering on delicate Face ID and earpiece flex cables.",
+  },
+  {
+    icon: ShieldAlert,
+    title: "quality control ✅",
+    desc: "pre-closure bench testing and thorough post-repair validation checks to ensure long-term device reliability.",
+  },
 ];
 
-// ── Support & Admin ──────────────────────────────────────────────────
+export interface PanicAnnotation {
+  line: string;
+  highlight?: boolean;
+  note?: string;
+}
+
+export const panicLogSample: PanicAnnotation[] = [
+  { line: `"bug_type": "210", "os_version": "iPhone OS 17.x"` },
+  { line: `panic(cpu 0 caller 0xfffffff01a2c4b10):` },
+  {
+    line: `  userspace watchdog timeout: no successful checkins from thermalmonitord in 180s`,
+    highlight: true,
+    note: "3-minute reboot loop signature — points directly at thermal/SMC telemetry rather than NAND or software.",
+  },
+  {
+    line: `  Missing sensor(s): Prs0, TG0B`,
+    highlight: true,
+    note: "Prs0 = barometric/charging port flex sensor; TG0B = battery gas-gauge thermal line. narrows bench test to 2 flexes immediately.",
+  },
+  { line: `  service: thermalmonitord, total successful checkins since wake: 0` },
+  { line: `  BootArgs: ... i2c_bus_error_count=4` },
+];
+
+// ── Support & Admin ───────────────────────────────────────────────────
 export interface LabService {
   name: string;
   description: string;
@@ -365,33 +480,95 @@ export interface LabService {
 }
 
 export const labServices: LabService[] = [
-  { name: "Docker", description: "containerized setup for self-hosted apps and services, keeping environments isolated and easy to update.", icon: Database },
-  { name: "OpenWebUI", description: "local interface for LLMs to help with scripting and local testing.", icon: Terminal },
-  { name: "Jellyfin", description: "self-hosted media server with hardware transcoding enabled.", icon: Server },
-  { name: "Tailscale", description: "mesh VPN setup for secure remote access to home servers from anywhere.", icon: Shield },
-  { name: "WOL Beacon", description: "Raspberry Pi setup as a Wake-on-LAN trigger for remote machine power management.", icon: Zap },
-  { name: "Kali Linux", description: "dedicated VM for network testing, security labs, and learning.", icon: Network },
+  {
+    name: "nginx Subpath Proxy",
+    description: "single port-80 entry point routing 10 self-hosted apps by path prefix, with WebSocket upgrade maps and sub_filter rewrites.",
+    icon: Globe,
+  },
+  {
+    name: "Gluetun VPN Gateway",
+    description: "OpenVPN container with an always-on killswitch; 7 download and *arr containers share its network namespace so traffic cannot leak.",
+    icon: Lock,
+  },
+  {
+    name: "Docker Compose Stacks",
+    description: "reproducible media and AI compose files on CachyOS with healthcheck dependencies and clean one-command updates.",
+    icon: Database,
+  },
+  {
+    name: "Jellyfin & Unmanic",
+    description: "RTX 5050 hardware-accelerated streaming and automated NVENC HEVC library compression over a 2TB mount.",
+    icon: Server,
+  },
+  {
+    name: "Ollama & Open WebUI",
+    description: "local LLM inference (gemma2) exposed cleanly at /ai/ with custom SvelteKit base-path and auth-guard sub_filter fixes.",
+    icon: Terminal,
+  },
+  {
+    name: "Homarr (Dashboard-as-Code)",
+    description: "root dashboard provisioned over Homarr's tRPC API from a version-controlled JSON layout so rebuilds are repeatable.",
+    icon: LayoutDashboard,
+  },
+  {
+    name: "Tailscale Mesh VPN",
+    description: "encrypted remote access to homelab services from anywhere without exposing ports to the public internet.",
+    icon: Shield,
+  },
+  {
+    name: "WOL Beacon",
+    description: "Raspberry Pi configured as a Wake-on-LAN trigger for remote machine power management.",
+    icon: Zap,
+  },
+  {
+    name: "Kali Linux VM",
+    description: "isolated VM for packet analysis, network testing, and hands-on security labs.",
+    icon: Network,
+  },
 ];
 
-export const operatingSystems = [
-  { name: "macOS", level: 100, desc: "primary workstation, env. optimisation." },
-  { name: "Windows", level: 100, desc: "desktop support, home server management." },
-  { name: "Linux (Ubuntu/Kali)", level: 90, desc: "server admin, pen testing, VMs." },
-  { name: "Android/iOS", level: 100, desc: "advanced diagnostics & mobile internals." },
+export interface OsCapability {
+  name: string;
+  tier: CapabilityTier;
+  desc: string;
+}
+
+export const operatingSystems: OsCapability[] = [
+  { name: "Linux (CachyOS / Arch / Ubuntu)", tier: "daily", desc: "Docker host admin, nginx reverse proxy, systemd, SQLite migrations, live SSD rescues." },
+  { name: "macOS", tier: "daily", desc: "primary dev workstation, CLI tooling, Raycast & AppleScript automation." },
+  { name: "Windows", tier: "daily", desc: "workstation provisioning, ticketing support, PowerShell & Winget automation." },
+  { name: "Android & iOS", tier: "daily", desc: "Kotlin/Compose app development, ADB/Shizuku, kernel panic log diagnostics." },
 ];
 
 export const techStack = [
-  "VMware", "WSL", "Docker", "SSH", "RDP", "Tailscale",
-  "Wireshark", "VS Code", "3uTools", "Parsec", "OBS Studio", "GIMP", "Photoshop",
+  "Linux (CachyOS/Ubuntu)", "Docker Compose", "nginx", "Gluetun",
+  "Tailscale", "SSH", "Git", "Kotlin", "TypeScript", "Python",
+  "Bash / Zsh", "PowerShell", "VMware", "WSL", "Wireshark",
+  "3uTools", "RDP / Parsec",
 ];
 
 export const examSaveSteps = [
   { label: "rapid diagnosis:", text: "spotted the OS boot crash right away and ruled out hardware failure within seconds." },
   { label: "creative solution:", text: "swapped in a spare SSD pre-loaded with Ubuntu and LibreOffice that I had ready." },
-  { label: "result:", text: "the student was back working on their exam in under 5 minutes with zero lost work. 🎉" },
+  { label: "result:", text: "the student was back working on their exam in under 5 minutes with zero lost work." },
 ];
 
-// ── Automation ───────────────────────────────────────────────────────
+export const subpathIncidentSteps = [
+  {
+    label: "symptom:",
+    text: "Open WebUI's login page rendered at /ai/ and POST /ai/api/v1/auths/signin returned HTTP 200, yet the browser immediately showed a 404 while every nginx log line stayed green.",
+  },
+  {
+    label: "root cause:",
+    text: "SvelteKit bakes base: \"\" into the HTML, so the client-side router tried to match /ai/ from root and failed before any request hit nginx — then fixing base exposed an infinite ?redirect= loop on pathname!==\"/auth\".",
+  },
+  {
+    label: "fix & verification:",
+    text: "paired surgical nginx sub_filter rewrites for base and the auth guard with a proper $connection_upgrade WebSocket map, validated with nginx -t and live browser inspection.",
+  },
+];
+
+// ── Automation ────────────────────────────────────────────────────────
 export interface AutomationProject {
   title: string;
   description: string;
@@ -401,21 +578,39 @@ export interface AutomationProject {
 
 export const automations: AutomationProject[] = [
   {
-    title: "raycast environment macros",
-    description: "custom Raycast macros and AppleScript shortcuts to launch my daily dev and support tools instantly.",
-    icon: MousePointer2,
-    tech: ["Raycast", "AppleScript", "macOS"],
+    title: "Komorebi command palette & QuickJS runner",
+    description:
+      "Android launcher overlay that runs Raycast and Vicinae JS/TS extensions inline, plus physical button remapping, Quick Settings tiles, and Shizuku/root system automations.",
+    icon: Terminal,
+    tech: ["Kotlin", "Jetpack Compose", "QuickJS", "Shizuku"],
+  },
+  {
+    title: "Homarr dashboard-as-code",
+    description:
+      "provisions the homelab dashboard over Homarr's tRPC API from a version-controlled JSON layout, so layout changes are reviewable in git diffs and reproducible after any rebuild.",
+    icon: Layers,
+    tech: ["Python", "JSON", "tRPC API", "Docker"],
   },
   {
     title: "server update pipeline",
-    description: "automated scripts using Winget and UnigetUI to keep home server apps and utilities up to date.",
+    description:
+      "non-interactive update scripts driving Winget, UnigetUI, and Docker Compose pulls with traceable logs so systems stay patched without manual babysitting.",
     icon: Cpu,
-    tech: ["Winget", "UnigetUI", "CMD"],
+    tech: ["Docker Compose", "Bash", "Winget", "PowerShell"],
+  },
+  {
+    title: "raycast environment macros",
+    description:
+      "custom Raycast commands and AppleScript shortcuts that wrap repetitive terminal invocations and daily support tools behind a single keystroke.",
+    icon: MousePointer2,
+    tech: ["Raycast", "AppleScript", "macOS"],
   },
 ];
 
 export const scriptingTools = [
-  { name: "Python", tag: "automation", isAccent: true },
-  { name: "AppleScript", tag: "macros", isAccent: false },
-  { name: "CMD", tag: "system admin", isAccent: false },
+  { name: "Bash / Zsh", tag: "linux & docker ops", isAccent: true },
+  { name: "Python", tag: "api provisioning & validation", isAccent: true },
+  { name: "Kotlin", tag: "android & extension runtimes", isAccent: false },
+  { name: "PowerShell / CMD", tag: "windows automation", isAccent: false },
+  { name: "AppleScript", tag: "macos macros", isAccent: false },
 ];

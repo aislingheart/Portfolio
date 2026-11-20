@@ -1,10 +1,11 @@
 import { m } from "motion/react";
-import { Cpu, CheckCircle2 } from "lucide-react";
+import { Cpu, CheckCircle2, Terminal } from "lucide-react";
 import pfp from "../assets/pfp.webp";
 import PageHeader from "../components/PageHeader";
 import AnimatedCard from "../components/AnimatedCard";
 import IconBox from "../components/IconBox";
-import { caseStudies, hardwareSkills } from "../lib/data";
+import { fadeInUp } from "../lib/theme";
+import { caseStudies, hardwareSkills, panicLogSample } from "../lib/data";
 
 export default function Hardware() {
   return (
@@ -17,11 +18,11 @@ export default function Hardware() {
         {caseStudies.map((study, i) => (
           <AnimatedCard key={study.title} index={i} className="glass-card p-8 flex flex-col group">
             <div className="flex justify-between items-start mb-6">
-              <div className={`p-3 rounded-2xl bg-white/5 text-zinc-400 group-hover:bg-accent/15 group-hover:text-accent transition-colors`}>
+              <div className="p-3 rounded-2xl bg-white/5 text-zinc-400 group-hover:bg-accent/15 group-hover:text-accent transition-colors">
                 <IconBox icon={Cpu} hoverRotate={-10} />
               </div>
               <div className="flex gap-2 flex-wrap justify-end">
-                {study.tags.map(tag => (
+                {study.tags.map((tag) => (
                   <m.span
                     key={tag}
                     className="px-2.5 py-1 rounded-full bg-white/5 text-xs font-medium text-zinc-400 group-hover:bg-white/10 transition-colors"
@@ -33,7 +34,7 @@ export default function Hardware() {
               </div>
             </div>
             <h3 className="text-2xl font-semibold mb-1 group-hover:text-white transition-colors glow-text">{study.title}</h3>
-            <p className={`text-accent text-sm font-medium mb-4`}>{study.subtitle}</p>
+            <p className="text-accent text-sm font-medium mb-4">{study.subtitle}</p>
             <p className="text-zinc-400 mb-8 flex-grow leading-relaxed">{study.description}</p>
 
             <div className="space-y-3 border-t border-white/5 pt-6">
@@ -46,7 +47,7 @@ export default function Hardware() {
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 + idx * 0.08 }}
                 >
-                  <CheckCircle2 size={16} className={`text-zinc-500 shrink-0 mt-0.5 group-hover:text-accent transition-colors`} />
+                  <CheckCircle2 size={16} className="text-zinc-500 shrink-0 mt-0.5 group-hover:text-accent transition-colors" />
                   <span>{detail}</span>
                 </m.div>
               ))}
@@ -55,11 +56,51 @@ export default function Hardware() {
         ))}
       </div>
 
+      {/* Diagnostic Artifact: Annotated iOS Kernel Panic Trace */}
+      <m.section {...fadeInUp} className="glass-card p-6 md:p-8 space-y-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h2 className="text-xl font-semibold flex items-center gap-2.5">
+              <Terminal size={19} className="text-accent" />
+              diagnostic artifact: reading a panic-full log
+            </h2>
+            <p className="text-xs sm:text-sm text-zinc-400 mt-1">
+              representative iOS thermal/SMC watchdog trace — showing how two lines in a panic log narrow a 3-minute reboot loop to exact flex cables before touching a screwdriver.
+            </p>
+          </div>
+          <span className="text-[11px] font-mono text-zinc-500 bg-white/[0.04] px-3 py-1 rounded-full border border-white/[0.06] w-fit">
+            panic-full · bug_type 210
+          </span>
+        </div>
+
+        <div className="rounded-2xl bg-[#0a0a0c]/90 border border-white/[0.08] p-4 sm:p-5 font-mono text-xs space-y-2 overflow-x-auto">
+          {panicLogSample.map((entry, idx) => (
+            <div key={idx} className="space-y-1">
+              <div
+                className={`px-3 py-1.5 rounded-lg whitespace-pre ${
+                  entry.highlight
+                    ? "bg-accent/15 border border-accent/30 text-zinc-100"
+                    : "text-zinc-500"
+                }`}
+              >
+                {entry.line}
+              </div>
+              {entry.note && (
+                <div className="pl-4 text-[11px] font-sans text-zinc-300 flex items-start gap-2 pb-1">
+                  <span className="text-accent font-mono shrink-0">↳</span>
+                  <span>{entry.note}</span>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </m.section>
+
       <section className="grid md:grid-cols-3 gap-6">
         {hardwareSkills.map((item, i) => (
           <AnimatedCard key={item.title} index={i + 2} className="glass-card p-6 group">
             <div className="flex items-center gap-3 mb-4 text-zinc-400 group-hover:text-zinc-200 transition-colors">
-              <IconBox icon={item.icon} size={20} className={`group-hover:text-accent transition-colors`} hoverRotate={5} />
+              <IconBox icon={item.icon} size={20} className="group-hover:text-accent transition-colors" hoverRotate={5} />
               <h4 className="font-semibold">{item.title}</h4>
             </div>
             <p className="text-sm text-zinc-400 leading-relaxed group-hover:text-zinc-300 transition-colors">
@@ -77,7 +118,7 @@ export default function Hardware() {
         transition={{ duration: 0.4 }}
         className="glass-card p-8 md:p-12 relative overflow-hidden"
       >
-        <div className={`absolute right-0 bottom-0 w-64 h-64 bg-[radial-gradient(circle,rgba(192,57,43,0.08)_0%,transparent_70%)] rounded-full -mr-20 -mb-20 pointer-events-none`} />
+        <div className="absolute right-0 bottom-0 w-64 h-64 bg-[radial-gradient(circle,rgba(192,57,43,0.08)_0%,transparent_70%)] rounded-full -mr-20 -mb-20 pointer-events-none" />
         <div className="max-w-3xl relative z-10">
           <h2 className="text-2xl font-semibold mb-6">the bucket analogy 🪣</h2>
           <p className="text-lg text-zinc-400 italic mb-8 leading-relaxed">
@@ -87,7 +128,7 @@ export default function Hardware() {
             <m.img
               src={pfp}
               alt="Aisling Avatar"
-              className={`w-12 h-12 rounded-full border-2 border-[#c0392b]/30 object-cover shadow-lg`}
+              className="w-12 h-12 rounded-full border-2 border-[#c0392b]/30 object-cover shadow-lg"
               whileHover={{ rotate: 5, scale: 1.1 }}
               transition={{ type: "spring", stiffness: 300 }}
             />
